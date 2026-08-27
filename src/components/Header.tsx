@@ -31,7 +31,7 @@ export default function Header() {
   return (
     <>
       {/* ================= DESKTOP — floating segmented nav ================= */}
-      <header className="sticky top-3 z-50 px-5 sm:px-8">
+      <header className="sticky top-3 z-50 hidden px-5 sm:px-8 md:block">
         <div className="mx-auto flex max-w-[80rem] items-center justify-between gap-3 rounded-2xl border border-line bg-bg/80 py-2 pl-3 pr-2 backdrop-blur-md">
           {/* LEFT — identity */}
           <Link to="/" className="group flex shrink-0 items-center gap-2.5">

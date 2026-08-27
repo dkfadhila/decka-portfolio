@@ -59,7 +59,7 @@ export default function Home() {
               {/* ══════════ LEFT — headline + identity + intro + CTA ══════════ */}
               <div className="flex flex-col md:w-[58%] md:pr-14">
                 {/* Massive headline */}
-                <h1 className="heading-display text-[clamp(3.4rem,9vw,7.75rem)] uppercase leading-[0.86] tracking-tight">
+                <h1 className="heading-display text-[clamp(2.5rem,11vw,7.75rem)] uppercase leading-[0.86] tracking-tight">
                   {profile.heroLines[0]}
                   <br />I&apos;m{' '}
                   <span className="text-blue">{profile.name}</span>
@@ -81,10 +81,10 @@ export default function Home() {
                     Impact
                   </span>
                   <span
-                    className="ml-3 h-px flex-1 bg-gradient-to-r from-line to-transparent"
+                    className="ml-3 hidden h-px flex-1 bg-gradient-to-r from-line to-transparent sm:block"
                     aria-hidden
                   />
-                  <PlusMark className="opacity-60" />
+                  <PlusMark className="hidden opacity-60 sm:inline-block" />
                 </div>
 
                 {/* Introduction — two-tier paragraphs */}
@@ -132,14 +132,14 @@ export default function Home() {
 
               {/* ══════════ RIGHT — information index panel ══════════ */}
               <div className="flex flex-1 flex-col justify-between gap-10 md:pl-14">
-                <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
+                <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:gap-10">
                   {/* SECTION 01 — BASED IN */}
                   <div className="flex flex-col">
                     <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-secondary">
                       <span className="mr-2 inline-block h-1.5 w-1.5 rounded-[2px] bg-blue align-middle" aria-hidden />
                       Based In
                     </span>
-                    <span className="heading-display mt-2 text-2xl uppercase tracking-tight">
+                    <span className="heading-display mt-2 text-xl uppercase tracking-tight sm:text-2xl">
                       {heroMeta.location}
                     </span>
                     {/* Coordinate annotation under value */}
@@ -154,7 +154,7 @@ export default function Home() {
                       <span className="mr-2 inline-block h-1.5 w-1.5 rounded-[2px] bg-blue align-middle" aria-hidden />
                       Role
                     </span>
-                    <span className="heading-display mt-2 text-2xl uppercase leading-tight tracking-tight">
+                    <span className="heading-display mt-2 text-xl uppercase leading-tight tracking-tight sm:text-2xl">
                       {heroMeta.role}
                     </span>
                     <div className="mt-4 flex flex-wrap gap-2">
@@ -175,7 +175,7 @@ export default function Home() {
                       <span className="mr-2 inline-block h-1.5 w-1.5 rounded-[2px] bg-blue align-middle" aria-hidden />
                       Year
                     </span>
-                    <span className="heading-display mt-2 flex items-center gap-3 text-2xl uppercase tracking-tight">
+                    <span className="heading-display mt-2 flex items-center gap-2 text-xl uppercase tracking-tight sm:gap-3 sm:text-2xl">
                       {heroMeta.year}
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#62B5F5" strokeWidth="1.5" aria-hidden>
                         <rect x="3" y="5" width="18" height="16" rx="2" />
@@ -195,11 +195,11 @@ export default function Home() {
                       <span className="mr-2 inline-block h-1.5 w-1.5 rounded-[2px] bg-blue align-middle" aria-hidden />
                       Status
                     </span>
-                    <span className="heading-display mt-2 flex items-center gap-2.5 text-2xl uppercase tracking-tight">
-                      <span className="pulse-dot h-2.5 w-2.5 rounded-full bg-blue" aria-hidden />
+                    <span className="heading-display mt-2 flex items-center gap-2 text-xl uppercase tracking-tight sm:gap-2.5 sm:text-2xl">
+                      <span className="pulse-dot h-2 w-2 shrink-0 rounded-full bg-blue sm:h-2.5 sm:w-2.5" aria-hidden />
                       Open to work
                     </span>
-                    <span className="mt-4 inline-flex w-fit rounded-[5px] bg-blue-soft px-2.5 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-ink/70">
+                    <span className="mt-3 inline-block max-w-full rounded-[5px] bg-blue-soft px-2.5 py-1.5 font-mono text-[9px] font-bold uppercase leading-relaxed tracking-[0.14em] text-ink/70 sm:mt-4">
                       Available for new opportunities
                     </span>
                   </div>
@@ -235,7 +235,7 @@ export default function Home() {
                 </div>
 
                 {/* LOWER RIGHT METRICS — editorial statistics columns */}
-                <div className="grid grid-cols-4 border-t border-line pt-6">
+                <div className="grid grid-cols-2 gap-y-6 border-t border-line pt-6 sm:grid-cols-4">
                   {[
                     { value: 'B.Sc.', label: 'Physics' },
                     { value: '4+', label: 'Projects' },
@@ -245,7 +245,11 @@ export default function Home() {
                     <div
                       key={s.label}
                       className={`flex flex-col items-center px-2 text-center ${
-                        i > 0 ? 'border-l border-line' : ''
+                        i === 1 || i === 3
+                          ? 'border-l border-line'
+                          : i === 2
+                            ? 'sm:border-l sm:border-line'
+                            : ''
                       }`}
                     >
                       <span className={`heading-display text-2xl leading-none tracking-tight sm:text-3xl ${i === 0 ? 'text-ink' : 'text-blue'}`}>

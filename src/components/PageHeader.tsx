@@ -10,7 +10,7 @@ export default function PageHeader({ page }: { page: string }) {
       {/* Oversized ghost page number — compositional element */}
       <span
         aria-hidden
-        className="ghost-num heading-display pointer-events-none absolute -top-6 right-0 text-[7rem] leading-none sm:text-[11rem] md:-top-10"
+        className="ghost-num heading-display pointer-events-none absolute -top-3 right-0 text-[5rem] leading-none sm:-top-6 sm:text-[11rem] md:-top-10"
       >
         {meta.num}
       </span>
