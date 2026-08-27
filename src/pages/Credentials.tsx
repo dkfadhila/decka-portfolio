@@ -51,6 +51,7 @@ export default function Credentials() {
   const ui = {
     academic: { id: '01 / Akademik', en: '01 / Academic' },
     degreeTitle: { id: 'S.Si. Fisika', en: 'B.Sc. Physics' },
+    university: { id: 'Universitas Negeri Yogyakarta', en: 'Yogyakarta State University' },
     field: { id: 'Bidang', en: 'Field' },
     graduated: { id: 'Lulus', en: 'Graduated' },
     status: { id: 'Status', en: 'Status' },
@@ -93,7 +94,7 @@ export default function Credentials() {
               {t(ui.degreeTitle)}
             </h2>
             <p className="mt-3 text-sm font-bold uppercase tracking-wide text-ink/50">
-              Universitas Negeri Yogyakarta
+              {t(ui.university)}
             </p>
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-line pt-6 sm:grid-cols-4">

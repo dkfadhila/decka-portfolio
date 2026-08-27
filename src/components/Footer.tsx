@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { profile, socials, heroMeta } from '../data';
 import { useI18n, ui, LangToggle } from '../i18n';
@@ -57,19 +57,20 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-2 border-t border-bg/15 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-bg/40">
-            © {year} {profile.fullName}
+            Â© {year} {profile.fullName}
           </p>
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-bg/40">
-            Portfolio / {heroMeta.year}
+            {t(ui.portfolio)} / {heroMeta.year}
           </p>
           <Link
             to="/"
             className="link-underline font-mono text-[10px] uppercase tracking-[0.18em] text-bg/40 hover:text-bg"
           >
-            {t(ui.backToTop)} ↑
+            {t(ui.backToTop)} â†‘
           </Link>
         </div>
       </div>
     </footer>
   );
 }
+

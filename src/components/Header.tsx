@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { nav, profile, heroMeta } from '../data';
@@ -44,10 +44,10 @@ export default function Header() {
 
   return (
     <>
-      {/* ================= DESKTOP — floating segmented nav ================= */}
+      {/* ================= DESKTOP â€” floating segmented nav ================= */}
       <header className="sticky top-3 z-50 hidden px-5 sm:px-8 md:block">
         <div className="mx-auto flex max-w-[80rem] items-center justify-between gap-3 rounded-2xl border border-line bg-bg/80 py-2 pl-3 pr-2 backdrop-blur-md">
-          {/* LEFT — identity */}
+          {/* LEFT â€” identity */}
           <Link to="/" className="group flex shrink-0 items-center gap-2.5">
             <Monogram />
             <span className="flex flex-col leading-none">
@@ -56,12 +56,12 @@ export default function Header() {
                 <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-blue" aria-hidden />
               </span>
               <span className="mt-1 font-mono text-[9px] uppercase tracking-[0.18em] text-ink/45">
-                Portfolio
+                {t(ui.portfolio)}
               </span>
             </span>
           </Link>
 
-          {/* CENTER — navigation cluster */}
+          {/* CENTER â€” navigation cluster */}
           <nav className="hide-scrollbar flex items-center gap-1 overflow-x-auto">
             {nav.map((item) => (
               <NavLink
@@ -86,17 +86,17 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* RIGHT — year + language toggle */}
+          {/* RIGHT â€” year + language toggle */}
           <div className="hidden shrink-0 items-center gap-3 lg:flex">
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
-              Portfolio / {heroMeta.year}
+              {t(ui.portfolio)} / {heroMeta.year}
             </span>
             <LangToggle />
           </div>
         </div>
       </header>
 
-      {/* ================= MOBILE — compact top nav ================= */}
+      {/* ================= MOBILE â€” compact top nav ================= */}
       <header className="sticky top-3 z-50 px-5 sm:px-8 md:hidden">
         <div className="mx-auto flex max-w-[80rem] items-center justify-between rounded-2xl border border-line bg-bg/80 py-2 pl-3 pr-2 backdrop-blur-md">
           <Link to="/" className="flex items-center gap-2.5">
@@ -112,13 +112,13 @@ export default function Header() {
               onClick={() => setOpen((v) => !v)}
               className="rounded-lg border border-line px-4 py-2 text-[11px] font-bold uppercase tracking-wide transition-colors hover:border-blue hover:bg-blue-soft"
             >
-              {open ? `${t(ui.close)} ×` : `${t(ui.menu)} +`}
+              {open ? `${t(ui.close)} Ã—` : `${t(ui.menu)} +`}
             </button>
           </div>
         </div>
       </header>
 
-      {/* ================= MOBILE — fullscreen editorial menu ================= */}
+      {/* ================= MOBILE â€” fullscreen editorial menu ================= */}
       {open && (
         <div className="fixed inset-0 z-40 flex flex-col bg-bg pt-20 md:hidden">
           <nav className="container-shell flex-1 overflow-y-auto">
@@ -154,7 +154,7 @@ export default function Header() {
             </Link>
             <div className="flex items-center justify-between">
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
-                Portfolio / {heroMeta.year}
+                {t(ui.portfolio)} / {heroMeta.year}
               </span>
               <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
                 <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-blue" />
@@ -167,3 +167,4 @@ export default function Header() {
     </>
   );
 }
+

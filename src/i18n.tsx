@@ -107,6 +107,10 @@ export const ui = {
     en: 'DATA • RESEARCH • TECHNOLOGY • OPERATIONS',
   },
   heroHello: { id: 'Halo,', en: 'Hello,' },
+  heroParagraph2: {
+    id: 'Sebelumnya mengerjakan fisika komputasi, analisis peristiwa banjir, prototipe IoT, dan alur kerja riset berbantuan AI. Saat ini mengeksplorasi peluang berbasis data dan membangun alat yang memecahkan masalah nyata.',
+    en: 'Previously worked on computational physics, flood event analysis, IoT prototyping, and AI-assisted research workflows. Currently exploring data-driven opportunities and building tools that solve real problems.',
+  },
   heroIm: { id: 'saya', en: "I'm" },
   identityPhysics: { id: 'FISIKA', en: 'PHYSICS' },
   identityData: { id: 'DATA', en: 'DATA' },
@@ -144,5 +148,6 @@ export const ui = {
   // Footer
   footerContact: { id: 'Kontak', en: 'Contact' },
   footerBy: { id: 'Portofolio oleh', en: 'Portfolio by' },
+  portfolio: { id: 'Portofolio', en: 'Portfolio' },
   backToTop: { id: 'Kembali ke atas', en: 'Back to top' },
 } satisfies Record<string, LStr>;

@@ -96,10 +96,7 @@ export default function Home() {
                     {profile.subtitle}
                   </p>
                   <p className="mt-5 text-sm leading-6 text-secondary">
-                    Previously worked on computational physics, flood event
-                    analysis, IoT prototyping, and AI-assisted research
-                    workflows. Currently exploring data-driven opportunities and
-                    building tools that solve real problems.
+                    {t(ui.heroParagraph2)}
                   </p>
                 </div>
 
