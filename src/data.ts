@@ -101,7 +101,8 @@ export const nav: NavItem[] = [
   { id: 'work', label: 'Work', path: '/work', num: '04' },
   { id: 'projects', label: 'Projects', path: '/projects', num: '05' },
   { id: 'content', label: 'Content', path: '/content', num: '06' },
-  { id: 'contact', label: 'Contact', path: '/contact', num: '07' },
+  { id: 'credentials', label: 'Credentials', path: '/credentials', num: '07' },
+  { id: 'contact', label: 'Contact', path: '/contact', num: '08' },
 ];
 
 // Editorial page headers — one per dedicated page
@@ -142,8 +143,14 @@ export const pageMeta: Record<string, PageMeta> = {
     title: 'Content & Research.',
     lead: 'Web3 research, articles, and independent projects.',
   },
-  contact: {
+  credentials: {
     num: '07',
+    kicker: 'Credentials',
+    title: 'Credentials & Honors.',
+    lead: 'Academic record, certificates, and recognition.',
+  },
+  contact: {
+    num: '08',
     kicker: 'Contact',
     title: "Let's Talk.",
     lead: 'Have a project, a role, or just want to say hi? The inbox is open.',
@@ -556,8 +563,16 @@ export const mapCards: MapCard[] = [
     image: 'https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=1000&q=75',
   },
   {
-    id: 'contact',
+    id: 'credentials',
     num: '07',
+    title: 'Credentials',
+    description: 'Academic record, certificates, and honors. Entries coming soon.',
+    path: '/credentials',
+    type: 'A',
+  },
+  {
+    id: 'contact',
+    num: '08',
     title: 'Contact',
     description: 'Start a conversation — the inbox is open.',
     path: '/contact',

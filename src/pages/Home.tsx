@@ -26,7 +26,7 @@ function Meta({ k, n, dim = false }: { k: string; n: string; dim?: boolean }) {
 }
 
 export default function Home() {
-  const [about, experience, work, projects, content, contact] = mapCards;
+  const [about, experience, work, projects, content, credentials, contact] = mapCards;
 
   return (
     <>
@@ -315,7 +315,7 @@ export default function Home() {
               </h2>
             </div>
             <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-secondary sm:block">
-              06 entries
+              07 entries
             </span>
           </div>
         </Reveal>
@@ -373,6 +373,16 @@ export default function Home() {
               image={content.image}
               to={content.path}
               className="min-h-[220px]"
+            />
+          </Reveal>
+          {/* CREDENTIALS — reserved, full-width teaser */}
+          <Reveal className="col-span-12">
+            <CardA
+              num={credentials.num}
+              title={credentials.title}
+              description={credentials.description}
+              to={credentials.path}
+              className="min-h-[120px]"
             />
           </Reveal>
           {/* CONTACT — distinct final CTA */}

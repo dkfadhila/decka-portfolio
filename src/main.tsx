@@ -10,6 +10,7 @@ import Work from './pages/Work';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Content from './pages/Content';
+import Credentials from './pages/Credentials';
 import Contact from './pages/Contact';
 
 createRoot(document.getElementById('root')!).render(
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:slug" element={<ProjectDetail />} />
           <Route path="content" element={<Content />} />
+          <Route path="credentials" element={<Credentials />} />
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
         </Route>
