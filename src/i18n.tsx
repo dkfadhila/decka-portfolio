@@ -28,7 +28,14 @@ const I18nContext = createContext<I18nValue>({
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(() => {
     if (typeof window === 'undefined') return 'en';
+    // EN is the default. If a user had an old "id" choice stored from an
+    // earlier build, ignore it once so everyone starts fresh on EN.
     const saved = window.localStorage.getItem('tirta-lang');
+    if (saved === 'id' && !window.localStorage.getItem('tirta-lang-v2')) {
+      window.localStorage.setItem('tirta-lang-v2', '1');
+      window.localStorage.removeItem('tirta-lang');
+      return 'en';
+    }
     return saved === 'id' || saved === 'en' ? saved : 'en';
   });
 
