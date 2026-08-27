@@ -34,7 +34,7 @@ export default function Contact() {
           <div className="mt-10 flex flex-wrap items-center gap-6 border-t border-line pt-8">
             <a
               href={`mailto:${heroMeta.email}`}
-              className="link-underline heading-display text-2xl uppercase tracking-tight sm:text-4xl"
+              className="link-underline heading-display break-all text-xl uppercase tracking-tight sm:text-4xl"
             >
               {heroMeta.email}
             </a>

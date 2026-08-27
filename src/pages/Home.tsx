@@ -102,10 +102,10 @@ export default function Home() {
 
                 {/* CTA row */}
                 <div className="mt-auto pt-12">
-                  <div className="flex flex-wrap items-center gap-4">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                     <Link
                       to="/work"
-                      className="group inline-flex items-center gap-2 rounded-[9px] bg-ink px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-blue hover:text-ink"
+                      className="group inline-flex w-full items-center justify-center gap-2 rounded-[9px] bg-ink px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-blue hover:text-ink sm:w-auto"
                     >
                       View work
                       <ArrowUpRight
@@ -115,7 +115,7 @@ export default function Home() {
                     </Link>
                     <Link
                       to="/contact"
-                      className="group inline-flex items-center gap-2 rounded-[9px] border border-line bg-transparent px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-ink transition-colors hover:border-blue hover:bg-blue-soft"
+                      className="group inline-flex w-full items-center justify-center gap-2 rounded-[9px] border border-line bg-transparent px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-ink transition-colors hover:border-blue hover:bg-blue-soft sm:w-auto"
                     >
                       Get in touch
                       <ArrowUpRight size={14} className="text-secondary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

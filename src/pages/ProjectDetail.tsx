@@ -52,17 +52,17 @@ export default function ProjectDetail() {
           <img
             src={project.imageUrl}
             alt={project.title}
-            className="aspect-[21/9] w-full object-cover grayscale"
+            className="aspect-[4/3] w-full object-cover grayscale sm:aspect-[21/9]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-transparent" />
-          <div className="absolute bottom-0 left-0 p-6 sm:p-8 md:p-10">
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent sm:from-ink/60 sm:via-ink/10" />
+          <div className="absolute bottom-0 left-0 p-5 sm:p-8 md:p-10">
             <span className="rounded-md border border-line bg-bg/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-ink/70">
               {project.category}
             </span>
-            <h1 className="heading-display mt-4 text-4xl uppercase leading-[0.9] tracking-tight text-white sm:text-5xl md:text-6xl">
+            <h1 className="heading-display mt-3 text-3xl uppercase leading-[0.9] tracking-tight text-white sm:mt-4 sm:text-5xl md:text-6xl">
               {project.title}
             </h1>
-            <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-white/80 sm:text-base">
+            <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-white/80 sm:mt-3 sm:text-base">
               {project.subtitle}
             </p>
           </div>

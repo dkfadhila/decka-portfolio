@@ -109,7 +109,7 @@ export default function Header() {
 
       {/* ================= MOBILE — fullscreen editorial menu ================= */}
       {open && (
-        <div className="fixed inset-0 z-40 flex flex-col bg-bg pt-24 md:hidden">
+        <div className="fixed inset-0 z-40 flex flex-col bg-bg pt-20 md:hidden">
           <nav className="container-shell flex-1 overflow-y-auto">
             {nav.map((item) => (
               <NavLink
@@ -117,30 +117,39 @@ export default function Header() {
                 to={item.path}
                 end={item.path === '/'}
                 className={({ isActive }) =>
-                  `group flex items-baseline gap-4 border-b border-line py-5 ${
+                  `group flex items-baseline gap-4 border-b border-line py-4 sm:py-5 ${
                     isActive ? 'text-ink' : 'text-ink/70'
                   }`
                 }
               >
                 <span className="font-mono text-xs text-blue">{item.num}</span>
-                <span className="heading-display text-4xl uppercase leading-none tracking-tight">
+                <span className="heading-display text-3xl uppercase leading-none tracking-tight sm:text-4xl">
                   {item.label}
                 </span>
                 <ArrowUpRight
-                  size={22}
+                  size={20}
                   className="ml-auto self-center text-ink/40 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-blue"
                 />
               </NavLink>
             ))}
           </nav>
-          <div className="container-shell flex items-center justify-between border-t border-line py-5">
-            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
-              Portfolio / {heroMeta.year}
-            </span>
-            <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
-              <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-blue" />
-              {heroMeta.availability}
-            </span>
+          <div className="container-shell flex flex-col gap-4 border-t border-line py-5">
+            <Link
+              to="/contact"
+              className="inline-flex w-fit items-center gap-2 rounded-lg bg-ink px-5 py-3 text-[11px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-blue hover:text-ink"
+            >
+              Let&apos;s talk
+              <ArrowUpRight size={14} />
+            </Link>
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
+                Portfolio / {heroMeta.year}
+              </span>
+              <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
+                <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-blue" />
+                {heroMeta.availability}
+              </span>
+            </div>
           </div>
         </div>
       )}
