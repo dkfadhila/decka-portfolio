@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
+import { LanguageProvider } from './i18n';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -15,21 +16,23 @@ import Contact from './pages/Contact';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="experience" element={<Experience />} />
-          <Route path="work" element={<Work />} />
-          <Route path="projects" element={<Projects />} />
-          <Route path="projects/:slug" element={<ProjectDetail />} />
-          <Route path="content" element={<Content />} />
-          <Route path="credentials" element={<Credentials />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<Home />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="experience" element={<Experience />} />
+            <Route path="work" element={<Work />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="projects/:slug" element={<ProjectDetail />} />
+            <Route path="content" element={<Content />} />
+            <Route path="credentials" element={<Credentials />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="*" element={<Home />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </LanguageProvider>
   </StrictMode>
 );

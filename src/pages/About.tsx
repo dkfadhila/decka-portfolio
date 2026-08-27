@@ -1,20 +1,30 @@
-import Reveal from '../components/Reveal';
+﻿import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Crosshair, Tag } from '../components/cards';
 import { profile } from '../data';
+import { useI18n } from '../i18n';
 
 export default function About() {
+  const { t } = useI18n();
+  const ui = {
+    biography: { id: '02.A â€” Biografi', en: '02.A â€” Biography' },
+    profile: { id: '02.B â€” Profil', en: '02.B â€” Profile' },
+    method: { id: '02 / Metode', en: '{t(ui.method)}' },
+    howWork: { id: 'Cara Saya Bekerja', en: '{t(ui.howWork)}' },
+    principles: { id: 'prinsip', en: 'principles' },
+    capabilities: { id: '02.C â€” Kemampuan', en: '02.C â€” Capabilities' },
+  };
   return (
     <section className="container-shell py-16 md:py-20">
       <PageHeader page="about" />
 
-      {/* Editorial biography — asymmetric two-column */}
+      {/* Editorial biography â€” asymmetric two-column */}
       <div className="grid grid-cols-12 gap-4">
         <Reveal className="col-span-12 lg:col-span-7">
           <article className="card flex h-full flex-col p-6 sm:p-8">
             <div className="flex items-center justify-between">
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-                02.A — Biography
+                02.A â€” Biography
               </span>
               <Crosshair />
             </div>
@@ -55,7 +65,7 @@ export default function About() {
                 />
                 <span className="absolute left-3 top-3 h-2.5 w-2.5 rounded-[2px] bg-blue" aria-hidden />
                 <span className="absolute bottom-3 right-3 rounded-md border border-line bg-bg/90 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-ink/70 transition-colors duration-500 group-hover:border-blue group-hover:bg-blue-soft">
-                  Fig. 02 — {profile.name}
+                  Fig. 02 â€” {profile.name}
                 </span>
               </div>
             </div>
@@ -65,7 +75,7 @@ export default function About() {
           <Reveal>
             <div className="card p-6">
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-                02.B — Profile
+                02.B â€” Profile
               </span>
               <dl className="mt-4">
                 {profile.facts.map((f, i) => (
@@ -89,20 +99,20 @@ export default function About() {
         </div>
       </div>
 
-      {/* Method — numbered cards with rhythm variation */}
+      {/* Method â€” numbered cards with rhythm variation */}
       <div className="mt-16">
         <Reveal>
           <div className="mb-6 flex items-end justify-between border-b border-line pb-4">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-blue">
-                02 / Method
+                {t(ui.method)}
               </p>
               <h2 className="heading-display mt-2 text-2xl uppercase tracking-tight sm:text-3xl">
-                How I Work
+                {t(ui.howWork)}
               </h2>
             </div>
             <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45 sm:block">
-              04 principles
+              {t(ui.principles)}
             </span>
           </div>
         </Reveal>
@@ -134,7 +144,7 @@ export default function About() {
         <Reveal>
           <div className="card p-6">
             <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-              02.C — Capabilities
+              02.C â€” Capabilities
             </span>
             <div className="mt-5 flex flex-wrap gap-2">
               {profile.capabilities.map((c) => (
@@ -147,3 +157,4 @@ export default function About() {
     </section>
   );
 }
+

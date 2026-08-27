@@ -1,6 +1,7 @@
 ﻿import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import Reveal from '../components/Reveal';
+import { useI18n, ui } from '../i18n';
 import {
   Crosshair,
   PlusMark,
@@ -27,6 +28,7 @@ function Meta({ k, n, dim = false }: { k: string; n: string; dim?: boolean }) {
 
 export default function Home() {
   const [about, experience, work, projects, content, credentials, contact] = mapCards;
+  const { t } = useI18n();
 
   return (
     <>
@@ -47,10 +49,10 @@ export default function Home() {
               />
               <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-secondary">
                 <span className="h-2 w-2 rounded-[2px] bg-blue" aria-hidden />
-                {profile.label}
+                {t(ui.heroLabel)}
               </span>
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-                {profile.capsLine}
+                {t(ui.heroCaps)}
               </span>
             </div>
 
@@ -60,8 +62,9 @@ export default function Home() {
               <div className="flex flex-col md:w-[58%] md:pr-14">
                 {/* Massive headline */}
                 <h1 className="heading-display text-[clamp(2.5rem,11vw,7.75rem)] uppercase leading-[0.86] tracking-tight">
-                  {profile.heroLines[0]}
-                  <br />I&apos;m{' '}
+                  {t(ui.heroHello)}
+                  <br />
+                  {t(ui.heroIm)}{' '}
                   <span className="text-blue">{profile.name}</span>
                   <span className="text-ink/30">.</span>
                 </h1>
@@ -70,15 +73,15 @@ export default function Home() {
                 <div className="mt-10 flex items-center gap-3">
                   <span className="h-7 w-[3px] rounded-full bg-blue" aria-hidden />
                   <span className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary">
-                    Physics
+                    {t(ui.identityPhysics)}
                   </span>
                   <span className="font-mono text-[11px] text-blue">→</span>
                   <span className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary">
-                    Data
+                    {t(ui.identityData)}
                   </span>
                   <span className="font-mono text-[11px] text-blue">→</span>
                   <span className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary">
-                    Impact
+                    {t(ui.identityImpact)}
                   </span>
                   <span
                     className="ml-3 hidden h-px flex-1 bg-gradient-to-r from-line to-transparent sm:block"
@@ -107,7 +110,7 @@ export default function Home() {
                       to="/work"
                       className="group inline-flex w-full items-center justify-center gap-2 rounded-[9px] bg-ink px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-blue hover:text-ink sm:w-auto"
                     >
-                      View work
+                      {t(ui.viewWork)}
                       <ArrowUpRight
                         size={14}
                         className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -117,7 +120,7 @@ export default function Home() {
                       to="/contact"
                       className="group inline-flex w-full items-center justify-center gap-2 rounded-[9px] border border-line bg-transparent px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-ink transition-colors hover:border-blue hover:bg-blue-soft sm:w-auto"
                     >
-                      Get in touch
+                      {t(ui.getInTouch)}
                       <ArrowUpRight size={14} className="text-secondary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </Link>
                   </div>
@@ -137,7 +140,7 @@ export default function Home() {
                   <div className="flex flex-col">
                     <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-secondary">
                       <span className="mr-2 inline-block h-1.5 w-1.5 rounded-[2px] bg-blue align-middle" aria-hidden />
-                      Based In
+                      {t(ui.basedIn)}
                     </span>
                     <span className="heading-display mt-2 text-xl uppercase tracking-tight sm:text-2xl">
                       {heroMeta.location}
@@ -152,18 +155,18 @@ export default function Home() {
                   <div className="flex flex-col">
                     <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-secondary">
                       <span className="mr-2 inline-block h-1.5 w-1.5 rounded-[2px] bg-blue align-middle" aria-hidden />
-                      Role
+                      {t(ui.role)}
                     </span>
                     <span className="heading-display mt-2 text-xl uppercase leading-tight tracking-tight sm:text-2xl">
                       {heroMeta.role}
                     </span>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {['Data', 'Research', 'Tech'].map((t) => (
+                      {['Data', 'Research', 'Tech'].map((tag) => (
                         <span
-                          key={t}
+                          key={tag}
                           className="rounded-[5px] border border-blue/40 bg-blue-soft px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-ink"
                         >
-                          {t}
+                          {tag}
                         </span>
                       ))}
                     </div>
@@ -173,7 +176,7 @@ export default function Home() {
                   <div className="flex flex-col">
                     <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-secondary">
                       <span className="mr-2 inline-block h-1.5 w-1.5 rounded-[2px] bg-blue align-middle" aria-hidden />
-                      Year
+                      {t(ui.year)}
                     </span>
                     <span className="heading-display mt-2 flex items-center gap-2 text-xl uppercase tracking-tight sm:gap-3 sm:text-2xl">
                       {heroMeta.year}
@@ -193,14 +196,14 @@ export default function Home() {
                   <div className="flex flex-col">
                     <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-secondary">
                       <span className="mr-2 inline-block h-1.5 w-1.5 rounded-[2px] bg-blue align-middle" aria-hidden />
-                      Status
+                      {t(ui.status)}
                     </span>
                     <span className="heading-display mt-2 flex items-center gap-2 text-xl uppercase tracking-tight sm:gap-2.5 sm:text-2xl">
                       <span className="pulse-dot h-2 w-2 shrink-0 rounded-full bg-blue sm:h-2.5 sm:w-2.5" aria-hidden />
-                      Open to work
+                      {t(ui.openToWork)}
                     </span>
                     <span className="mt-3 inline-block max-w-full rounded-[5px] bg-blue-soft px-2.5 py-1.5 font-mono text-[9px] font-bold uppercase leading-relaxed tracking-[0.14em] text-ink/70 sm:mt-4">
-                      Available for new opportunities
+                      {t(ui.availableFor)}
                     </span>
                   </div>
                 </div>
@@ -230,17 +233,17 @@ export default function Home() {
                     <line x1="153" y1="8" x2="153" y2="17" stroke="#62B5F5" strokeWidth="0.9" opacity="0.55" />
                   </svg>
                   <span className="absolute right-0 top-0 font-mono text-[9px] uppercase tracking-[0.14em] text-ink/35">
-                    Signal / 01
+                    {t(ui.signal)}
                   </span>
                 </div>
 
                 {/* LOWER RIGHT METRICS — editorial statistics columns */}
                 <div className="grid grid-cols-2 gap-y-6 border-t border-line pt-6 sm:grid-cols-4">
                   {[
-                    { value: 'B.Sc.', label: 'Physics' },
-                    { value: '4+', label: 'Projects' },
-                    { value: '5+', label: 'Tools & Tech' },
-                    { value: '80+', label: 'Students Mentored' },
+                    { value: 'B.Sc.', label: t(ui.metricPhysics) },
+                    { value: '4+', label: t(ui.metricProjects) },
+                    { value: '5+', label: t(ui.metricTools) },
+                    { value: '80+', label: t(ui.metricStudents) },
                   ].map((s, i) => (
                     <div
                       key={s.label}
@@ -268,7 +271,7 @@ export default function Home() {
             <div className="mt-12 flex items-center justify-between border-t border-line pt-5">
               <CoordMark label={heroMeta.coords} />
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/35">
-                Fig. 01 — Index
+                {t(ui.figIndex)}
               </span>
             </div>
           </div>
@@ -308,14 +311,14 @@ export default function Home() {
           <div className="mb-8 flex items-end justify-between border-b border-line pb-4">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-blue">
-                01 / Index
+                01 / {t(ui.index)}
               </p>
               <h2 className="heading-display mt-2 text-3xl uppercase tracking-tight sm:text-4xl">
-                Portfolio Map
+                {t(ui.portfolioMap)}
               </h2>
             </div>
             <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-secondary sm:block">
-              07 entries
+              07 {t(ui.entries)}
             </span>
           </div>
         </Reveal>
@@ -404,7 +407,7 @@ export default function Home() {
           <Reveal>
             <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
               <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-secondary">
-                Currently focused on
+                {t(ui.focusedOn)}
               </span>
               <div className="flex flex-wrap gap-2">
                 {profile.focusPills.map((p, i) => (

@@ -2,8 +2,22 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Tag, Crosshair } from '../components/cards';
 import { experience, profile, heroMeta } from '../data';
+import { useI18n } from '../i18n';
 
 export default function Experience() {
+  const { t } = useI18n();
+  const ui = {
+    record: { id: 'Catatan / 0', en: 'Record / 0' },
+    status: { id: 'Status', en: 'Status' },
+    currently: { id: 'Saat Ini', en: 'Currently' },
+    independent: { id: 'Independen', en: 'Independent' },
+    open: {
+      id: 'Terbuka untuk kerja lepas, kolaborasi, dan masalah menarik.',
+      en: 'Open to freelance work, collaborations, and interesting problems.',
+    },
+    capabilities: { id: 'Kemampuan', en: 'Capabilities' },
+    focus: { id: 'Fokus', en: 'Focus' },
+  };
   return (
     <section className="container-shell py-16 md:py-20">
       <PageHeader page="experience" />
@@ -41,7 +55,7 @@ export default function Experience() {
                         {e.period}
                       </span>
                       <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/40">
-                        Record / 0{i + 1}
+                        {t(ui.record)}{i + 1}
                       </span>
                     </div>
                     <h3 className="heading-display mt-3 text-2xl uppercase leading-[0.95] tracking-tight sm:text-3xl">
@@ -54,8 +68,8 @@ export default function Experience() {
                       {e.description}
                     </p>
                     <div className="mt-5 flex flex-wrap gap-2">
-                      {e.tags.map((t) => (
-                        <Tag key={t}>{t}</Tag>
+                      {e.tags.map((tag) => (
+                        <Tag key={tag}>{tag}</Tag>
                       ))}
                     </div>
                   </div>
@@ -71,17 +85,17 @@ export default function Experience() {
             <div className="card card-cta p-6">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/55">
-                  Status
+                  {t(ui.status)}
                 </span>
                 <Crosshair />
               </div>
               <p className="heading-display mt-5 text-3xl uppercase leading-[0.95] tracking-tight">
-                Currently
+                {t(ui.currently)}
                 <br />
-                Independent
+                {t(ui.independent)}
               </p>
               <p className="mt-3 text-sm font-medium leading-6 text-ink/60">
-                Open to freelance work, collaborations, and interesting problems.
+                {t(ui.open)}
               </p>
               <div className="mt-5 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink/70">
                 <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-ink" />
@@ -92,7 +106,7 @@ export default function Experience() {
           <Reveal>
             <div className="card p-6">
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-                Capabilities
+                {t(ui.capabilities)}
               </span>
               <div className="mt-4 flex flex-wrap gap-2">
                 {profile.capabilities.map((c) => (
@@ -104,7 +118,7 @@ export default function Experience() {
           <Reveal>
             <div className="card p-6">
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-                Focus
+                {t(ui.focus)}
               </span>
               <div className="mt-4 divide-y divide-line">
                 {profile.facts.slice(0, 3).map((f) => (

@@ -2,9 +2,25 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Crosshair, PlusMark } from '../components/cards';
 import { socials, heroMeta } from '../data';
+import { useI18n } from '../i18n';
 
 export default function Contact() {
   const others = socials.filter((s) => s.label !== 'Email');
+  const { t } = useI18n();
+  const ui = {
+    transmission: { id: '07 / Transmisi', en: '07 / Transmission' },
+    lets: { id: 'Mari', en: "Let's" },
+    talk: { id: 'Bicara.', en: 'Talk.' },
+    intro: {
+      id: 'Punya proyek, peran, atau sekadar ingin menyapa? Kotak masuk terbuka — biasanya kubalas dalam satu atau dua hari.',
+      en: 'Have a project, a role, or just want to say hi? The inbox is open — I usually reply within a day or two.',
+    },
+    clickMail: { id: 'Klik untuk buka email', en: 'Click to open mail' },
+    coordinates: { id: 'Koordinat', en: 'Coordinates' },
+    based: { id: 'Basis', en: 'Based In' },
+    status: { id: 'Status', en: 'Status' },
+    focus: { id: 'Fokus', en: 'Focus' },
+  };
 
   return (
     <section className="container-shell py-16 md:py-20">
@@ -17,18 +33,17 @@ export default function Contact() {
           <PlusMark className="absolute bottom-8 left-8 hidden sm:block" />
 
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-blue">
-            07 / Transmission
+            {t(ui.transmission)}
           </p>
 
           <h2 className="heading-display mt-6 text-6xl uppercase leading-[0.85] tracking-tight sm:text-8xl md:text-9xl">
-            Let&apos;s
+            {t(ui.lets)}
             <br />
-            <span className="text-blue">Talk.</span>
+            <span className="text-blue">{t(ui.talk)}</span>
           </h2>
 
           <p className="mt-8 max-w-xl text-base font-medium leading-7 text-ink/65 sm:text-lg">
-            Have a project, a role, or just want to say hi? The inbox is open —
-            I usually reply within a day or two.
+            {t(ui.intro)}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-6 border-t border-line pt-8">
@@ -39,7 +54,7 @@ export default function Contact() {
               {heroMeta.email}
             </a>
             <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45">
-              Click to open mail
+              {t(ui.clickMail)}
             </span>
           </div>
         </div>
@@ -50,14 +65,14 @@ export default function Contact() {
         <Reveal className="col-span-12 md:col-span-6">
           <div className="card h-full p-6">
             <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-              Coordinates
+              {t(ui.coordinates)}
             </span>
             <dl className="mt-4">
               {[
-                { k: 'Based In', v: heroMeta.location },
+                { k: t(ui.based), v: heroMeta.location },
                 { k: 'Coordinates', v: heroMeta.coords },
-                { k: 'Status', v: heroMeta.availability },
-                { k: 'Focus', v: heroMeta.role },
+                { k: t(ui.status), v: heroMeta.availability },
+                { k: t(ui.focus), v: heroMeta.role },
               ].map((row, i) => (
                 <div
                   key={row.k}

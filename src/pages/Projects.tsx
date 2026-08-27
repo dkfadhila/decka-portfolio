@@ -3,10 +3,18 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, Tag, MetaNum } from '../components/cards';
 import { projects } from '../data';
+import { useI18n } from '../i18n';
 
 const spans = ['col-span-12 lg:col-span-5', 'col-span-12 lg:col-span-4', 'col-span-12 lg:col-span-3'];
 
 export default function Projects() {
+  const { t } = useI18n();
+  const ui = {
+    exp: { id: 'Eksp. 0', en: 'Exp. 0' },
+    year: { id: 'Tahun', en: 'Year' },
+    stack: { id: 'Tumpukan', en: 'Stack' },
+    status: { id: 'Status', en: 'Status' },
+  };
   return (
     <section className="container-shell py-16 md:py-20">
       <PageHeader page="projects" />
@@ -39,7 +47,7 @@ export default function Projects() {
                         : 'border-line bg-bg/90 text-ink/70'
                     }`}
                   >
-                    Exp. 0{i + 1}
+                    {t(ui.exp)}{i + 1}
                   </span>
                 </div>
 
@@ -60,9 +68,9 @@ export default function Projects() {
                   {/* Technical metadata */}
                   <dl className="mt-5 border-t border-line pt-4">
                     {[
-                      { k: 'Year', v: p.year },
-                      { k: 'Stack', v: p.stack },
-                      { k: 'Status', v: p.status },
+                      { k: t(ui.year), v: p.year },
+                      { k: t(ui.stack), v: p.stack },
+                      { k: t(ui.status), v: p.status },
                     ].map((row) => (
                       <div
                         key={row.k}
@@ -79,8 +87,8 @@ export default function Projects() {
                   </dl>
 
                   <div className="mt-5 flex flex-wrap gap-2 pt-1">
-                    {p.tags.map((t) => (
-                      <Tag key={t}>{t}</Tag>
+                    {p.tags.map((tag) => (
+                      <Tag key={tag}>{tag}</Tag>
                     ))}
                   </div>
                 </div>

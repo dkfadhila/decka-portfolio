@@ -1,16 +1,21 @@
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Crosshair } from '../components/cards';
+import { useI18n } from '../i18n';
 
 /* Editorial empty state — reserved section, not a dead end */
 function EmptySection({
   num,
   title,
   description,
+  emptyLabel,
+  awaitingLabel,
 }: {
   num: string;
   title: string;
   description: string;
+  emptyLabel: string;
+  awaitingLabel: string;
 }) {
   return (
     <div className="card relative overflow-hidden">
@@ -26,7 +31,7 @@ function EmptySection({
         </div>
 
         <h3 className="heading-display text-2xl uppercase leading-[0.95] tracking-tight sm:text-3xl">
-          No entries yet
+          {emptyLabel}
         </h3>
         <p className="max-w-md text-sm font-medium leading-6 text-ink/60">
           {description}
@@ -34,7 +39,7 @@ function EmptySection({
 
         <span className="mt-auto flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-ink/45">
           <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-blue" aria-hidden />
-          Awaiting entries
+          {awaitingLabel}
         </span>
       </div>
     </div>
@@ -42,6 +47,31 @@ function EmptySection({
 }
 
 export default function Credentials() {
+  const { t } = useI18n();
+  const ui = {
+    academic: { id: '01 / Akademik', en: '01 / Academic' },
+    field: { id: 'Bidang', en: 'Field' },
+    graduated: { id: 'Lulus', en: 'Graduated' },
+    status: { id: 'Status', en: 'Status' },
+    degree: { id: 'Gelar', en: 'Degree' },
+    certTitle: { id: 'Sertifikat', en: 'Certificates' },
+    certDesc: {
+      id: 'Sertifikat magang, praktikum, dan kursus akan didaftarkan di sini saat sudah diperoleh.',
+      en: 'Internship, practicum, and course certificates will be listed here as they are earned.',
+    },
+    honorsTitle: { id: 'Penghargaan', en: 'Honors' },
+    honorsDesc: {
+      id: 'Penghargaan, pengakuan, dan prestasi akademik akan dicatat di sini.',
+      en: 'Awards, recognitions, and academic honors will be recorded here.',
+    },
+    noEntries: { id: 'Belum ada entri', en: 'No entries yet' },
+    awaiting: { id: 'Menunggu entri', en: 'Awaiting entries' },
+    bio: {
+      id: 'Lulus dengan fokus pada fisika komputasi dan komputasi ilmiah — pemrosesan data penilaian untuk 80+ mahasiswa, metode numerik, dan mata kuliah berorientasi riset.',
+      en: 'Graduated with a focus on computational physics and scientific computing — assessment data processing for 80+ students, numerical methods, and research-oriented coursework.',
+    },
+  };
+
   return (
     <section className="container-shell py-16 md:py-20">
       <PageHeader page="credentials" />
@@ -55,7 +85,7 @@ export default function Credentials() {
             </span>
 
             <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-blue">
-              01 / Academic
+              {t(ui.academic)}
             </span>
 
             <h2 className="heading-display mt-6 text-3xl uppercase leading-[0.9] tracking-tight sm:text-5xl">
@@ -68,10 +98,10 @@ export default function Credentials() {
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-line pt-6 sm:grid-cols-4">
               {[
-                { k: 'Degree', v: 'Bachelor of Science' },
-                { k: 'Field', v: 'Physics' },
-                { k: 'Graduated', v: '2026' },
-                { k: 'Status', v: 'Completed' },
+                { k: t(ui.degree), v: 'Bachelor of Science' },
+                { k: t(ui.field), v: 'Physics' },
+                { k: t(ui.graduated), v: '2026' },
+                { k: t(ui.status), v: 'Completed' },
               ].map((row) => (
                 <div key={row.k}>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/45">
@@ -85,9 +115,7 @@ export default function Credentials() {
             </dl>
 
             <p className="mt-8 max-w-2xl text-sm font-medium leading-6 text-ink/60">
-              Graduated with a focus on computational physics and scientific
-              computing — assessment data processing for 80+ students,
-              numerical methods, and research-oriented coursework.
+              {t(ui.bio)}
             </p>
           </div>
         </Reveal>
@@ -96,8 +124,10 @@ export default function Credentials() {
         <Reveal className="col-span-12 sm:col-span-6">
           <EmptySection
             num="02"
-            title="Certificates"
-            description="Internship, practicum, and course certificates will be listed here as they are earned."
+            title={t(ui.certTitle)}
+            description={t(ui.certDesc)}
+            emptyLabel={t(ui.noEntries)}
+            awaitingLabel={t(ui.awaiting)}
           />
         </Reveal>
 
@@ -105,8 +135,10 @@ export default function Credentials() {
         <Reveal className="col-span-12 sm:col-span-6">
           <EmptySection
             num="03"
-            title="Honors"
-            description="Awards, recognitions, and academic honors will be recorded here."
+            title={t(ui.honorsTitle)}
+            description={t(ui.honorsDesc)}
+            emptyLabel={t(ui.noEntries)}
+            awaitingLabel={t(ui.awaiting)}
           />
         </Reveal>
       </div>

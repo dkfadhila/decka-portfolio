@@ -180,10 +180,10 @@ export const experience: ExperienceItem[] = [
   {
     id: 'exp-2',
     role: 'Intern — Emergency & Logistics Division',
-    org: 'BPBD Kabupaten Kudus',
+    org: 'Badan Penanggulangan Bencana Daerah Kabupaten Kudus',
     period: 'Dec 2024 — Feb 2025',
     description:
-      'Sorted and organized travel documents and financial records. Created visual materials for BPBD communication. Conducted rainfall and disaster-vulnerability mapping for Kabupaten Kudus. Participated in field surveys and assessments related to landslides and flood events.',
+      'Sorted and organized travel documents and financial records. Created visual materials for the agency\'s communication. Conducted rainfall and disaster-vulnerability mapping for Kabupaten Kudus. Participated in field surveys and assessments related to landslides and flood events.',
     tags: ['Data Mapping', 'GIS', 'Administrative Support', 'Field Research'],
   },
   {
@@ -198,7 +198,7 @@ export const experience: ExperienceItem[] = [
   {
     id: 'exp-4',
     role: 'Vice Head — Media & Information Division',
-    org: 'BEM FMIPA UNY',
+    org: 'Badan Eksekutif Mahasiswa Fakultas Matematika & Ilmu Pengetahuan Alam Universitas Negeri Yogyakarta',
     period: '2025',
     description:
       'Coordinated communication between organizational leadership, Media & Information staff, and other divisions. Monitored division workflow, managed design requests from multiple divisions, and supported social media publication and content distribution.',
@@ -207,7 +207,7 @@ export const experience: ExperienceItem[] = [
   {
     id: 'exp-5',
     role: 'Organizational Advisory Board',
-    org: 'UKM CATUR UNY',
+    org: 'Unit Kegiatan Mahasiswa Catur Universitas Negeri Yogyakarta',
     period: '2025',
     description:
       'Monitored internal coordination and organizational relationships among management members. Provided organizational monitoring and oversight to support internal coordination.',
@@ -216,7 +216,7 @@ export const experience: ExperienceItem[] = [
   {
     id: 'exp-6',
     role: 'Media & Information Staff',
-    org: 'UKM CATUR UNY',
+    org: 'Unit Kegiatan Mahasiswa Catur Universitas Negeri Yogyakarta',
     period: '2023',
     description:
       'Supported internal communication and coordination within the Media & Information division. Managed and published organizational social media content, created visual materials, and supported content planning and publication activities.',
@@ -259,8 +259,8 @@ export const work: WorkItem[] = [
   },
   {
     id: 'w2',
-    title: 'BPBD Kudus — Disaster Mapping',
-    client: 'BPBD Kabupaten Kudus',
+    title: 'Kudus Disaster Agency — Mapping',
+    client: 'Badan Penanggulangan Bencana Daerah Kabupaten Kudus',
     description:
       'Conducted rainfall and disaster-vulnerability mapping, created visual materials, and participated in field surveys for landslide and flood events.',
     imageUrl:

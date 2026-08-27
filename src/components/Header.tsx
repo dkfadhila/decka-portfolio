@@ -2,6 +2,19 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { nav, profile, heroMeta } from '../data';
+import { useI18n, ui, LangToggle, type LStr } from '../i18n';
+
+/* Map nav id -> translatable label */
+const navLabel: Record<string, LStr> = {
+  home: ui.navHome,
+  about: ui.navAbout,
+  experience: ui.navExperience,
+  work: ui.navWork,
+  projects: ui.navProjects,
+  content: ui.navContent,
+  credentials: ui.navCredentials,
+  contact: ui.navContact,
+};
 
 function Monogram() {
   return (
@@ -13,6 +26,7 @@ function Monogram() {
 
 export default function Header() {
   const { pathname } = useLocation();
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
 
   // Close the mobile menu on navigation
@@ -60,7 +74,7 @@ export default function Header() {
               >
                 {({ isActive }) => (
                   <>
-                    {item.label}
+                    {t(navLabel[item.id])}
                     {isActive && (
                       <span className="font-mono text-[9px] font-medium text-blue">
                         {item.num}
@@ -72,18 +86,12 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* RIGHT — utility / explore */}
+          {/* RIGHT — year + language toggle */}
           <div className="hidden shrink-0 items-center gap-3 lg:flex">
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
               Portfolio / {heroMeta.year}
             </span>
-            <Link
-              to="/contact"
-              aria-label="Contact"
-              className="grid h-9 w-9 place-items-center rounded-full border border-line text-ink transition-colors hover:border-blue hover:text-blue"
-            >
-              <ArrowUpRight size={15} />
-            </Link>
+            <LangToggle />
           </div>
         </div>
       </header>
@@ -97,13 +105,16 @@ export default function Header() {
               {profile.name}
             </span>
           </Link>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            className="rounded-lg border border-line px-4 py-2 text-[11px] font-bold uppercase tracking-wide transition-colors hover:border-blue hover:bg-blue-soft"
-          >
-            {open ? 'Close ×' : 'Menu +'}
-          </button>
+          <div className="flex items-center gap-2">
+            <LangToggle className="md:hidden" />
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              className="rounded-lg border border-line px-4 py-2 text-[11px] font-bold uppercase tracking-wide transition-colors hover:border-blue hover:bg-blue-soft"
+            >
+              {open ? `${t(ui.close)} ×` : `${t(ui.menu)} +`}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -124,7 +135,7 @@ export default function Header() {
               >
                 <span className="font-mono text-xs text-blue">{item.num}</span>
                 <span className="heading-display text-3xl uppercase leading-none tracking-tight sm:text-4xl">
-                  {item.label}
+                  {t(navLabel[item.id])}
                 </span>
                 <ArrowUpRight
                   size={20}
@@ -138,7 +149,7 @@ export default function Header() {
               to="/contact"
               className="inline-flex w-fit items-center gap-2 rounded-lg bg-ink px-5 py-3 text-[11px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-blue hover:text-ink"
             >
-              Let&apos;s talk
+              {t(ui.letsTalk)}
               <ArrowUpRight size={14} />
             </Link>
             <div className="flex items-center justify-between">

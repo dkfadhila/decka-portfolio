@@ -2,12 +2,19 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, MetaNum, Crosshair } from '../components/cards';
 import { content } from '../data';
+import { useI18n } from '../i18n';
 
 const targetOf = (link?: string) =>
   link && link !== '#' ? { href: link, target: '_blank', rel: 'noreferrer' } : { href: '#' };
 
 export default function Content() {
   const [featured, ...rest] = content;
+  const { t } = useI18n();
+  const ui = {
+    featured: { id: 'Unggulan — ', en: 'Featured — ' },
+    index: { id: 'Indeks — ', en: 'Index — ' },
+    entries: { id: 'entri', en: 'entries' },
+  };
 
   return (
     <section className="container-shell py-16 md:py-20">
@@ -22,7 +29,7 @@ export default function Content() {
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-md border border-blue bg-blue-soft px-3 py-1 text-[10px] font-black uppercase tracking-wide text-ink">
-                Featured — {featured?.type}
+                {t(ui.featured)}{featured?.type}
               </span>
               <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45">
                 {featured?.date}
@@ -46,7 +53,7 @@ export default function Content() {
         <Reveal>
           <div className="mb-4 flex items-center justify-between border-b border-line pb-3">
             <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-blue">
-              Index — {rest.length} entries
+              {t(ui.index)}{rest.length} {t(ui.entries)}
             </span>
             <Crosshair />
           </div>

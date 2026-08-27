@@ -1,19 +1,30 @@
-import { useParams, Link } from 'react-router-dom';
+﻿import { useParams, Link } from 'react-router-dom';
 import { ArrowUpLeft } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import { Tag, Crosshair } from '../components/cards';
 import { projectDetails } from '../data';
+import { useI18n } from '../i18n';
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? projectDetails[slug] : undefined;
+  const { t } = useI18n();
+  const ui = {
+    back: { id: 'Kembali ke Proyek', en: 'Back to Projects' },
+    notFound: { id: 'Proyek tidak ditemukan', en: 'Project not found' },
+stack: { id: 'Tumpukan:', en: 'Stack:' },
+    projectInfo: { id: 'Info Proyek', en: 'Project Info' },
+    year: { id: 'Tahun', en: 'Year' },
+    category: { id: 'Kategori', en: 'Category' },
+    status: { id: 'Status', en: 'Status' },
+  };
 
   if (!project) {
     return (
       <section className="container-shell py-16 md:py-20">
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <p className="font-mono text-sm uppercase tracking-[0.18em] text-ink/45">
-            Project not found
+            {t(ui.notFound)}
           </p>
           <h1 className="heading-display mt-4 text-4xl uppercase tracking-tight">
             404
@@ -23,7 +34,7 @@ export default function ProjectDetail() {
             className="mt-6 inline-flex items-center gap-2 rounded-lg border border-line bg-card px-5 py-3 text-[11px] font-bold uppercase tracking-wide text-ink transition-colors hover:border-blue hover:bg-blue-soft"
           >
             <ArrowUpLeft size={14} />
-            Back to Projects
+            {t(ui.back)}
           </Link>
         </div>
       </section>
@@ -42,7 +53,7 @@ export default function ProjectDetail() {
             size={14}
             className="transition-transform group-hover:-translate-x-0.5"
           />
-          Back to Projects
+          {t(ui.back)}
         </Link>
       </Reveal>
 
@@ -89,7 +100,7 @@ export default function ProjectDetail() {
       <Reveal>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45">
-            Stack:
+            {t(ui.stack)}
           </span>
           <div className="flex flex-wrap gap-2">
             {project.stack.map((s) => (
@@ -130,13 +141,13 @@ export default function ProjectDetail() {
         <Reveal className="col-span-12 lg:col-span-4">
           <div className="card p-6">
             <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-              Project Info
+              {t(ui.projectInfo)}
             </span>
             <dl className="mt-4">
               {[
-                { k: 'Year', v: project.year },
-                { k: 'Category', v: project.category },
-                { k: 'Status', v: 'Completed' },
+                { k: t(ui.year), v: project.year },
+                { k: t(ui.category), v: project.category },
+                { k: t(ui.status), v: 'Completed' },
               ].map((row, i) => (
                 <div
                   key={row.k}
@@ -164,3 +175,4 @@ export default function ProjectDetail() {
     </section>
   );
 }
+
