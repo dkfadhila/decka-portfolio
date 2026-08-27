@@ -2,17 +2,17 @@
 import PageHeader from '../components/PageHeader';
 import { Crosshair, Tag } from '../components/cards';
 import { profile } from '../data';
-import { useI18n } from '../i18n';
+import { useI18n, tr } from '../i18n';
 
 export default function About() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const ui = {
-    biography: { id: '02.A â€” Biografi', en: '02.A â€” Biography' },
-    profile: { id: '02.B â€” Profil', en: '02.B â€” Profile' },
-    method: { id: '02 / Metode', en: '{t(ui.method)}' },
-    howWork: { id: 'Cara Saya Bekerja', en: '{t(ui.howWork)}' },
+    biography: { id: '02.A — Biografi', en: '02.A — Biography' },
+    profile: { id: '02.B — Profil', en: '02.B — Profile' },
+    method: { id: '02 / Metode', en: '02 / Method' },
+    howWork: { id: 'Cara Saya Bekerja', en: 'How I Work' },
     principles: { id: 'prinsip', en: 'principles' },
-    capabilities: { id: '02.C â€” Kemampuan', en: '02.C â€” Capabilities' },
+    capabilities: { id: '02.C — Kemampuan', en: '02.C — Capabilities' },
   };
   return (
     <section className="container-shell py-16 md:py-20">
@@ -23,15 +23,19 @@ export default function About() {
         <Reveal className="col-span-12 lg:col-span-7">
           <article className="card flex h-full flex-col p-6 sm:p-8">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-                02.A â€” Biography
+<span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
+                {t(ui.biography)}
               </span>
               <Crosshair />
             </div>
-            <h2 className="heading-display mt-8 text-4xl uppercase leading-[0.9] tracking-tight sm:text-5xl">
+<h2 className="heading-display mt-8 text-4xl uppercase leading-[0.9] tracking-tight sm:text-5xl">
               {profile.aboutHeading.map((l, i) => (
                 <span key={i} className="block">
-                  {i === 1 ? <span className="text-blue">{l}</span> : l}
+                  {i === 1 ? (
+                    <span className="text-blue">{tr(l, lang)}</span>
+                  ) : (
+                    tr(l, lang)
+                  )}
                 </span>
               ))}
             </h2>
@@ -45,9 +49,9 @@ export default function About() {
                 </p>
               ))}
             </div>
-            <div className="mt-auto flex flex-wrap gap-2 border-t border-line pt-6">
+<div className="mt-auto flex flex-wrap gap-2 border-t border-line pt-6">
               {profile.focusPills.map((p) => (
-                <Tag key={p}>{p}</Tag>
+                <Tag key={p}>{tr(p, lang)}</Tag>
               ))}
             </div>
           </article>
@@ -65,7 +69,7 @@ export default function About() {
                 />
                 <span className="absolute left-3 top-3 h-2.5 w-2.5 rounded-[2px] bg-blue" aria-hidden />
                 <span className="absolute bottom-3 right-3 rounded-md border border-line bg-bg/90 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-ink/70 transition-colors duration-500 group-hover:border-blue group-hover:bg-blue-soft">
-                  Fig. 02 â€” {profile.name}
+                  Fig. 02 — {profile.name}
                 </span>
               </div>
             </div>
@@ -73,9 +77,9 @@ export default function About() {
 
           {/* Facts card */}
           <Reveal>
-            <div className="card p-6">
+<div className="card p-6">
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-                02.B â€” Profile
+                {t(ui.profile)}
               </span>
               <dl className="mt-4">
                 {profile.facts.map((f, i) => (
@@ -86,10 +90,10 @@ export default function About() {
                     }`}
                   >
                     <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/45">
-                      {f.label}
+                      {tr(f.label, lang)}
                     </dt>
                     <dd className="text-sm font-bold uppercase leading-tight text-ink/85">
-                      {f.value}
+                      {tr(f.value, lang)}
                     </dd>
                   </div>
                 ))}
@@ -111,8 +115,8 @@ export default function About() {
                 {t(ui.howWork)}
               </h2>
             </div>
-            <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45 sm:block">
-              {t(ui.principles)}
+<span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45 sm:block">
+              04 {t(ui.principles)}
             </span>
           </div>
         </Reveal>
@@ -127,11 +131,11 @@ export default function About() {
                 >
                   0{i + 1}
                 </span>
-                <h3 className="heading-display mt-6 text-xl uppercase leading-[0.95] tracking-tight sm:text-2xl">
-                  {m.title}
+<h3 className="heading-display mt-6 text-xl uppercase leading-[0.95] tracking-tight sm:text-2xl">
+                  {tr(m.title, lang)}
                 </h3>
                 <p className="mt-3 max-w-md text-sm font-medium leading-6 text-ink/65">
-                  {m.description}
+                  {tr(m.description, lang)}
                 </p>
               </article>
             </Reveal>
@@ -142,13 +146,13 @@ export default function About() {
       {/* Capabilities */}
       <div className="mt-16">
         <Reveal>
-          <div className="card p-6">
+<div className="card p-6">
             <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-              02.C â€” Capabilities
+              {t(ui.capabilities)}
             </span>
             <div className="mt-5 flex flex-wrap gap-2">
               {profile.capabilities.map((c) => (
-                <Tag key={c}>{c}</Tag>
+                <Tag key={c}>{tr(c, lang)}</Tag>
               ))}
             </div>
           </div>

@@ -2,7 +2,7 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Tag, Crosshair } from '../components/cards';
 import { experience, profile, heroMeta } from '../data';
-import { useI18n, institutionName } from '../i18n';
+import { useI18n, institutionName, tr } from '../i18n';
 
 export default function Experience() {
   const { t, lang } = useI18n();
@@ -110,7 +110,7 @@ export default function Experience() {
               </span>
               <div className="mt-4 flex flex-wrap gap-2">
                 {profile.capabilities.map((c) => (
-                  <Tag key={c}>{c}</Tag>
+                  <Tag key={c}>{tr(c, lang)}</Tag>
                 ))}
               </div>
             </div>
@@ -124,10 +124,10 @@ export default function Experience() {
                 {profile.facts.slice(0, 3).map((f) => (
                   <div key={f.label} className="grid grid-cols-[6rem_1fr] gap-3 py-3">
                     <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/45">
-                      {f.label}
+                      {tr(f.label, lang)}
                     </span>
                     <span className="text-sm font-bold uppercase leading-tight text-ink/85">
-                      {f.value}
+                      {tr(f.value, lang)}
                     </span>
                   </div>
                 ))}

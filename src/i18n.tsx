@@ -114,6 +114,72 @@ export function institutionName(name: string, lang: Lang): string {
 }
 
 /* ============================================================
+   Content translations — English source strings from data.ts
+   -> Indonesian equivalents. Unknown strings pass through.
+   ============================================================ */
+const contentTr: Record<string, string> = {
+  // aboutHeading
+  'Data explorer.': 'Penjelajah data.',
+  'Scientific thinker.': 'Pemikir ilmiah.',
+  'Tech builder.': 'Pembangun teknologi.',
+  // facts labels
+  Focus: 'Fokus',
+  Languages: 'Bahasa',
+  Industry: 'Industri',
+  Platforms: 'Platform',
+  'Based In': 'Basis',
+  // facts values
+  'Data, Research, Technology': 'Data, Riset, Teknologi',
+  'Indonesian / English': 'Indonesia / Inggris',
+  'Web, X, GitHub': 'Web, X, GitHub',
+  Indonesia: 'Indonesia',
+  // focusPills
+  'Data Processing': 'Pemrosesan Data',
+  'AI-Assisted Research': 'Riset Berbantuan AI',
+  Automation: 'Otomatisasi',
+  // method titles
+  'Data-driven approach': 'Pendekatan berbasis data',
+  'Research-oriented mindset': 'Pola pikir berorientasi riset',
+  'AI-assisted workflows': 'Alur kerja berbantuan AI',
+  'Workflow optimization': 'Optimasi alur kerja',
+  // method descriptions
+  'Handle large datasets, organize them, and extract patterns that inform decisions.':
+    'Menangani dataset besar, mengorganisasikannya, dan mengekstrak pola yang mendukung keputusan.',
+  'Dig into the data and context before drawing conclusions — analytical and curious.':
+    'Menggali data dan konteks sebelum menarik kesimpulan — analitis dan kritis.',
+  'Experienced with n8n, Cursor, GitHub, Claude Code, Codex, Vercel, and Hermes.':
+    'Berpengalaman dengan n8n, Cursor, GitHub, Claude Code, Codex, Vercel, dan Hermes.',
+  'Use AI tools and automation to improve research, content creation, and repetitive workflows.':
+    'Memanfaatkan alat AI dan otomatisasi untuk riset, pembuatan konten, dan alur kerja repetitif.',
+  // stats labels
+  'Data points processed': 'Titik data diproses',
+  'Roles & engagements': 'Peran & keterlibatan',
+  'Web3 campaigns researched': 'Kampanye Web3 diteliti',
+  'Working online': 'Bekerja daring',
+  // capabilities
+  'Data Management & Processing': 'Manajemen & Pemrosesan Data',
+  'Data Analysis & Visualization': 'Analisis & Visualisasi Data',
+  'Scientific Computing': 'Komputasi Ilmiah',
+  'Research & Information Analysis': 'Riset & Analisis Informasi',
+  'Reporting & Documentation': 'Pelaporan & Dokumentasi',
+  'Administrative Support': 'Dukungan Administratif',
+  'Workflow & Process Management': 'Manajemen Alur Kerja & Proses',
+  'AI-Assisted Research & Automation': 'Riset Berbantuan AI & Otomatisasi',
+  'Project & Task Planning': 'Perencanaan Proyek & Tugas',
+  'Content Operations': 'Operasi Konten',
+  'Graphic Design & Visual Communication': 'Desain Grafis & Komunikasi Visual',
+  'Social Media Management': 'Manajemen Media Sosial',
+  'Copywriting & Content Writing': 'Penulisan Iklan & Konten',
+  'Microsoft Office & Google Workspace': 'Microsoft Office & Google Workspace',
+};
+
+/* Translate a content string (EN source) to the active language */
+export function tr(s: string, lang: Lang): string {
+  if (lang === 'en') return s;
+  return contentTr[s] ?? s;
+}
+
+/* ============================================================
    UI chrome strings (nav, hero, headers, footer, section labels)
    ============================================================ */
 export const ui = {

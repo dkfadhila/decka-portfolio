@@ -1,7 +1,7 @@
 ﻿import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import Reveal from '../components/Reveal';
-import { useI18n, ui } from '../i18n';
+import { useI18n, ui, tr } from '../i18n';
 import {
   Crosshair,
   PlusMark,
@@ -28,7 +28,7 @@ function Meta({ k, n, dim = false }: { k: string; n: string; dim?: boolean }) {
 
 export default function Home() {
   const [about, experience, work, projects, content, credentials, contact] = mapCards;
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   return (
     <>
@@ -293,7 +293,7 @@ export default function Home() {
                     {s.value}
                   </p>
                   <p className="mt-2 text-[11px] font-bold uppercase tracking-wide text-secondary">
-                    {s.label}
+                    {tr(s.label, lang)}
                   </p>
                 </div>
               ))}
@@ -416,7 +416,7 @@ export default function Home() {
                         : 'border-line bg-bg text-ink/70 hover:border-blue hover:text-ink'
                     }`}
                   >
-                    {p}
+                    {tr(p, lang)}
                   </span>
                 ))}
               </div>
