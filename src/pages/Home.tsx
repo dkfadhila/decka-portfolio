@@ -240,7 +240,7 @@ export default function Home() {
                 {/* LOWER RIGHT METRICS — editorial statistics columns */}
                 <div className="grid grid-cols-2 gap-y-6 border-t border-line pt-6 sm:grid-cols-4">
                   {[
-                    { value: 'B.Sc.', label: t(ui.metricPhysics) },
+                    { value: t(ui.metricPhysics), label: t(ui.metricPhysicsLabel) },
                     { value: '4+', label: t(ui.metricProjects) },
                     { value: '5+', label: t(ui.metricTools) },
                     { value: '80+', label: t(ui.metricStudents) },

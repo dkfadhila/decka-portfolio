@@ -50,6 +50,7 @@ export default function Credentials() {
   const { t } = useI18n();
   const ui = {
     academic: { id: '01 / Akademik', en: '01 / Academic' },
+    degreeTitle: { id: 'S.Si. Fisika', en: 'B.Sc. Physics' },
     field: { id: 'Bidang', en: 'Field' },
     graduated: { id: 'Lulus', en: 'Graduated' },
     status: { id: 'Status', en: 'Status' },
@@ -89,8 +90,7 @@ export default function Credentials() {
             </span>
 
             <h2 className="heading-display mt-6 text-3xl uppercase leading-[0.9] tracking-tight sm:text-5xl">
-              B.Sc. Physics
-              <span className="text-blue"> (S.Si.)</span>
+              {t(ui.degreeTitle)}
             </h2>
             <p className="mt-3 text-sm font-bold uppercase tracking-wide text-ink/50">
               Universitas Negeri Yogyakarta
