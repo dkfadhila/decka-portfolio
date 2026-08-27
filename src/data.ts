@@ -24,7 +24,7 @@ export const profile: Profile = {
   capsLine: 'DATA • RESEARCH • TECHNOLOGY • OPERATIONS',
   heroLines: ["Hello,", 'Tirta.'],
   subtitle:
-    'Bachelor of Science in Physics graduate from Universitas Negeri Yogyakarta with experience in data processing, scientific computing, research, administrative support, and organizational coordination.',
+    'Bachelor of Science in Physics graduate with experience in data processing, scientific computing, research, administrative support, and organizational coordination.',
   intro: [
     "I'm Tirta — a Physics graduate (Universitas Negeri Yogyakarta) with experience spanning data processing, scientific computing, research, administrative support, and organizational coordination.",
     'I care about turning complex data into clear insights, building computational tools, and using AI to make research and operations more efficient.',
