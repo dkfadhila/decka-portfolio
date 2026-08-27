@@ -2,10 +2,10 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Tag, Crosshair } from '../components/cards';
 import { experience, profile, heroMeta } from '../data';
-import { useI18n } from '../i18n';
+import { useI18n, institutionName } from '../i18n';
 
 export default function Experience() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const ui = {
     record: { id: 'Catatan / 0', en: 'Record / 0' },
     status: { id: 'Status', en: 'Status' },
@@ -62,7 +62,7 @@ export default function Experience() {
                       {e.role}
                     </h3>
                     <p className="mt-1 text-sm font-bold uppercase tracking-wide text-ink/50">
-                      {e.org}
+                      {institutionName(e.org, lang)}
                     </p>
                     <p className="mt-4 max-w-2xl text-sm font-medium leading-6 text-ink/65">
                       {e.description}

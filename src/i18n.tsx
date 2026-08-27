@@ -87,6 +87,33 @@ export function LangToggle({ className = '' }: { className?: string }) {
 }
 
 /* ============================================================
+   Institution names — Indonesian official names -> English
+   ============================================================ */
+const institutions: Record<string, LStr> = {
+  'Badan Penanggulangan Bencana Daerah Kabupaten Kudus': {
+    id: 'Badan Penanggulangan Bencana Daerah Kabupaten Kudus',
+    en: 'Regional Disaster Management Agency of Kudus Regency',
+  },
+  'Badan Eksekutif Mahasiswa Fakultas Matematika & Ilmu Pengetahuan Alam Universitas Negeri Yogyakarta': {
+    id: 'Badan Eksekutif Mahasiswa Fakultas Matematika & Ilmu Pengetahuan Alam Universitas Negeri Yogyakarta',
+    en: 'Student Executive Board, Faculty of Mathematics & Natural Sciences, Yogyakarta State University',
+  },
+  'Unit Kegiatan Mahasiswa Catur Universitas Negeri Yogyakarta': {
+    id: 'Unit Kegiatan Mahasiswa Catur Universitas Negeri Yogyakarta',
+    en: 'Student Chess Activity Unit, Yogyakarta State University',
+  },
+  'Universitas Negeri Yogyakarta': {
+    id: 'Universitas Negeri Yogyakarta',
+    en: 'Yogyakarta State University',
+  },
+};
+
+/* Translate an institution name if a mapping exists; otherwise return as-is */
+export function institutionName(name: string, lang: Lang): string {
+  return institutions[name]?.[lang] ?? name;
+}
+
+/* ============================================================
    UI chrome strings (nav, hero, headers, footer, section labels)
    ============================================================ */
 export const ui = {

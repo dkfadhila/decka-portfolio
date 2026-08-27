@@ -2,14 +2,14 @@
 import PageHeader from '../components/PageHeader';
 import { CardArrow, Tag, MetaNum } from '../components/cards';
 import { work } from '../data';
-import { useI18n } from '../i18n';
+import { useI18n, institutionName } from '../i18n';
 
 const targetOf = (link?: string) =>
   link && link !== '#' ? { href: link, target: '_blank', rel: 'noreferrer' } : { href: '#' };
 
 export default function Work() {
   const [first, second, third] = work;
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const ui = {
     case: { id: 'Kasus 0', en: 'Case 0' },
   };
@@ -38,7 +38,7 @@ export default function Work() {
             <div className="flex flex-1 flex-col p-6 sm:p-7">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <MetaNum num={first?.client ?? ''} />
+                  <MetaNum num={institutionName(first?.client ?? '', lang)} />
                   <h3 className="heading-display mt-2 text-2xl uppercase leading-[0.95] tracking-tight sm:text-3xl">
                     {first?.title}
                   </h3>
@@ -76,7 +76,7 @@ export default function Work() {
             <div className="flex flex-1 flex-col p-6 sm:p-7">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <MetaNum num={second?.client ?? ''} />
+                  <MetaNum num={institutionName(second?.client ?? '', lang)} />
                   <h3 className="heading-display mt-2 text-2xl uppercase leading-[0.95] tracking-tight sm:text-3xl">
                     {second?.title}
                   </h3>
@@ -114,7 +114,7 @@ export default function Work() {
             <div className="flex flex-1 flex-col p-6 sm:p-8">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <MetaNum num={third?.client ?? ''} />
+                  <MetaNum num={institutionName(third?.client ?? '', lang)} />
                   <h3 className="heading-display mt-2 text-3xl uppercase leading-[0.95] tracking-tight sm:text-4xl">
                     {third?.title}
                   </h3>
