@@ -1,0 +1,18 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Local work artifacts (screenshots)
+/*.png
+
+# Unused leftover config (not referenced by the Vite project)
+firebase-applet-config.json
+firebase-blueprint.json
+firestore.rules
+metadata.json
+.vercel

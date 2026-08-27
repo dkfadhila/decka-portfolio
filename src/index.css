@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  /* Swiss editorial + soft neo-brutalism palette */
+  --color-bg: #f7f7f4;
+  --color-ink: #111111;
+  --color-blue: #62b5f5;
+  --color-blue-bright: #8dceff;
+  --color-blue-soft: #dceeff;
+  --color-line: #d2d3d0;
+  --color-card: #ffffff;
+  --color-secondary: #6f7378;
+
+  /* Card corner radius: 18–24px */
+  --radius-card: 1.25rem;
+  --radius-panel: 1.5rem;
+  --radius-tab: 0.625rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-blue);
+  color: var(--color-ink);
+}
+
+/* Display headings — neo-grotesk, tight */
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Page width container */
+.container-shell {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .container-shell {
+    padding-inline: 2rem;
+  }
+}
+
+/* Faint technical dot grid */
+.dot-grid {
+  background-image: radial-gradient(rgba(17, 17, 17, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Crosshair mark */
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  background: var(--color-blue);
+}
+.crosshair::before {
+  width: 11px;
+  height: 1px;
+  left: 0;
+  top: 50%;
+}
+.crosshair::after {
+  width: 1px;
+  height: 11px;
+  left: 50%;
+  top: 0;
+}
+
+/* Hide scrollbar on horizontal nav rows */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================
+   CARD SYSTEM
+   Thin gray borders, 18–24px radius, generous whitespace,
+   almost no shadows, precise mechanical hover states.
+   ============================================================ */
+.card {
+  position: relative;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  transition:
+    border-color 0.22s ease,
+    background-color 0.22s ease;
+}
+.card:hover {
+  border-color: var(--color-blue);
+  background: #ffffff;
+}
+
+/* Arrow control inside a card — moves diagonally on hover */
+.card .card-arrow {
+  transition:
+    transform 0.22s ease,
+    color 0.22s ease;
+}
+.card:hover .card-arrow {
+  transform: translate(4px, -4px);
+  color: var(--color-blue);
+}
+
+/* Preview graphic inside a card — subtle 2–4px shift */
+.card .card-media {
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+.card:hover .card-media {
+  transform: translate(3px, -3px);
+}
+
+/* CTA card variant — light blue base */
+.card-cta {
+  background: var(--color-blue-soft);
+  border-color: var(--color-blue);
+}
+.card-cta:hover {
+  background: var(--color-blue-bright);
+  border-color: var(--color-blue);
+}
+
+/* ============================================================
+   NAV TABS — compact editorial tabs
+   ============================================================ */
+.nav-tab {
+  border: 1px solid transparent;
+  border-radius: var(--radius-tab);
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+.nav-tab:hover {
+  background: var(--color-blue-soft);
+}
+.nav-tab-active {
+  background: var(--color-blue-soft);
+  border-color: var(--color-blue);
+  color: var(--color-ink);
+}
+
+/* ============================================================
+   LINKS — animated underline
+   ============================================================ */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.25s ease;
+}
+.link-underline:hover {
+  background-size: 100% 1.5px;
+}
+
+/* ============================================================
+   DECORATIVE — ghost page numbers
+   ============================================================ */
+.ghost-num {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-line);
+  user-select: none;
+}
+.ghost-num-blue {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-blue);
+  user-select: none;
+}
+
+/* Blinking status dot */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
