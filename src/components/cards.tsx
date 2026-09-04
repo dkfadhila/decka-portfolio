@@ -168,7 +168,7 @@ export function CardB({
       )}
 
       {/* Gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
 
       {/* Num badge top-left */}
       <span className="absolute left-3 top-3 z-10 rounded-md border border-line bg-bg/90 px-2 py-1 font-mono text-[10px] tracking-wide text-ink/70">
@@ -181,7 +181,9 @@ export function CardB({
           <h3 className="heading-display text-xl uppercase leading-[0.95] tracking-tight text-white sm:text-2xl">
             {title}
           </h3>
-          <CardArrow size={16} />
+          <span className="text-white/80 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue">
+            <CardArrow size={16} />
+          </span>
         </div>
         <p className="mt-2 text-sm font-medium leading-6 text-white/80">{description}</p>
       </div>

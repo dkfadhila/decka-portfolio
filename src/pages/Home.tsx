@@ -27,7 +27,7 @@ function Meta({ k, n, dim = false }: { k: string; n: string; dim?: boolean }) {
 }
 
 export default function Home() {
-  const [about, experience, work, projects, content, credentials, contact] = mapCards;
+  const [about, experience, work, projects, content, creative, credentials, contact] = mapCards;
   const { t, lang } = useI18n();
 
   return (
@@ -315,35 +315,37 @@ export default function Home() {
               </h2>
             </div>
             <span className="hidden font-mono text-[11px] uppercase tracking-[0.18em] text-secondary sm:block">
-              07 {t(ui.entries)}
+              08 {t(ui.entries)}
             </span>
           </div>
         </Reveal>
 
         <div className="grid grid-cols-12 gap-4">
-          {/* ABOUT — large, tall */}
-          <Reveal className="col-span-12 sm:col-span-6 lg:col-span-5 lg:row-span-2">
+          {/* 02 — ABOUT (Large showcase) */}
+          <Reveal className="col-span-12 md:col-span-6 lg:col-span-7">
             <CardB
               num={about.num}
               title={about.title}
               description={about.description}
               image={about.image}
               to={about.path}
-              className="min-h-[260px]"
+              className="min-h-[280px]"
             />
           </Reveal>
-          {/* EXPERIENCE — medium, numeric */}
-          <Reveal className="col-span-12 sm:col-span-6 lg:col-span-3">
+
+          {/* 03 — EXPERIENCE (Metric highlight) */}
+          <Reveal className="col-span-12 md:col-span-6 lg:col-span-5">
             <CardC
               num={experience.num}
-              big="3+"
+              big="8+"
               title={experience.title}
               description={experience.description}
               to={experience.path}
-              className="min-h-[220px]"
+              className="min-h-[280px]"
             />
           </Reveal>
-          {/* SELECTED WORK — wide, image */}
+
+          {/* 04 — SELECTED WORK (Bento medium) */}
           <Reveal className="col-span-12 sm:col-span-6 lg:col-span-4">
             <CardB
               num={work.num}
@@ -351,20 +353,23 @@ export default function Home() {
               description={work.description}
               image={work.image}
               to={work.path}
-              className="min-h-[220px]"
+              className="min-h-[250px]"
             />
           </Reveal>
-          {/* PROJECTS — medium */}
-          <Reveal className="col-span-12 sm:col-span-6 lg:col-span-3">
-            <CardA
+
+          {/* 05 — PROJECTS (Bento medium) */}
+          <Reveal className="col-span-12 sm:col-span-6 lg:col-span-4">
+            <CardB
               num={projects.num}
               title={projects.title}
               description={projects.description}
+              image={projects.image}
               to={projects.path}
-              className="min-h-[220px]"
+              className="min-h-[250px]"
             />
           </Reveal>
-          {/* CONTENT — small / wide, image */}
+
+          {/* 06 — CONTENT (Bento medium) */}
           <Reveal className="col-span-12 sm:col-span-6 lg:col-span-4">
             <CardB
               num={content.num}
@@ -372,20 +377,34 @@ export default function Home() {
               description={content.description}
               image={content.image}
               to={content.path}
-              className="min-h-[220px]"
+              className="min-h-[250px]"
             />
           </Reveal>
-          {/* CREDENTIALS — reserved, full-width teaser */}
-          <Reveal className="col-span-12">
+
+          {/* 07 — CREATIVE WORKS (Wide visual card) */}
+          <Reveal className="col-span-12 sm:col-span-6 lg:col-span-8">
+            <CardB
+              num={creative.num}
+              title={creative.title}
+              description={creative.description}
+              image={creative.image}
+              to={creative.path}
+              className="min-h-[260px]"
+            />
+          </Reveal>
+
+          {/* 08 — CREDENTIALS (Minimal academic tag) */}
+          <Reveal className="col-span-12 lg:col-span-4">
             <CardA
               num={credentials.num}
               title={credentials.title}
               description={credentials.description}
               to={credentials.path}
-              className="min-h-[120px]"
+              className="min-h-[260px]"
             />
           </Reveal>
-          {/* CONTACT — distinct final CTA */}
+
+          {/* 09 — CONTACT (Full-width distinct final CTA) */}
           <Reveal className="col-span-12">
             <CardD
               num={contact.num}
