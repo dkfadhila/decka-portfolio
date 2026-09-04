@@ -45,8 +45,8 @@ export const profile: Profile = {
   focusPills: [
     'Data Processing',
     'Scientific Computing',
-    'AI-Assisted Research',
-    'Automation',
+    'AI-Leveraged Operations',
+    'Agentic & Automated Workflows',
   ],
   method: [
     {
@@ -58,7 +58,7 @@ export const profile: Profile = {
       description: 'Dig into the data and context before drawing conclusions — analytical and curious.',
     },
     {
-      title: 'AI-assisted workflows',
+      title: 'Agentic & automated workflows',
       description: 'Experienced with n8n, Cursor, GitHub, Claude Code, Codex, Vercel, and Hermes.',
     },
     {
@@ -75,7 +75,8 @@ export const profile: Profile = {
     'Reporting & Documentation',
     'Administrative Support',
     'Workflow & Process Management',
-    'AI-Assisted Research & Automation',
+    'AI-Leveraged Operations',
+    'Agentic & Automated Workflows',
     'Project & Task Planning',
     'Content Operations',
     'Graphic Design & Visual Communication',

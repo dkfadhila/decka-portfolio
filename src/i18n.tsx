@@ -142,12 +142,12 @@ const contentTr: Record<string, string> = {
   Indonesia: 'Indonesia',
   // focusPills
   'Data Processing': 'Pemrosesan Data',
-  'AI-Assisted Research': 'Riset Berbantuan AI',
-  Automation: 'Otomatisasi',
+  'AI-Leveraged Operations': 'Operasi Berbasis AI & Otomasi',
+  'Agentic & Automated Workflows': 'Alur Kerja Agentik & Terotomasi',
   // method titles
   'Data-driven approach': 'Pendekatan berbasis data',
   'Research-oriented mindset': 'Pola pikir berorientasi riset',
-  'AI-assisted workflows': 'Alur kerja berbantuan AI',
+  'Agentic & automated workflows': 'Alur kerja agentik & terotomasi',
   'Workflow optimization': 'Optimasi alur kerja',
   // method descriptions
   'Handle large datasets, organize them, and extract patterns that inform decisions.':
@@ -210,7 +210,7 @@ export const ui = {
   heroHello: { id: 'Halo,', en: 'Hello,' },
   heroParagraph2: {
     id: 'Sebelumnya mengerjakan fisika komputasi, analisis peristiwa banjir, prototipe IoT, dan alur kerja riset berbantuan AI. Saat ini mengeksplorasi peluang berbasis data dan membangun alat yang memecahkan masalah nyata.',
-    en: 'Previously worked on computational physics, flood event analysis, IoT prototyping, and AI-assisted research workflows. Currently exploring data-driven opportunities and building tools that solve real problems.',
+    en: 'Previously worked on computational physics, flood event analysis, IoT prototyping, and agentic workflows. Currently exploring data-driven opportunities and building tools that solve real problems.',
   },
   heroIm: { id: 'saya', en: "I'm" },
   identityPhysics: { id: 'FISIKA', en: 'PHYSICS' },
