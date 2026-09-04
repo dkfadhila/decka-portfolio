@@ -1,11 +1,18 @@
 import { useState } from 'react';
-import { Play, Eye, X, Maximize2 } from 'lucide-react';
+import { X, Play } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
-import { Crosshair, Tag } from '../components/cards';
+import { CardArrow, Tag, MetaNum } from '../components/cards';
 import { creativeItems } from '../data';
 import { useI18n, type LStr } from '../i18n';
 import type { CreativeItem } from '../types';
+
+const spans = [
+  'col-span-12 lg:col-span-7',
+  'col-span-12 lg:col-span-5',
+  'col-span-12 lg:col-span-5',
+  'col-span-12 lg:col-span-7',
+];
 
 type FilterTab = 'all' | 'graphic' | 'photography' | 'motion';
 
@@ -21,39 +28,32 @@ export default function Creative() {
     { id: 'motion', label: { id: 'Motion & Video', en: 'Motion & Video' } },
   ];
 
+  const ui = {
+    piece: { id: 'Karya 0', en: 'Piece 0' },
+    year: { id: 'Tahun', en: 'Year' },
+    format: { id: 'Format', en: 'Format' },
+    type: { id: 'Tipe', en: 'Type' },
+  };
+
   const filteredItems =
     activeTab === 'all'
       ? creativeItems
       : creativeItems.filter((item) => item.category === activeTab);
 
-  const getAspectClass = (aspect?: string) => {
-    switch (aspect) {
-      case 'poster':
-        return 'aspect-[3/4]';
-      case 'video-vertical':
-        return 'aspect-[9/16]';
-      case 'video-horizontal':
-        return 'aspect-[16/9]';
-      case 'photo':
-      default:
-        return 'aspect-[4/3]';
-    }
-  };
-
   return (
     <section className="container-shell py-16 md:py-20">
       <PageHeader page="creative" />
 
-      {/* Filter Tabs */}
+      {/* Filter Tabs — matching subtle editorial style */}
       <Reveal>
-        <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
           <div className="flex flex-wrap items-center gap-1.5">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`rounded-lg px-3.5 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                className={`rounded-lg px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider transition-colors ${
                   activeTab === tab.id
                     ? 'bg-ink text-white'
                     : 'border border-line bg-card text-ink/70 hover:border-blue hover:text-ink'
@@ -64,74 +64,78 @@ export default function Creative() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-wider text-ink/45">
-            <span>
-              {filteredItems.length} {t({ id: 'karya', en: 'works' })}
-            </span>
-            <Crosshair />
-          </div>
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45">
+            {filteredItems.length} {t({ id: 'entri', en: 'entries' })}
+          </span>
         </div>
       </Reveal>
 
-      {/* Media Grid */}
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {filteredItems.map((item) => (
-          <Reveal key={item.id}>
-            <div className="group card flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-blue">
-              {/* Thumbnail Container */}
-              <div
-                className={`relative w-full cursor-pointer overflow-hidden bg-ink/5 ${getAspectClass(
-                  item.aspectRatio
-                )}`}
-                onClick={() => setSelectedMedia(item)}
-              >
+      {/* 12-column Bento Grid matching Work & Projects */}
+      <div className="grid grid-cols-12 gap-4">
+        {filteredItems.map((item, i) => (
+          <Reveal key={item.id} className={spans[i % spans.length]}>
+            <div
+              onClick={() => setSelectedMedia(item)}
+              className="card group flex h-full cursor-pointer flex-col overflow-hidden transition-all duration-300 hover:border-blue"
+            >
+              {/* Media Preview Box with grayscale hover */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-line bg-ink/5">
                 <img
                   src={item.thumbnailUrl}
                   alt={item.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
+                  className="card-media h-full w-full object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
                 />
 
-                {/* Overlay Badge */}
-                <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-md bg-ink/70 px-2 py-1 backdrop-blur-sm">
-                  {item.mediaType === 'video' ? (
-                    <Play size={11} className="fill-white text-white" />
-                  ) : (
-                    <Eye size={11} className="text-white" />
-                  )}
-                  <span className="font-mono text-[9px] font-bold uppercase tracking-wider text-white">
-                    {item.type}
-                  </span>
-                </div>
+                <span className="absolute left-4 top-4 rounded-md border border-line bg-bg/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-ink/70">
+                  {t(ui.piece)}{i + 1}
+                </span>
 
-                {/* Quick Expand Button */}
-                <div className="absolute right-3 bottom-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink shadow-md opacity-0 transition-opacity group-hover:opacity-100">
-                  <Maximize2 size={16} />
-                </div>
+                {item.mediaType === 'video' && (
+                  <span className="absolute right-4 bottom-4 flex items-center gap-1 rounded-md border border-line bg-ink/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-white backdrop-blur-sm">
+                    <Play size={10} className="fill-white" />
+                    Video
+                  </span>
+                )}
               </div>
 
-              {/* Info Body */}
-              <div className="flex flex-1 flex-col justify-between p-5">
-                <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-blue">
-                      {item.category}
-                    </span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/40">
-                      {item.date}
-                    </span>
+              {/* Card Body */}
+              <div className="flex flex-1 flex-col p-6 sm:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <MetaNum num={item.type} />
+                    <h3 className="heading-display mt-2 text-2xl uppercase leading-[0.95] tracking-tight sm:text-3xl">
+                      {item.title}
+                    </h3>
                   </div>
-
-                  <h3 className="heading-display mt-2 text-xl uppercase leading-tight tracking-tight text-ink">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-2 text-xs font-medium leading-relaxed text-ink/65 line-clamp-2">
-                    {item.description}
-                  </p>
+                  <CardArrow size={20} />
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-1 border-t border-line/60 pt-3">
+                <p className="mt-3 text-sm font-medium leading-6 text-ink/65">
+                  {item.description}
+                </p>
+
+                {/* Technical metadata table matching Projects */}
+                <dl className="mt-5 border-t border-line pt-4">
+                  {[
+                    { k: t(ui.year), v: item.date },
+                    { k: t(ui.format), v: item.mediaType.toUpperCase() },
+                    { k: t(ui.type), v: item.category.toUpperCase() },
+                  ].map((row) => (
+                    <div
+                      key={row.k}
+                      className="flex items-center justify-between py-1.5 last:pb-0"
+                    >
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/45">
+                        {row.k}
+                      </dt>
+                      <dd className="font-mono text-[11px] uppercase tracking-wide text-ink/75">
+                        {row.v}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <div className="mt-5 flex flex-wrap gap-2 border-t border-line pt-5">
                   {item.tags.map((tag) => (
                     <Tag key={tag}>{tag}</Tag>
                   ))}
@@ -142,10 +146,10 @@ export default function Creative() {
         ))}
       </div>
 
-      {/* Media Inspection Modal */}
+      {/* Lightbox / Media Preview Modal */}
       {selectedMedia && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/80 p-4 backdrop-blur-sm sm:p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/85 p-4 backdrop-blur-sm sm:p-6"
           onClick={() => setSelectedMedia(null)}
         >
           <div
@@ -153,12 +157,10 @@ export default function Creative() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-line px-5 py-4">
+            <div className="flex items-center justify-between border-b border-line px-6 py-4">
               <div>
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-blue">
-                  {selectedMedia.type} • {selectedMedia.date}
-                </span>
-                <h2 className="heading-display text-lg uppercase tracking-tight text-ink sm:text-xl">
+                <MetaNum num={selectedMedia.type} />
+                <h2 className="heading-display mt-1 text-xl uppercase tracking-tight sm:text-2xl">
                   {selectedMedia.title}
                 </h2>
               </div>
@@ -171,32 +173,32 @@ export default function Creative() {
               </button>
             </div>
 
-            {/* Modal Content / Player */}
-            <div className="flex flex-1 items-center justify-center overflow-auto bg-ink/5 p-4">
+            {/* Modal Media */}
+            <div className="flex flex-1 items-center justify-center overflow-auto bg-ink/5 p-4 sm:p-6">
               {selectedMedia.mediaType === 'video' && selectedMedia.mediaUrl ? (
-                <div className="w-full max-w-2xl overflow-hidden rounded-lg bg-black">
+                <div className="w-full max-w-3xl overflow-hidden rounded-lg bg-black">
                   <video
                     src={selectedMedia.mediaUrl}
                     controls
                     autoPlay
-                    className="max-h-[65vh] w-full object-contain"
+                    className="max-h-[60vh] w-full object-contain"
                   />
                 </div>
               ) : (
                 <img
                   src={selectedMedia.mediaUrl || selectedMedia.thumbnailUrl}
                   alt={selectedMedia.title}
-                  className="max-h-[65vh] max-w-full rounded-lg object-contain shadow-md"
+                  className="max-h-[60vh] max-w-full rounded-lg object-contain shadow-md"
                 />
               )}
             </div>
 
-            {/* Modal Footer Description */}
-            <div className="flex flex-col justify-between gap-3 border-t border-line bg-bg/50 px-5 py-4 sm:flex-row sm:items-center">
-              <p className="text-xs leading-relaxed text-ink/70">
+            {/* Modal Footer */}
+            <div className="flex flex-col justify-between gap-3 border-t border-line bg-bg/50 px-6 py-4 sm:flex-row sm:items-center">
+              <p className="max-w-xl text-xs font-medium leading-relaxed text-ink/70">
                 {selectedMedia.description}
               </p>
-              <div className="flex shrink-0 flex-wrap gap-1">
+              <div className="flex shrink-0 flex-wrap gap-1.5">
                 {selectedMedia.tags.map((tag) => (
                   <Tag key={tag}>{tag}</Tag>
                 ))}
