@@ -1,6 +1,6 @@
 ﻿import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
-import { Tag } from '../components/cards';
+import { Crosshair, Tag } from '../components/cards';
 import { profile } from '../data';
 import { useI18n, tr } from '../i18n';
 import { FileDown } from 'lucide-react';
