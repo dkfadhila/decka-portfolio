@@ -64,8 +64,8 @@ export default function About() {
               <div className="group relative overflow-hidden rounded-xl border border-line">
                 <img
                   src={profile.profileImage}
-                  alt={`${profile.name} profile`}
-                  className="aspect-[5/4] w-full object-cover object-[center_30%] transition-[filter] duration-500 group-hover:grayscale-0"
+                  alt={profile.fullName}
+                  className="aspect-[5/4] w-full object-cover object-[center_30%] transition-transform duration-500 group-hover:scale-105"
                 />
                 <span className="absolute left-3 top-3 h-2.5 w-2.5 rounded-[2px] bg-blue" aria-hidden />
                 <span className="absolute bottom-3 right-3 rounded-md border border-line bg-bg/90 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-ink/70 transition-colors duration-500 group-hover:border-blue group-hover:bg-blue-soft">

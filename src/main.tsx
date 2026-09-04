@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Experience from './pages/Experience';
 import Work from './pages/Work';
+import WorkDetail from './pages/WorkDetail';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Content from './pages/Content';
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="about" element={<About />} />
             <Route path="experience" element={<Experience />} />
             <Route path="work" element={<Work />} />
+            <Route path="work/:slug" element={<WorkDetail />} />
             <Route path="projects" element={<Projects />} />
             <Route path="projects/:slug" element={<ProjectDetail />} />
             <Route path="content" element={<Content />} />

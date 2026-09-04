@@ -38,7 +38,7 @@ export default function Projects() {
                   <img
                     src={p.imageUrl}
                     alt={p.title}
-                    className="card-media h-full w-full object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+                    className="card-media h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <span
                     className={`absolute left-4 top-4 rounded-md border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] ${

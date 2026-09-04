@@ -10,6 +10,8 @@ import type {
   Social,
   PageMeta,
   MapCard,
+  WorkDetail,
+  CreativeItem,
 } from './types';
 
 // ============================================================
@@ -261,8 +263,12 @@ export const work: WorkItem[] = [
       'Managed academic assessment data for 60+ students, assisted in computational physics sessions, and guided students through Python-based assignments.',
     imageUrl:
       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=75',
+    detailPath: '/work/physics-computing',
     link: '#',
     tags: ['Data Processing', 'Python', 'Scientific Computing'],
+    period: 'Februari 2025 — Juni 2025',
+    stack: 'Python / Scientific Computing',
+    status: 'Completed',
   },
   {
     id: 'w2',
@@ -272,8 +278,12 @@ export const work: WorkItem[] = [
       'Conducted rainfall and disaster-vulnerability mapping, created visual materials, and participated in field surveys for landslide and flood events.',
     imageUrl:
       'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1000&q=75',
+    detailPath: '/work/kudus-disaster-mapping',
     link: '#',
     tags: ['GIS', 'Data Mapping', 'Field Research'],
+    period: 'Desember 2024 — Februari 2025',
+    stack: 'QGIS / Data Mapping / Admin',
+    status: 'Completed',
   },
   {
     id: 'w3',
@@ -283,10 +293,139 @@ export const work: WorkItem[] = [
       'Processed assessment data for 20+ students, supported documentation processes, and guided students through practical assignments.',
     imageUrl:
       'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1000&q=75',
+    detailPath: '/work/digital-systems',
     link: '#',
     tags: ['Data Management', 'Documentation', 'Teaching'],
+    period: 'Agustus 2024 — Desember 2024',
+    stack: 'Digital Systems / Data Management',
+    status: 'Completed',
   },
 ];
+
+export const workDetails: Record<string, WorkDetail> = {
+  'physics-computing': {
+    id: 'physics-computing',
+    title: 'Physics Computing Practicum',
+    subtitle: 'Academic Data Management & Computational Physics Laboratory Assistance',
+    client: 'Universitas Negeri Yogyakarta',
+    period: 'Februari 2025 — Juni 2025',
+    stack: ['Python', 'Data Processing', 'Scientific Computing', 'Academic Support', 'Troubleshooting'],
+    status: 'Completed',
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80',
+    overview:
+      'A comprehensive laboratory teaching and academic support engagement at Universitas Negeri Yogyakarta. Responsible for managing assessment data for 60+ undergraduate physics students, providing direct instructional support during computational sessions, and troubleshooting Python code.',
+    highlights: [
+      { label: 'Students Supported', value: '60+' },
+      { label: 'Timeframe', value: 'Feb — Jun 2025' },
+      { label: 'Core Focus', value: 'Python & Numerics' },
+      { label: 'Role', value: 'Teaching Assistant' },
+    ],
+    sections: [
+      {
+        heading: 'Operational Scope & Responsibilities',
+        content: [
+          'Led weekly laboratory sessions focusing on computational physics problem solving using Python.',
+          'Processed, structured, and archived comprehensive assessment records across both weekly lab work and midterm practical evaluations.',
+          'Conducted real-time debugging and code reviews for students learning scientific numerical libraries.',
+        ],
+      },
+      {
+        heading: 'Data Workflow & Methodology',
+        content: [
+          'Built clean data processing sheets and automated tracking to minimize human grading discrepancies.',
+          'Coordinated closely with primary course lecturers to calibrate grading standards and ensure consistency.',
+          'Created reference scripts and problem-solving guidelines to accelerate student onboarding on complex physics algorithms.',
+        ],
+      },
+      {
+        heading: 'Impact & Outcomes',
+        content: [
+          'Successfully supervised and graded over 60 students with zero record losses and on-time grade submissions.',
+          'Enhanced student code quality and numerical literacy through structured practical mentorship.',
+        ],
+      },
+    ],
+    tags: ['Teaching Assistant', 'Data Processing', 'Python', 'Scientific Computing', 'UNY'],
+  },
+  'kudus-disaster-mapping': {
+    id: 'kudus-disaster-mapping',
+    title: 'Kudus Disaster Agency — Mapping',
+    subtitle: 'GIS Vulnerability Mapping, Field Surveys & Administrative Support',
+    client: 'Badan Penanggulangan Bencana Daerah Kabupaten Kudus',
+    period: 'Desember 2024 — Februari 2025',
+    stack: ['QGIS', 'GIS Mapping', 'Field Assessment', 'Data Analysis', 'Visual Design'],
+    status: 'Completed',
+    imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1400&q=80',
+    overview:
+      'Professional internship engagement within the Emergency and Logistics Division of BPBD Kabupaten Kudus. Involved in disaster vulnerability mapping, GIS data processing, field hazard surveys, and operational administrative support.',
+    highlights: [
+      { label: 'Agency', value: 'BPBD Kudus' },
+      { label: 'Timeframe', value: 'Des 2024 — Feb 2025' },
+      { label: 'Domain', value: 'GIS & Disaster Mgmt' },
+      { label: 'Focus', value: 'Floods & Landslides' },
+    ],
+    sections: [
+      {
+        heading: 'Field Reconnaissance & Hazard Assessment',
+        content: [
+          'Participated directly in on-site field surveys following landslide and localized flooding events across vulnerable sub-districts in Kudus.',
+          'Collected ground-truth geographic and hazard impact data to support rapid response and logistics allocation.',
+        ],
+      },
+      {
+        heading: 'Spatial Mapping & Data Synthesis',
+        content: [
+          'Conducted rainfall distribution analysis and correlated precipitation anomalies with historical vulnerability maps.',
+          'Compiled geographic layers into accessible disaster risk maps for internal agency review and stakeholder briefs.',
+          'Organized official travel and operational documentation, ensuring accurate administrative tracking for emergency dispatch.',
+        ],
+      },
+      {
+        heading: 'Communication & Visual Materials',
+        content: [
+          'Designed informative graphic infographics and visual notices for regional public awareness and agency bulletins.',
+          'Bridged technical data and public comprehension through concise visual communication design.',
+        ],
+      },
+    ],
+    tags: ['BPBD', 'GIS', 'Disaster Mitigation', 'Data Mapping', 'Field Survey'],
+  },
+  'digital-systems': {
+    id: 'digital-systems',
+    title: 'Digital Systems Practicum',
+    subtitle: 'Hardware Logic Testing & Academic Assessment Management',
+    client: 'Universitas Negeri Yogyakarta',
+    period: 'Agustus 2024 — Desember 2024',
+    stack: ['Digital Logic', 'Data Management', 'Documentation', 'Teaching', 'Circuit Testing'],
+    status: 'Completed',
+    imageUrl: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1400&q=80',
+    overview:
+      'Academic teaching assistance for the Digital Systems laboratory course at UNY. Managed evaluation data, guided undergraduate students through circuit implementations, and supported laboratory documentation standards.',
+    highlights: [
+      { label: 'Students', value: '20+' },
+      { label: 'Timeframe', value: 'Agt — Des 2024' },
+      { label: 'Course', value: 'Digital Systems' },
+      { label: 'Role', value: 'Teaching Assistant' },
+    ],
+    sections: [
+      {
+        heading: 'Instruction & Lab Supervision',
+        content: [
+          'Mentored students during weekly laboratory assignments covering logic gates, combinational circuits, and sequential systems.',
+          'Assisted students with breadboard hardware setup and digital logic troubleshooting.',
+        ],
+      },
+      {
+        heading: 'Assessment Management',
+        content: [
+          'Recorded, processed, and maintained academic performance data for 20+ students throughout the semester.',
+          'Ensured rigorous and transparent evaluation according to the faculty academic rubrics.',
+        ],
+      },
+    ],
+    tags: ['Digital Systems', 'Teaching Assistant', 'Academic Support', 'UNY'],
+  },
+};
 
 // ============================================================
 //  PROJECTS — Real projects from CV

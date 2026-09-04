@@ -36,6 +36,25 @@ export interface WorkItem {
   description: string;
   imageUrl: string;
   link?: string;
+  detailPath?: string;
+  tags: string[];
+  period: string; // e.g. "Feb 2025 — Jun 2025"
+  stack: string;
+  status: string;
+}
+
+export interface WorkDetail {
+  id: string;
+  title: string;
+  subtitle: string;
+  client: string;
+  period: string;
+  stack: string[];
+  status: string;
+  imageUrl: string;
+  overview: string;
+  highlights: { label: string; value: string }[];
+  sections: { heading: string; content: string[] }[];
   tags: string[];
 }
 
