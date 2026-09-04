@@ -12,6 +12,7 @@ const navLabel: Record<string, LStr> = {
   work: ui.navWork,
   projects: ui.navProjects,
   content: ui.navContent,
+  creative: ui.navCreative,
   credentials: ui.navCredentials,
   contact: ui.navContact,
 };

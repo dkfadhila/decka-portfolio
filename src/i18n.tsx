@@ -197,6 +197,7 @@ export const ui = {
   navWork: { id: 'Karya', en: 'Work' },
   navProjects: { id: 'Proyek', en: 'Projects' },
   navContent: { id: 'Konten', en: 'Content' },
+  navCreative: { id: 'Kreatif', en: 'Creative' },
   navCredentials: { id: 'Kredensial', en: 'Credentials' },
   navContact: { id: 'Kontak', en: 'Contact' },
 

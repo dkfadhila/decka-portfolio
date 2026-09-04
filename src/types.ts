@@ -76,6 +76,20 @@ export interface ContentItem {
   link?: string;
 }
 
+export interface CreativeItem {
+  id: string;
+  title: string;
+  category: 'graphic' | 'photography' | 'motion';
+  type: string; // Poster, Branding, Street Photo, Short Video, 3D Animation, etc.
+  date: string;
+  description: string;
+  thumbnailUrl: string;
+  mediaUrl?: string; // Full-res image or video link (embed / mp4)
+  mediaType: 'image' | 'video';
+  tags: string[];
+  aspectRatio?: 'poster' | 'video-vertical' | 'video-horizontal' | 'photo'; // 3:4, 9:16, 16:9, 4:3
+}
+
 export interface Social {
   label: string;
   href: string;

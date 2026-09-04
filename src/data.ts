@@ -101,8 +101,9 @@ export const nav: NavItem[] = [
   { id: 'work', label: 'Work', path: '/work', num: '04' },
   { id: 'projects', label: 'Projects', path: '/projects', num: '05' },
   { id: 'content', label: 'Content', path: '/content', num: '06' },
-  { id: 'credentials', label: 'Credentials', path: '/credentials', num: '07' },
-  { id: 'contact', label: 'Contact', path: '/contact', num: '08' },
+  { id: 'creative', label: 'Creative', path: '/creative', num: '07' },
+  { id: 'credentials', label: 'Credentials', path: '/credentials', num: '08' },
+  { id: 'contact', label: 'Contact', path: '/contact', num: '09' },
 ];
 
 // Editorial page headers — one per dedicated page
@@ -143,14 +144,20 @@ export const pageMeta: Record<string, PageMeta> = {
     title: 'Content & Research.',
     lead: 'Web3 research, articles, and independent projects.',
   },
-  credentials: {
+  creative: {
     num: '07',
+    kicker: 'Creative',
+    title: 'Visual & Motion Works.',
+    lead: 'Posters, graphic design, photography, short-form edits, and motion visuals.',
+  },
+  credentials: {
+    num: '08',
     kicker: 'Credentials',
     title: 'Credentials & Honors.',
     lead: 'Academic record, certificates, and recognition.',
   },
   contact: {
-    num: '08',
+    num: '09',
     kicker: 'Contact',
     title: "Let's Talk.",
     lead: 'Have a project, a role, or just want to say hi? The inbox is open.',
@@ -508,6 +515,65 @@ export const content: ContentItem[] = [
   },
 ];
 
+export const creativeItems: CreativeItem[] = [
+  {
+    id: 'cr-1',
+    title: 'Disaster Mitigation Campaign Poster',
+    category: 'graphic',
+    type: 'Poster & Layout',
+    date: '2025',
+    description:
+      'Information design and public advisory poster series created for regional disaster risk awareness.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&q=80',
+    mediaUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1600&q=90',
+    mediaType: 'image',
+    tags: ['Graphic Design', 'Poster', 'Infographic', 'Figma'],
+    aspectRatio: 'poster',
+  },
+  {
+    id: 'cr-2',
+    title: 'Urban Architecture & Geometry',
+    category: 'photography',
+    type: 'Photography',
+    date: '2024',
+    description:
+      'Monochrome and high-contrast architectural series exploring structural lines and shadow patterns.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1000&q=80',
+    mediaUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1600&q=90',
+    mediaType: 'image',
+    tags: ['Photography', 'Architecture', 'Monochrome'],
+    aspectRatio: 'photo',
+  },
+  {
+    id: 'cr-3',
+    title: 'Data Flow & Particle Simulation',
+    category: 'motion',
+    type: 'Motion & Animation',
+    date: '2025',
+    description:
+      'Generative motion graphics visualizing real-time computational data and particle dynamics.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1000&q=80',
+    mediaUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    mediaType: 'video',
+    tags: ['Motion Design', 'Animation', 'Generative', 'Visuals'],
+    aspectRatio: 'video-horizontal',
+  },
+  {
+    id: 'cr-4',
+    title: 'Short Cinematic Reel',
+    category: 'motion',
+    type: 'Short Video / Reel',
+    date: '2025',
+    description:
+      'Fast-paced short-form edit featuring dynamic cuts, sound design sync, and color grading.',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1000&q=80',
+    mediaUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    mediaType: 'video',
+    tags: ['Video Editing', 'Reel', 'Color Grading', 'Sound Sync'],
+    aspectRatio: 'video-vertical',
+  },
+];
+
 export const socials: Social[] = [
   { label: 'Email', href: 'mailto:deckafadhila@gmail.com' },
   { label: 'X', href: 'https://x.com/tirtavex' },
@@ -563,8 +629,17 @@ export const mapCards: MapCard[] = [
     image: 'https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=1000&q=75',
   },
   {
-    id: 'credentials',
+    id: 'creative',
     num: '07',
+    title: 'Creative Works',
+    description: 'Visual designs, photography, motion graphics, and video edits.',
+    path: '/creative',
+    type: 'B',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&q=75',
+  },
+  {
+    id: 'credentials',
+    num: '08',
     title: 'Credentials',
     description: 'Academic record, certificates, and honors. Entries coming soon.',
     path: '/credentials',
@@ -572,7 +647,7 @@ export const mapCards: MapCard[] = [
   },
   {
     id: 'contact',
-    num: '08',
+    num: '09',
     title: 'Contact',
     description: 'Start a conversation — the inbox is open.',
     path: '/contact',
