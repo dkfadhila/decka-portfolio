@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Copy, Check } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Crosshair, PlusMark } from '../components/cards';
@@ -7,6 +9,13 @@ import { useI18n } from '../i18n';
 export default function Contact() {
   const others = socials.filter((s) => s.label !== 'Email');
   const { t } = useI18n();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(heroMeta.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
   const ui = {
     transmission: { id: '07 / Transmisi', en: '07 / Transmission' },
     lets: { id: 'Mari', en: "Let's" },
@@ -46,16 +55,32 @@ export default function Contact() {
             {t(ui.intro)}
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-6 border-t border-line pt-8">
+          <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-line pt-8">
             <a
               href={`mailto:${heroMeta.email}`}
               className="link-underline heading-display break-all text-xl uppercase tracking-tight sm:text-4xl"
             >
               {heroMeta.email}
             </a>
-            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45">
-              {t(ui.clickMail)}
-            </span>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleCopy}
+                className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                  copied
+                    ? 'border-blue bg-blue-soft text-ink'
+                    : 'border-line bg-bg text-ink/70 hover:border-blue hover:text-ink'
+                }`}
+              >
+                {copied ? <Check size={13} className="text-blue" /> : <Copy size={13} />}
+                {copied ? t({ id: 'Tersalin!', en: 'Copied!' }) : t({ id: 'Salin Email', en: 'Copy Email' })}
+              </button>
+
+              <span className="hidden font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45 sm:inline">
+                {t(ui.clickMail)}
+              </span>
+            </div>
           </div>
         </div>
       </Reveal>
