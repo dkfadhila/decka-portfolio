@@ -15,6 +15,7 @@ import Content from './pages/Content';
 import Creative from './pages/Creative';
 import Credentials from './pages/Credentials';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -33,7 +34,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="creative" element={<Creative />} />
             <Route path="credentials" element={<Credentials />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="*" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

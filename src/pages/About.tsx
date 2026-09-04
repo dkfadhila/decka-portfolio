@@ -1,8 +1,9 @@
 ﻿import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
-import { Crosshair, Tag } from '../components/cards';
+import { Tag } from '../components/cards';
 import { profile } from '../data';
 import { useI18n, tr } from '../i18n';
+import { FileDown } from 'lucide-react';
 
 export default function About() {
   const { t, lang } = useI18n();
@@ -85,19 +86,31 @@ export default function About() {
                 {profile.facts.map((f, i) => (
                   <div
                     key={f.label}
-                    className={`grid grid-cols-[7rem_1fr] gap-3 py-3 first:pt-0 last:pb-0 sm:grid-cols-[8rem_1fr] ${
+                    className={`flex items-center justify-between py-3 ${
                       i < profile.facts.length - 1 ? 'border-b border-line' : ''
                     }`}
                   >
                     <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/45">
-                      {tr(f.label, lang)}
+                      {f.label}
                     </dt>
-                    <dd className="text-sm font-bold uppercase leading-tight text-ink/85">
-                      {tr(f.value, lang)}
+                    <dd className="font-mono text-[11px] uppercase tracking-wide text-ink/80">
+                      {f.value}
                     </dd>
                   </div>
                 ))}
               </dl>
+
+              {/* Download CV CTA */}
+              <div className="mt-6 border-t border-line pt-5">
+                <a
+                  href="/decka-cv.pdf"
+                  download="Decka-Fadhila-Tirta-CV.pdf"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-ink px-4 py-3 font-mono text-[11px] font-bold uppercase tracking-wider text-white transition-colors hover:bg-blue hover:text-ink"
+                >
+                  <FileDown size={15} />
+                  {t({ id: 'Unduh Curriculum Vitae (PDF)', en: 'Download Curriculum Vitae (PDF)' })}
+                </a>
+              </div>
             </div>
           </Reveal>
         </div>
