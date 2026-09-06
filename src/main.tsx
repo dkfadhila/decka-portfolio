@@ -16,6 +16,7 @@ import Content from './pages/Content';
 import Creative from './pages/Creative';
 import Credentials from './pages/Credentials';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin';
 import NotFound from './pages/NotFound';
 
 createRoot(document.getElementById('root')!).render(
@@ -35,6 +36,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="creative" element={<Creative />} />
             <Route path="credentials" element={<Credentials />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
