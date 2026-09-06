@@ -30,8 +30,11 @@ import {
   content as initialContent,
   creativeItems as initialCreatives,
 } from '../data';
+import { useI18n, LangToggle, type LStr } from '../i18n';
+import type { CreativeItem } from '../types';
 
 export default function AdminPage() {
+  const { t } = useI18n();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState(false);
@@ -151,6 +154,24 @@ export default function AdminPage() {
     sub2Content: '',
     sub3Title: 'Key Insights',
     sub3Content: '',
+  });
+
+  // 3. Creative Modal (Karya Visual: Graphic & Posters, Photography, Motion & Video)
+  const [creativeModalOpen, setCreativeModalOpen] = useState(false);
+  const [isEditingCreative, setIsEditingCreative] = useState(false);
+  const [creativeStatus, setCreativeStatus] = useState<'Published' | 'Draft'>('Published');
+  const [creativeForm, setCreativeForm] = useState({
+    id: '',
+    title: '',
+    category: 'graphic' as 'graphic' | 'photography' | 'motion',
+    type: 'Poster & Layout',
+    date: '2025',
+    description: '',
+    thumbnailUrl: '',
+    mediaUrl: '',
+    mediaType: 'image' as 'image' | 'video',
+    tags: 'Graphic Design, Poster',
+    aspectRatio: 'poster' as 'poster' | 'video-vertical' | 'video-horizontal' | 'photo',
   });
 
   // ══════════════════════════════════════════════════════════
@@ -354,6 +375,94 @@ export default function AdminPage() {
     setContentModalOpen(false);
   };
 
+  const openNewCreative = () => {
+    setIsEditingCreative(false);
+    setCreativeStatus('Published');
+    setCreativeForm({
+      id: 'cr-' + Date.now().toString(36),
+      title: '',
+      category: 'Graphic & Posters',
+      type: 'Graphic & Posters',
+      date: '2025',
+      description: '',
+      thumbnailUrl: '',
+      mediaUrl: '',
+      mediaType: 'image',
+      tags: 'Graphic Design, Poster',
+      aspectRatio: 'poster',
+    });
+    setCreativeModalOpen(true);
+  };
+
+  const openEditCreative = (cr: any) => {
+    setIsEditingCreative(true);
+    setCreativeStatus(cr.status || 'Published');
+    let cat = cr.category || 'Graphic & Posters';
+    if (cat === 'graphic' || cat.toLowerCase().includes('poster') || cat.toLowerCase().includes('graphic')) {
+      cat = 'Graphic & Posters';
+    } else if (cat === 'photography' || cat.toLowerCase().includes('photo')) {
+      cat = 'Photography';
+    } else if (cat === 'motion' || cat.toLowerCase().includes('motion') || cat.toLowerCase().includes('video')) {
+      cat = 'Motion & Video';
+    }
+    setCreativeForm({
+      id: cr.id,
+      title: cr.title || '',
+      category: cat,
+      type: cr.type || cat,
+      date: cr.date || '2025',
+      description: cr.description || '',
+      thumbnailUrl: cr.thumbnailUrl || '',
+      mediaUrl: cr.mediaUrl || '',
+      mediaType: cr.mediaType || 'image',
+      tags: Array.isArray(cr.tags) ? cr.tags.join(', ') : cr.tags || '',
+      aspectRatio: cr.aspectRatio || 'poster',
+    });
+    setCreativeModalOpen(true);
+  };
+
+  const saveCreative = (e: React.FormEvent) => {
+    e.preventDefault();
+    const tags = creativeForm.tags.split(',').map((s) => s.trim()).filter(Boolean);
+    let mappedCategory = creativeForm.category;
+    const catLower = (creativeForm.category || '').toLowerCase();
+    if (catLower.includes('graphic') || catLower.includes('poster')) {
+      mappedCategory = 'Graphic & Posters';
+    } else if (catLower.includes('photo')) {
+      mappedCategory = 'Photography';
+    } else if (catLower.includes('motion') || catLower.includes('video')) {
+      mappedCategory = 'Motion & Video';
+    }
+
+    const newObj: CreativeItem = {
+      id: creativeForm.id || 'cr-' + Date.now().toString(36),
+      title: creativeForm.title,
+      category: mappedCategory as any,
+      type: creativeForm.type || mappedCategory,
+      date: creativeForm.date,
+      description: creativeForm.description,
+      thumbnailUrl: creativeForm.thumbnailUrl || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&q=80',
+      mediaUrl: creativeForm.mediaUrl || creativeForm.thumbnailUrl,
+      mediaType: creativeForm.mediaType,
+      tags,
+      aspectRatio: creativeForm.aspectRatio,
+      status: creativeStatus,
+    };
+
+    const updated = isEditingCreative
+      ? creativeList.map((cr: any) => (cr.id === creativeForm.id ? newObj : cr))
+      : [newObj, ...creativeList];
+    setCreativeList(updated);
+    persistChanges('dktirta_creative', updated);
+    triggerNotify(
+      t({
+        id: `Karya visual "${creativeForm.title}" berhasil disimpan [${creativeStatus}]!`,
+        en: `Visual piece "${creativeForm.title}" saved successfully [${creativeStatus}]!`,
+      })
+    );
+    setCreativeModalOpen(false);
+  };
+
   // ══════════════════════════════════════════════════════════
   // AUTH GUARD CHECK
   // ══════════════════════════════════════════════════════════
@@ -441,29 +550,31 @@ export default function AdminPage() {
             <span className="text-ink/60">{currentTimeWIB}</span>
           </div>
           <h1 className="heading-display mt-2 text-3xl uppercase tracking-tight text-ink sm:text-4xl">
-            Pusat Pengelolaan Konten & Publikasi
+            {t({ id: 'Pusat Pengelolaan Konten & Publikasi', en: 'Content & Publishing Management Center' })}
           </h1>
         </div>
 
         <div className="flex items-center gap-3">
+          <LangToggle />
           <Link
             to="/"
             className="flex items-center gap-1.5 rounded-xl border border-line bg-card px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-ink hover:border-blue hover:bg-blue-soft transition-colors"
           >
             <Eye className="h-3.5 w-3.5 text-blue" />
-            Lihat Situs Live
+            {t({ id: 'Lihat Situs Live', en: 'View Live Site' })}
           </Link>
           <button
             onClick={() => {
               persistChanges('dktirta_projects', projectsList);
               persistChanges('dktirta_work', workList);
               persistChanges('dktirta_content', contentList);
-              triggerNotify('Seluruh perubahan data karya & konten telah tersimpan ke sistem!');
+              persistChanges('dktirta_creative', creativeList);
+              triggerNotify(t({ id: 'Seluruh perubahan data karya & konten telah tersimpan ke sistem!', en: 'All portfolio & content changes have been saved to the system!' }));
             }}
             className="flex items-center gap-2 rounded-xl bg-ink px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-blue hover:text-ink transition-colors shadow-sm"
           >
             <Save className="h-3.5 w-3.5" />
-            Simpan Perubahan
+            {t({ id: 'Simpan Perubahan', en: 'Save All Changes' })}
           </button>
         </div>
       </div>
@@ -479,10 +590,10 @@ export default function AdminPage() {
       {/* ── SUB-TABS NAVIGATION (SWISS EDITORIAL TABS) ── */}
       <div className="mt-8 flex flex-wrap gap-2 border-b border-line pb-4">
         {[
-          { id: 'projects', label: `Proyek Artikel (${projectsList.length})`, icon: FolderGit2 },
-          { id: 'work', label: `Work Engagements (${workList.length})`, icon: Briefcase },
-          { id: 'content', label: `Content & Riset (${contentList.length})`, icon: FileText },
-          { id: 'creative', label: `Karya Visual (${creativeList.length})`, icon: ImageIcon },
+          { id: 'projects', label: `${t({ id: 'Proyek Artikel', en: 'Project Case Studies' })} (${projectsList.length})`, icon: FolderGit2 },
+          { id: 'work', label: `${t({ id: 'Work Engagements', en: 'Work Engagements' })} (${workList.length})`, icon: Briefcase },
+          { id: 'content', label: `${t({ id: 'Content & Riset', en: 'Content & Research' })} (${contentList.length})`, icon: FileText },
+          { id: 'creative', label: `${t({ id: 'Karya Visual', en: 'Visual Works' })} (${creativeList.length})`, icon: ImageIcon },
         ].map((tab) => {
           const Icon = tab.icon;
           const active = activeTab === tab.id;
@@ -773,25 +884,85 @@ export default function AdminPage() {
                 07 / Visual Portfolio
               </span>
               <h2 className="heading-display text-2xl uppercase tracking-tight text-ink">
-                Koleksi Karya Visual & Animasi
+                {t({ id: 'Koleksi Karya Visual & Animasi', en: 'Visual & Motion Design Portfolio' })}
               </h2>
             </div>
+            <button
+              onClick={openNewCreative}
+              className="flex items-center gap-1.5 rounded-xl bg-ink px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-blue hover:text-ink transition-colors"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              {t({ id: 'Tambah Karya Visual', en: 'New Creative Piece' })}
+            </button>
           </div>
 
           <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {creativeList.map((cr: any) => (
-              <div key={cr.id} className="card p-5 flex gap-4">
-                <img
-                  src={cr.thumbnailUrl}
-                  alt={cr.title}
-                  className="h-28 w-28 shrink-0 object-cover rounded-xl border border-line"
-                />
-                <div>
-                  <span className="rounded-md border border-line bg-bg px-2 py-0.5 font-mono text-[9px] uppercase text-secondary">
-                    {cr.type} · {cr.date}
-                  </span>
-                  <h3 className="heading-display mt-1.5 text-base uppercase text-ink">{cr.title}</h3>
-                  <p className="mt-1 text-xs text-secondary line-clamp-3">{cr.description}</p>
+              <div key={cr.id} className="card p-5 flex flex-col justify-between gap-4">
+                <div className="flex gap-4 items-start">
+                  <img
+                    src={cr.thumbnailUrl}
+                    alt={cr.title}
+                    className="h-28 w-28 shrink-0 object-cover rounded-xl border border-line"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="rounded-md border border-line bg-bg px-2 py-0.5 font-mono text-[9px] uppercase text-secondary">
+                        {cr.category === 'graphic'
+                          ? 'Graphic & Posters'
+                          : cr.category === 'photography'
+                          ? 'Photography'
+                          : 'Motion & Video'}
+                      </span>
+                      <span className="font-mono text-[10px] text-secondary">· {cr.date}</span>
+                      <span
+                        className={`rounded-md px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${
+                          cr.status === 'Draft'
+                            ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                            : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                        }`}
+                      >
+                        {cr.status || 'Published'}
+                      </span>
+                    </div>
+                    <h3 className="heading-display mt-1.5 text-base uppercase text-ink truncate">{cr.title}</h3>
+                    <p className="mt-1 text-xs text-secondary line-clamp-2">{cr.description}</p>
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {(cr.tags || []).slice(0, 3).map((tag: string) => (
+                        <span key={tag} className="font-mono text-[9px] text-ink/60 bg-ink/5 px-1.5 py-0.5 rounded">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-end gap-2 border-t border-line pt-3">
+                  <button
+                    onClick={() => openEditCreative(cr)}
+                    className="flex items-center gap-1.5 rounded-xl border border-line bg-bg px-3.5 py-1.5 font-mono text-xs font-bold uppercase text-ink hover:border-blue hover:bg-blue-soft transition-colors"
+                  >
+                    <Edit3 className="h-3.5 w-3.5 text-blue" />
+                    {t({ id: 'Edit', en: 'Edit' })}
+                  </button>
+                  <Link
+                    to="/creative"
+                    target="_blank"
+                    className="rounded-xl border border-line bg-bg p-2 text-secondary hover:border-ink hover:text-ink transition-colors"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </Link>
+                  <button
+                    onClick={() => {
+                      const updated = creativeList.filter((x: any) => x.id !== cr.id);
+                      setCreativeList(updated);
+                      persistChanges('dktirta_creative', updated);
+                      triggerNotify(t({ id: `Karya "${cr.title}" telah dihapus.`, en: `Piece "${cr.title}" has been deleted.` }));
+                    }}
+                    className="rounded-xl border border-red-200 bg-red-50 p-2 text-red-600 hover:bg-red-100 transition-colors"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
                 </div>
               </div>
             ))}
@@ -1302,6 +1473,263 @@ export default function AdminPage() {
                   className="rounded-xl bg-ink px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-blue hover:text-ink transition-colors"
                 >
                   {isEditingContent ? 'Simpan Perubahan' : 'Publikasikan Konten'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ═════════════════════════════════════════════════════════════ */}
+      {/* MODAL: CREATIVE WORKS CMS (GRAPHIC, PHOTOGRAPHY, MOTION)     */}
+      {/* ═════════════════════════════════════════════════════════════ */}
+      {creativeModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/75 p-4 backdrop-blur-sm overflow-y-auto">
+          <div className="my-8 w-full max-w-2xl rounded-2xl border border-line bg-card p-6 sm:p-8 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-line pb-4">
+              <div className="flex items-center gap-3">
+                <ImageIcon className="h-6 w-6 text-blue" />
+                <div>
+                  <h3 className="heading-display text-xl uppercase tracking-tight text-ink">
+                    {isEditingCreative
+                      ? t({ id: 'Edit Karya Visual', en: 'Edit Visual Piece' })
+                      : t({ id: 'Tambah Karya Visual Baru', en: 'New Visual Piece' })}
+                  </h3>
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-secondary">
+                    {t({
+                      id: 'Entri Kategori: Graphic & Posters, Photography, Motion & Video',
+                      en: 'Categories: Graphic & Posters, Photography, Motion & Video',
+                    })}
+                  </p>
+                </div>
+              </div>
+              <X
+                className="h-5 w-5 cursor-pointer text-secondary hover:text-ink"
+                onClick={() => setCreativeModalOpen(false)}
+              />
+            </div>
+
+            <form onSubmit={saveCreative} className="mt-6 space-y-4 text-xs">
+              {/* STATUS PUBLIKASI: PUBLISHED VS DRAFT */}
+              <div className="flex items-center gap-4 bg-bg p-3.5 rounded-xl border border-line">
+                <span className="font-mono uppercase font-bold text-ink">
+                  {t({ id: 'Status Publikasi:', en: 'Publication Status:' })}
+                </span>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="crStatus"
+                    checked={creativeStatus === 'Published'}
+                    onChange={() => setCreativeStatus('Published')}
+                  />
+                  <span className="font-bold text-emerald-700">
+                    Published ({t({ id: 'Tampil Live', en: 'Live' })})
+                  </span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="crStatus"
+                    checked={creativeStatus === 'Draft'}
+                    onChange={() => setCreativeStatus('Draft')}
+                  />
+                  <span className="font-bold text-amber-700">
+                    Draft ({t({ id: 'Simpan Sementara', en: 'Draft Only' })})
+                  </span>
+                </label>
+              </div>
+
+              {/* JUDUL */}
+              <div>
+                <label className="block font-mono uppercase text-secondary">
+                  {t({ id: 'Judul Karya', en: 'Piece Title' })}
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={creativeForm.title}
+                  onChange={(e) => setCreativeForm({ ...creativeForm, title: e.target.value })}
+                  placeholder={t({ id: 'misal: Disaster Mitigation Campaign Poster', en: 'e.g. Disaster Mitigation Campaign Poster' })}
+                  className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue"
+                />
+              </div>
+
+              {/* KATEGORI UTAMA & TIPE SUB */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-mono uppercase text-secondary">
+                    {t({ id: 'Kategori Entri', en: 'Entry Category' })}
+                  </label>
+                  <select
+                    value={creativeForm.category}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setCreativeForm({
+                        ...creativeForm,
+                        category: val as any,
+                        type: val,
+                      });
+                    }}
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue font-mono"
+                  >
+                    <option value="Graphic & Posters">Graphic & Posters</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Motion & Video">Motion & Video</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block font-mono uppercase text-secondary">
+                    {t({ id: 'Tipe / Format Spesifik', en: 'Specific Type / Format' })}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={creativeForm.type}
+                    onChange={(e) => setCreativeForm({ ...creativeForm, type: e.target.value })}
+                    placeholder="Poster & Layout / Photography / Reel"
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue"
+                  />
+                </div>
+              </div>
+
+              {/* TAHUN & MEDIA TYPE */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-mono uppercase text-secondary">
+                    {t({ id: 'Tahun Pembuatan', en: 'Creation Year' })}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={creativeForm.date}
+                    onChange={(e) => setCreativeForm({ ...creativeForm, date: e.target.value })}
+                    placeholder="2025"
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-mono uppercase text-secondary">
+                    {t({ id: 'Format Media', en: 'Media Format' })}
+                  </label>
+                  <select
+                    value={creativeForm.mediaType}
+                    onChange={(e) =>
+                      setCreativeForm({
+                        ...creativeForm,
+                        mediaType: e.target.value as 'image' | 'video',
+                        aspectRatio: e.target.value === 'video' ? 'video-horizontal' : 'poster',
+                      })
+                    }
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue font-mono"
+                  >
+                    <option value="image">{t({ id: 'Gambar Statis (Image)', en: 'Static Image' })}</option>
+                    <option value="video">{t({ id: 'Video / Animasi (Video)', en: 'Video / Animation' })}</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* URL THUMBNAIL & FULL MEDIA */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-mono uppercase text-secondary">
+                    {t({ id: 'URL Thumbnail (Sampul)', en: 'Thumbnail URL (Cover)' })}
+                  </label>
+                  <input
+                    type="url"
+                    required
+                    value={creativeForm.thumbnailUrl}
+                    onChange={(e) => setCreativeForm({ ...creativeForm, thumbnailUrl: e.target.value })}
+                    placeholder="https://images.unsplash.com/..."
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue font-mono text-xs"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-mono uppercase text-secondary">
+                    {t({ id: 'URL Media Lengkap (Opsional)', en: 'Full Media URL (Optional)' })}
+                  </label>
+                  <input
+                    type="url"
+                    value={creativeForm.mediaUrl}
+                    onChange={(e) => setCreativeForm({ ...creativeForm, mediaUrl: e.target.value })}
+                    placeholder="https://... / .mp4 / full res"
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue font-mono text-xs"
+                  />
+                </div>
+              </div>
+
+              {/* ASPECT RATIO & TAGS */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-mono uppercase text-secondary">
+                    {t({ id: 'Aspek Rasio Card', en: 'Card Aspect Ratio' })}
+                  </label>
+                  <select
+                    value={creativeForm.aspectRatio}
+                    onChange={(e) =>
+                      setCreativeForm({
+                        ...creativeForm,
+                        aspectRatio: e.target.value as any,
+                      })
+                    }
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue font-mono"
+                  >
+                    <option value="poster">Poster (3:4)</option>
+                    <option value="photo">Photo (4:3)</option>
+                    <option value="video-horizontal">Video Horizontal (16:9)</option>
+                    <option value="video-vertical">Video Vertikal / Reel (9:16)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block font-mono uppercase text-secondary">
+                    {t({ id: 'Tags (Pisahkan Koma)', en: 'Tags (Comma separated)' })}
+                  </label>
+                  <input
+                    type="text"
+                    value={creativeForm.tags}
+                    onChange={(e) => setCreativeForm({ ...creativeForm, tags: e.target.value })}
+                    placeholder="Graphic Design, Poster, Figma"
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue"
+                  />
+                </div>
+              </div>
+
+              {/* DESKRIPSI */}
+              <div>
+                <label className="block font-mono uppercase text-secondary">
+                  {t({ id: 'Deskripsi / Sinopsis Karya', en: 'Piece Description / Synopsis' })}
+                </label>
+                <textarea
+                  rows={3}
+                  required
+                  value={creativeForm.description}
+                  onChange={(e) => setCreativeForm({ ...creativeForm, description: e.target.value })}
+                  placeholder={t({
+                    id: 'Uraian singkat konsep karya atau proses desain...',
+                    en: 'Brief summary of the creative concept or workflow...',
+                  })}
+                  className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue leading-relaxed"
+                />
+              </div>
+
+              <div className="mt-6 flex justify-end gap-3 border-t border-line pt-4">
+                <button
+                  type="button"
+                  onClick={() => setCreativeModalOpen(false)}
+                  className="rounded-xl border border-line px-4 py-2 font-mono text-xs font-bold uppercase text-secondary hover:border-ink hover:text-ink"
+                >
+                  {t({ id: 'Batal', en: 'Cancel' })}
+                </button>
+                <button
+                  type="submit"
+                  className="rounded-xl bg-ink px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-blue hover:text-ink transition-colors"
+                >
+                  {isEditingCreative
+                    ? t({ id: 'Simpan Perubahan', en: 'Save Changes' })
+                    : t({ id: 'Publikasikan Karya', en: 'Publish Piece' })}
                 </button>
               </div>
             </form>

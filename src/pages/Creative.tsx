@@ -21,10 +21,16 @@ export default function Creative() {
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
   const [selectedMedia, setSelectedMedia] = useState<CreativeItem | null>(null);
 
+  const [creativeList] = useState(() => {
+    if (typeof window === 'undefined') return creativeItems;
+    const saved = localStorage.getItem('dktirta_creative');
+    return saved ? JSON.parse(saved) : creativeItems;
+  });
+
   const tabs: { id: FilterTab; label: LStr }[] = [
     { id: 'all', label: { id: 'Semua', en: 'All' } },
-    { id: 'graphic', label: { id: 'Grafis & Poster', en: 'Graphic & Posters' } },
-    { id: 'photography', label: { id: 'Fotografi', en: 'Photography' } },
+    { id: 'graphic', label: { id: 'Graphic & Posters', en: 'Graphic & Posters' } },
+    { id: 'photography', label: { id: 'Photography', en: 'Photography' } },
     { id: 'motion', label: { id: 'Motion & Video', en: 'Motion & Video' } },
   ];
 
@@ -35,10 +41,19 @@ export default function Creative() {
     type: { id: 'Tipe', en: 'Type' },
   };
 
-  const filteredItems =
-    activeTab === 'all'
-      ? creativeItems
-      : creativeItems.filter((item) => item.category === activeTab);
+  const matchesCategory = (itemCat: string, tab: FilterTab) => {
+    if (tab === 'all') return true;
+    const c = (itemCat || '').toLowerCase();
+    if (tab === 'graphic') return c === 'graphic' || c.includes('poster') || c.includes('graphic');
+    if (tab === 'photography') return c === 'photography' || c.includes('photo');
+    if (tab === 'motion') return c === 'motion' || c.includes('motion') || c.includes('video');
+    return false;
+  };
+
+  const filteredItems = creativeList.filter((item: any) => {
+    if (item.status === 'Draft') return false;
+    return matchesCategory(item.category, activeTab);
+  });
 
   return (
     <section className="container-shell py-16 md:py-20">

@@ -107,6 +107,7 @@ export interface CreativeItem {
   mediaType: 'image' | 'video';
   tags: string[];
   aspectRatio?: 'poster' | 'video-vertical' | 'video-horizontal' | 'photo'; // 3:4, 9:16, 16:9, 4:3
+  status?: 'Published' | 'Draft';
 }
 
 export interface Social {
