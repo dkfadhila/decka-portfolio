@@ -382,7 +382,7 @@ export default function Home() {
           </Reveal>
 
           {/* 07 — CREATIVE WORKS (Wide visual card) */}
-          <Reveal className="col-span-12 sm:col-span-6 lg:col-span-8">
+          <Reveal className="col-span-12">
             <CardB
               num={creative.num}
               title={creative.title}
@@ -393,14 +393,13 @@ export default function Home() {
             />
           </Reveal>
 
-          {/* 08 — CREDENTIALS (Minimal academic tag) */}
-          <Reveal className="col-span-12 lg:col-span-4">
+          {/* 08 — CREDENTIALS */}
+          <Reveal className="col-span-12">
             <CardA
               num={credentials.num}
               title={credentials.title}
               description={credentials.description}
               to={credentials.path}
-              className="min-h-[260px]"
             />
           </Reveal>
 
@@ -411,7 +410,6 @@ export default function Home() {
               title={contact.title}
               description={contact.description}
               to={contact.path}
-              image={contact.image}
             />
           </Reveal>
         </div>

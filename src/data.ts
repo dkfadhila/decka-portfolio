@@ -793,6 +793,5 @@ export const mapCards: MapCard[] = [
     description: 'Start a conversation — the inbox is open.',
     path: '/contact',
     type: 'D',
-    image: '/og-image.png',
   },
 ];
