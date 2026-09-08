@@ -22,6 +22,9 @@ export default function Creative() {
   const [selectedMedia, setSelectedMedia] = useState<CreativeItem | null>(null);
 
   const [creativeList] = useState(() => {
+    // Publication source is data.ts — while it is empty, the page stays
+    // empty for everyone (ignores any CMS preview saved in localStorage).
+    if (creativeItems.length === 0) return creativeItems;
     if (typeof window === 'undefined') return creativeItems;
     const saved = localStorage.getItem('dktirta_creative');
     return saved ? JSON.parse(saved) : creativeItems;
@@ -39,6 +42,12 @@ export default function Creative() {
     year: { id: 'Tahun', en: 'Year' },
     format: { id: 'Format', en: 'Format' },
     type: { id: 'Tipe', en: 'Type' },
+    inProgress: { id: '07 / Arsip', en: '07 / Archive' },
+    emptyTitle: { id: 'Portofolio dalam proses.', en: 'Portfolio in progress.' },
+    emptyDesc: {
+      id: 'Karya visual baru — desain grafis, fotografi, dan motion — sedang disiapkan dan akan diterbitkan di sini.',
+      en: 'New visual works — graphic design, photography, and motion — are being prepared and will be published here.',
+    },
   };
 
   const matchesCategory = (itemCat: string, tab: FilterTab) => {
@@ -59,31 +68,53 @@ export default function Creative() {
     <section className="container-shell py-16 md:py-20">
       <PageHeader page="creative" />
 
-      {/* Filter Tabs — matching subtle editorial style */}
-      <Reveal>
-        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
-          <div className="flex flex-wrap items-center gap-1.5">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`rounded-lg px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-ink text-white'
-                    : 'border border-line bg-card text-ink/70 hover:border-blue hover:text-ink'
-                }`}
-              >
-                {t(tab.label)}
-              </button>
-            ))}
-          </div>
+      {/* Filter Tabs — hidden while the archive is empty */}
+      {creativeList.length > 0 && (
+        <Reveal>
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`rounded-lg px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    activeTab === tab.id
+                      ? 'bg-ink text-white'
+                      : 'border border-line bg-card text-ink/70 hover:border-blue hover:text-ink'
+                  }`}
+                >
+                  {t(tab.label)}
+                </button>
+              ))}
+            </div>
 
-          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45">
-            {filteredItems.length} {t({ id: 'entri', en: 'entries' })}
-          </span>
-        </div>
-      </Reveal>
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45">
+              {filteredItems.length} {t({ id: 'entri', en: 'entries' })}
+            </span>
+          </div>
+        </Reveal>
+      )}
+
+      {/* Empty state — archive reserved for upcoming works */}
+      {creativeList.length === 0 && (
+        <Reveal>
+          <div className="card relative overflow-hidden">
+            <div className="dot-grid absolute inset-0 opacity-50" aria-hidden />
+            <div className="relative flex flex-col items-center gap-5 px-6 py-16 text-center sm:py-24">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-blue">
+                {t(ui.inProgress)}
+              </span>
+              <h2 className="heading-display text-3xl uppercase leading-[0.95] tracking-tight sm:text-5xl">
+                {t(ui.emptyTitle)}
+              </h2>
+              <p className="max-w-md text-sm font-medium leading-6 text-ink/60">
+                {t(ui.emptyDesc)}
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      )}
 
       {/* 12-column Bento Grid matching Work & Projects */}
       <div className="grid grid-cols-12 gap-4">

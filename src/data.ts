@@ -209,7 +209,7 @@ export const experience: ExperienceItem[] = [
     id: 'exp-4',
     role: 'Vice Head — Media & Information Division',
     org: 'Badan Eksekutif Mahasiswa Fakultas Matematika & Ilmu Pengetahuan Alam Universitas Negeri Yogyakarta',
-    period: '2025',
+    period: 'Feb 2025 — Dec 2025',
     description:
       'Coordinated communication between organizational leadership, Media & Information staff, and other divisions. Monitored division workflow, managed design requests from multiple divisions, and supported social media publication and content distribution.',
     tags: ['Coordination', 'Visual Design', 'Social Media', 'Leadership'],
@@ -218,7 +218,7 @@ export const experience: ExperienceItem[] = [
     id: 'exp-5',
     role: 'Organizational Advisory Board',
     org: 'Unit Kegiatan Mahasiswa Catur Universitas Negeri Yogyakarta',
-    period: '2025',
+    period: 'Jan 2025 — Dec 2025',
     description:
       'Monitored internal coordination and organizational relationships among management members. Provided organizational monitoring and oversight to support internal coordination.',
     tags: ['Oversight', 'Coordination', 'Organization'],
@@ -227,7 +227,7 @@ export const experience: ExperienceItem[] = [
     id: 'exp-6',
     role: 'Media & Information Staff',
     org: 'Unit Kegiatan Mahasiswa Catur Universitas Negeri Yogyakarta',
-    period: '2023',
+    period: 'Jan 2023 — Jan 2024',
     description:
       'Supported internal communication and coordination within the Media & Information division. Managed and published organizational social media content, created visual materials, and supported content planning and publication activities.',
     tags: ['Social Media', 'Visual Design', 'Content Planning'],
@@ -258,7 +258,7 @@ export const experience: ExperienceItem[] = [
 export const work: WorkItem[] = [
   {
     id: 'w1',
-    title: 'Physics Computing Practicum',
+    title: 'Physics Computing Teaching Assistant',
     client: 'Universitas Negeri Yogyakarta',
     description:
       'Managed academic assessment data for 60+ students, assisted in computational physics sessions, and guided students through Python-based assignments.',
@@ -273,7 +273,7 @@ export const work: WorkItem[] = [
   },
   {
     id: 'w2',
-    title: 'Kudus Disaster Agency — Mapping',
+    title: 'Intern — Emergency & Logistics Division',
     client: 'Badan Penanggulangan Bencana Daerah Kabupaten Kudus',
     description:
       'Conducted rainfall and disaster-vulnerability mapping, created visual materials, and participated in field surveys for landslide and flood events.',
@@ -288,7 +288,7 @@ export const work: WorkItem[] = [
   },
   {
     id: 'w3',
-    title: 'Digital Systems Practicum',
+    title: 'Digital Systems Laboratory Teaching Assistant',
     client: 'Universitas Negeri Yogyakarta',
     description:
       'Processed assessment data for 20+ students, supported documentation processes, and guided students through practical assignments.',
@@ -306,7 +306,7 @@ export const work: WorkItem[] = [
 export const workDetails: Record<string, WorkDetail> = {
   'physics-computing': {
     id: 'physics-computing',
-    title: 'Physics Computing Practicum',
+    title: 'Physics Computing Teaching Assistant',
     subtitle: 'Academic Data Management & Computational Physics Laboratory Assistance',
     client: 'Universitas Negeri Yogyakarta',
     period: 'Feb 2025 — Jun 2025',
@@ -350,7 +350,7 @@ export const workDetails: Record<string, WorkDetail> = {
   },
   'kudus-disaster-mapping': {
     id: 'kudus-disaster-mapping',
-    title: 'Kudus Disaster Agency — Mapping',
+    title: 'Intern — Emergency & Logistics Division',
     subtitle: 'GIS Vulnerability Mapping, Field Surveys & Administrative Support',
     client: 'Badan Penanggulangan Bencana Daerah Kabupaten Kudus',
     period: 'Dec 2024 — Feb 2025',
@@ -393,7 +393,7 @@ export const workDetails: Record<string, WorkDetail> = {
   },
   'digital-systems': {
     id: 'digital-systems',
-    title: 'Digital Systems Practicum',
+    title: 'Digital Systems Laboratory Teaching Assistant',
     subtitle: 'Hardware Logic Testing & Academic Assessment Management',
     client: 'Universitas Negeri Yogyakarta',
     period: 'Aug 2024 — Dec 2024',
@@ -412,15 +412,24 @@ export const workDetails: Record<string, WorkDetail> = {
       {
         heading: 'Instruction & Lab Supervision',
         content: [
-          'Mentored students during weekly laboratory assignments covering logic gates, combinational circuits, and sequential systems.',
-          'Assisted students with breadboard hardware setup and digital logic troubleshooting.',
+          'Assisted in monitoring students during Digital Systems laboratory sessions.',
+          'Provided guidance to students in completing Digital Systems laboratory assignments.',
+          'Mentored students through logic gates, combinational circuits, and sequential systems work.',
         ],
       },
       {
         heading: 'Assessment Management',
         content: [
-          'Recorded, processed, and maintained academic performance data for 20+ students throughout the semester.',
-          'Ensured rigorous and transparent evaluation according to the faculty academic rubrics.',
+          'Processed and managed assessment data for 20+ students during Digital Systems laboratory sessions.',
+          'Supported student assessment and documentation processes throughout the semester.',
+          'Maintained organized academic performance records to support accurate grading and reporting.',
+        ],
+      },
+      {
+        heading: 'Coordination & Communication',
+        content: [
+          'Supported coordination between students and teaching staff during laboratory activities.',
+          'Relayed laboratory requirements and schedule information to keep sessions running smoothly.',
         ],
       },
     ],
@@ -433,8 +442,22 @@ export const workDetails: Record<string, WorkDetail> = {
 // ============================================================
 export const projects: Project[] = [
   {
+    id: 'veyra',
+    title: 'Project Veyra — Multiplayer Browser RPG',
+    category: 'Full-Stack Web Game',
+    description:
+      'Built Realm of the Soulbond, a full-stack 2D multiplayer browser RPG with real-time position sync, a token-based marketplace, and an AI-powered NPC — developed end-to-end with an AI-leveraged workflow.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1000&q=75',
+    detailPath: '/projects/project-veyra',
+    tags: ['JavaScript', 'Canvas2D', 'Socket.IO', 'Express.js'],
+    year: '2023 — 2025',
+    stack: 'JavaScript / Express.js / Socket.IO',
+    status: 'Completed',
+  },
+  {
     id: 'p1',
-    title: 'Saturnian Moons Simulation',
+    title: 'Simulating the Orbits of 83 Saturnian Moons Using Python & Pygame',
     category: 'Scientific Computing',
     description:
       'Simulated the orbits of 83 Saturnian moons using Python & Pygame, processing 30,000+ data points with Runge-Kutta numerical methods.',
@@ -448,7 +471,7 @@ export const projects: Project[] = [
   },
   {
     id: 'p2',
-    title: 'Flood Event Analysis',
+    title: 'Analysis of the March 25, 2025 Flood Event in Kabupaten Kudus',
     category: 'Data Analysis',
     description:
       'Analyzed atmospheric dynamics for the March 25, 2025 flood event in Kabupaten Kudus using 10,000+ data points from 2016–2025.',
@@ -462,7 +485,7 @@ export const projects: Project[] = [
   },
   {
     id: 'p3',
-    title: 'Automatic Garage System',
+    title: 'Ultrasonic Sensor-Based Automatic Garage System',
     category: 'Embedded Systems',
     description:
       'Developed an automatic garage prototype using Arduino UNO and ultrasonic sensor with control logic for distance-based automation.',
@@ -470,7 +493,7 @@ export const projects: Project[] = [
       'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1000&q=75',
     detailPath: '/projects/arduino-garage',
     tags: ['Arduino', 'Ultrasonic Sensor', 'Embedded Systems', 'Control Logic'],
-    year: '2024',
+    year: '2025',
     stack: 'Arduino / C++',
     status: 'Completed',
   },
@@ -494,10 +517,50 @@ export const projects: Project[] = [
 //  PROJECT DETAILS — Detailed pages for selected projects
 // ============================================================
 export const projectDetails: Record<string, ProjectDetail> = {
+  'project-veyra': {
+    id: 'project-veyra',
+    title: 'Project Veyra — Multiplayer Browser RPG (Realm of the Soulbond)',
+    subtitle: 'Full-Stack Web Game — Real-Time Multiplayer & On-Chain Player State',
+    category: 'Full-Stack Web Game',
+    year: '2023 — 2025',
+    stack: ['JavaScript', 'Canvas2D', 'Express.js', 'Socket.IO', 'JWT + bcrypt', '0G Storage'],
+    imageUrl: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1400&q=80',
+    overview: 'Realm of the Soulbond is a full-stack 2D browser RPG with a vanilla JavaScript + Canvas2D frontend and an Express.js + Socket.IO backend providing real-time multiplayer position sync. Repository: github.com/dkfadhila/ProjectVeyra.',
+    highlights: [
+      { label: 'Genre', value: '2D Multiplayer RPG' },
+      { label: 'Playable Classes', value: '7' },
+      { label: 'AI NPC', value: 'Lyra Oracle · MIMO' },
+      { label: 'Real-Time Sync', value: 'Socket.IO' },
+    ],
+    sections: [
+      {
+        heading: 'Overview',
+        content: [
+          'Project Veyra is a full-stack 2D browser RPG: the frontend is built with vanilla JavaScript and Canvas2D, while the backend uses Express.js and Socket.IO to sync player positions across clients in real time.',
+          'Player accounts use JWT + bcrypt authentication, with auto-save persistence on both the server and localStorage, and on-chain verified player state stored via 0G Storage.',
+        ],
+      },
+      {
+        heading: 'Game Systems',
+        content: [
+          'Developed a player-driven marketplace with a token-based economy, turn-based combat with skills and item drops, and a chained quest system across 7 playable classes.',
+          'Integrated an AI-powered NPC (Lyra Oracle, MIMO) that responds to player dialogue and gifts.',
+        ],
+      },
+      {
+        heading: 'Development Workflow',
+        content: [
+          'Built the game end-to-end with an AI-leveraged workflow using Claude Code — from backend architecture and game systems to frontend rendering.',
+          'Repository and source code are available at github.com/dkfadhila/ProjectVeyra.',
+        ],
+      },
+    ],
+    tags: ['Full-Stack', 'Multiplayer', 'Browser RPG', 'AI-Leveraged Workflow'],
+  },
   'saturnian-moons': {
     id: 'saturnian-moons',
-    title: 'Saturnian Moons Simulation',
-    subtitle: 'Simulating the Orbits of 83 Saturnian Moons Using Python & Pygame',
+    title: 'Simulating the Orbits of 83 Saturnian Moons Using Python & Pygame',
+    subtitle: 'Computational Physics Simulation — Orbital Dynamics & Numerical Methods',
     category: 'Scientific Computing',
     year: '2023',
     stack: ['Python', 'Pygame', 'Runge-Kutta', 'Newtonian Gravity', 'Keplerian Mechanics'],
@@ -538,8 +601,8 @@ export const projectDetails: Record<string, ProjectDetail> = {
   },
   'flood-analysis': {
     id: 'flood-analysis',
-    title: 'Flood Event Analysis',
-    subtitle: 'Analysis of the March 25, 2025 Flood Event in Kabupaten Kudus',
+    title: 'Analysis of the March 25, 2025 Flood Event in Kabupaten Kudus',
+    subtitle: 'Atmospheric Dynamics Analysis — Python & Data Visualization',
     category: 'Data Analysis',
     year: '2025',
     stack: ['Python', 'Data Analysis', 'Atmospheric Science', 'Data Visualization'],
@@ -580,10 +643,10 @@ export const projectDetails: Record<string, ProjectDetail> = {
   },
   'arduino-garage': {
     id: 'arduino-garage',
-    title: 'Automatic Garage System',
-    subtitle: 'Ultrasonic Sensor-Based Automatic Garage System Using Arduino UNO',
+    title: 'Ultrasonic Sensor-Based Automatic Garage System',
+    subtitle: 'Embedded Systems Prototype — Arduino UNO & Control Logic',
     category: 'Embedded Systems',
-    year: '2024',
+    year: '2025',
     stack: ['Arduino UNO', 'Ultrasonic Sensor', 'C++', 'Embedded Systems', 'Control Logic'],
     imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=80',
     overview: 'An automatic garage prototype that uses an Arduino UNO and ultrasonic sensor to detect vehicle proximity and automatically open/close the garage door. The system integrates sensor input, mathematical distance calculations, and control logic into a working embedded automation system.',
@@ -655,64 +718,9 @@ export const content: ContentItem[] = [
   },
 ];
 
-export const creativeItems: CreativeItem[] = [
-  {
-    id: 'cr-1',
-    title: 'Disaster Mitigation Campaign Poster',
-    category: 'graphic',
-    type: 'Poster & Layout',
-    date: '2025',
-    description:
-      'Information design and public advisory poster series created for regional disaster risk awareness.',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&q=80',
-    mediaUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1600&q=90',
-    mediaType: 'image',
-    tags: ['Graphic Design', 'Poster', 'Infographic', 'Figma'],
-    aspectRatio: 'poster',
-  },
-  {
-    id: 'cr-2',
-    title: 'Urban Architecture & Geometry',
-    category: 'photography',
-    type: 'Photography',
-    date: '2024',
-    description:
-      'Monochrome and high-contrast architectural series exploring structural lines and shadow patterns.',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1000&q=80',
-    mediaUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1600&q=90',
-    mediaType: 'image',
-    tags: ['Photography', 'Architecture', 'Monochrome'],
-    aspectRatio: 'photo',
-  },
-  {
-    id: 'cr-3',
-    title: 'Data Flow & Particle Simulation',
-    category: 'motion',
-    type: 'Motion & Animation',
-    date: '2025',
-    description:
-      'Generative motion graphics visualizing real-time computational data and particle dynamics.',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1000&q=80',
-    mediaUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    mediaType: 'video',
-    tags: ['Motion Design', 'Animation', 'Generative', 'Visuals'],
-    aspectRatio: 'video-horizontal',
-  },
-  {
-    id: 'cr-4',
-    title: 'Short Cinematic Reel',
-    category: 'motion',
-    type: 'Short Video / Reel',
-    date: '2025',
-    description:
-      'Fast-paced short-form edit featuring dynamic cuts, sound design sync, and color grading.',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1000&q=80',
-    mediaUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    mediaType: 'video',
-    tags: ['Video Editing', 'Reel', 'Color Grading', 'Sound Sync'],
-    aspectRatio: 'video-vertical',
-  },
-];
+// Creative portfolio is intentionally empty for now — works will be
+// published here once the portfolio pieces are ready.
+export const creativeItems: CreativeItem[] = [];
 
 export const socials: Social[] = [
   { label: 'Email', href: 'mailto:deckafadhila@gmail.com' },
@@ -755,7 +763,7 @@ export const mapCards: MapCard[] = [
     id: 'projects',
     num: '05',
     title: 'Projects',
-    description: 'Computational physics, atmospheric dynamics, and prototypes.',
+    description: 'Browser RPG, computational physics, atmospheric analysis, prototypes.',
     path: '/projects',
     type: 'B',
     image: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1000&q=80',
@@ -773,7 +781,7 @@ export const mapCards: MapCard[] = [
     id: 'creative',
     num: '07',
     title: 'Creative Works',
-    description: 'Posters, graphic design, photography, and motion videos.',
+    description: 'Visual archive — new works in progress.',
     path: '/creative',
     type: 'B',
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&q=80',
