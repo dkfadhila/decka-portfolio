@@ -507,7 +507,6 @@ const contentTr: Record<string, string> = {
   'Web3 Research & Content': 'Riset & Konten Web3',
   // remaining labels, statuses, tags
   Role: 'Peran',
-  Focus: 'Fokus',
   Ongoing: 'Sedang berjalan',
   Content: 'Konten',
   Experiment: 'Eksperimen',

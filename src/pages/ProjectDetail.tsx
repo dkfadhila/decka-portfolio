@@ -16,7 +16,6 @@ stack: { id: 'Tumpukan:', en: 'Stack:' },
     projectInfo: { id: 'Info Proyek', en: 'Project Info' },
     year: { id: 'Tahun', en: 'Year' },
     category: { id: 'Kategori', en: 'Category' },
-    status: { id: 'Status', en: 'Status' },
   };
 
   if (!project) {
@@ -147,12 +146,11 @@ stack: { id: 'Tumpukan:', en: 'Stack:' },
               {[
                 { k: t(ui.year), v: trPeriod(project.year, lang) },
                 { k: t(ui.category), v: tr(project.category, lang) },
-                { k: t(ui.status), v: tr(project.status, lang) },
               ].map((row, i) => (
                 <div
                   key={row.k}
                   className={`flex items-center justify-between py-3 ${
-                    i < 2 ? 'border-b border-line' : ''
+                    i < 1 ? 'border-b border-line' : ''
                   }`}
                 >
                   <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/45">

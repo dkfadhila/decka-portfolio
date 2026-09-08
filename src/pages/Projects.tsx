@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, Tag, MetaNum } from '../components/cards';
 import { projects } from '../data';
-import { useI18n, tr } from '../i18n';
+import { useI18n, tr, trPeriod } from '../i18n';
 
 const spans = ['col-span-12 lg:col-span-5', 'col-span-12 lg:col-span-4', 'col-span-12 lg:col-span-3'];
 
