@@ -46,7 +46,7 @@ export default function About() {
             <div className="mt-8 grid gap-5 text-base font-medium leading-7 text-ink/70">
               {profile.intro.map((p, i) => (
                 <p key={i} className="max-w-2xl">
-                  {p}
+                  {tr(p, lang)}
                 </p>
               ))}
             </div>

@@ -41,6 +41,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     window.localStorage.setItem('tirta-lang', lang);
+    document.documentElement.lang = lang;
   }, [lang]);
 
   const t = (s: LStr) => s[lang];
@@ -125,6 +126,16 @@ export function institutionName(name: string, lang: Lang): string {
    -> Indonesian equivalents. Unknown strings pass through.
    ============================================================ */
 const contentTr: Record<string, string> = {
+  // profile.subtitle
+  'Bachelor of Science in Physics graduate with experience in data processing, scientific computing, research, administrative support, and organizational coordination.':
+    'Lulusan S.Si. Fisika dengan pengalaman di pemrosesan data, komputasi ilmiah, riset, dukungan administratif, dan koordinasi organisasi.',
+  // profile.intro
+  "I'm Tirta — a Physics graduate (Universitas Negeri Yogyakarta) with experience spanning data processing, scientific computing, research, administrative support, and organizational coordination.":
+    'Saya Tirta — lulusan Fisika (Universitas Negeri Yogyakarta) dengan pengalaman di pemrosesan data, komputasi ilmiah, riset, dukungan administratif, dan koordinasi organisasi.',
+  'I care about turning complex data into clear insights, building computational tools, and using AI to make research and operations more efficient.':
+    'Saya fokus mengubah data kompleks menjadi insight yang jelas, membangun alat komputasi, dan memakai AI agar riset serta operasional lebih efisien.',
+  'I also build small, useful things for myself and others when existing workflows feel repetitive.':
+    'Saya juga membangun hal-hal kecil yang berguna untuk diri sendiri dan orang lain saat alur kerja yang ada terasa repetitif.',
   // aboutHeading
   'Data explorer.': 'Penjelajah data.',
   'Scientific thinker.': 'Pemikir ilmiah.',
@@ -187,6 +198,22 @@ export function tr(s: string, lang: Lang): string {
 }
 
 /* ============================================================
+   Period strings — "Feb 2025 — Jun 2025", "2024 — Present".
+   EN source; month names & "Present" localized for ID.
+   ============================================================ */
+const monthsId: Record<string, string> = {
+  Jan: 'Jan', Feb: 'Feb', Mar: 'Mar', Apr: 'Apr', May: 'Mei', Jun: 'Jun',
+  Jul: 'Jul', Aug: 'Agu', Sep: 'Sep', Oct: 'Okt', Nov: 'Nov', Dec: 'Des',
+};
+
+export function trPeriod(s: string, lang: Lang): string {
+  if (lang === 'en') return s;
+  return s
+    .replace(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/g, (m) => monthsId[m])
+    .replace(/\bPresent\b/g, 'Sekarang');
+}
+
+/* ============================================================
    UI chrome strings (nav, hero, headers, footer, section labels)
    ============================================================ */
 export const ui = {
@@ -245,6 +272,7 @@ export const ui = {
   menu: { id: 'Menu', en: 'Menu' },
   close: { id: 'Tutup', en: 'Close' },
   letsTalk: { id: 'Mari bicara', en: "Let's talk" },
+  downloadCv: { id: 'Unduh CV', en: 'Download CV' },
 
   // Footer
   footerContact: { id: 'Kontak', en: 'Contact' },

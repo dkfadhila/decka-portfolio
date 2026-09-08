@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, Download } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Crosshair, PlusMark } from '../components/cards';
@@ -8,7 +8,7 @@ import { useI18n } from '../i18n';
 
 export default function Contact() {
   const others = socials.filter((s) => s.label !== 'Email');
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -17,7 +17,7 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2000);
   };
   const ui = {
-    transmission: { id: '07 / Transmisi', en: '07 / Transmission' },
+    transmission: { id: '09 / Transmisi', en: '09 / Transmission' },
     lets: { id: 'Mari', en: "Let's" },
     talk: { id: 'Bicara.', en: 'Talk.' },
     intro: {
@@ -76,6 +76,15 @@ export default function Contact() {
                 {copied ? <Check size={13} className="text-blue" /> : <Copy size={13} />}
                 {copied ? t({ id: 'Tersalin!', en: 'Copied!' }) : t({ id: 'Salin Email', en: 'Copy Email' })}
               </button>
+
+              <a
+                href={lang === 'id' ? '/cv/cv-id.pdf' : '/cv/cv-en.pdf'}
+                download
+                className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-bg px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-wider text-ink/70 transition-colors hover:border-blue hover:text-ink"
+              >
+                <Download size={13} />
+                {t({ id: 'Unduh CV', en: 'Download CV' })}
+              </a>
 
               <span className="hidden font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45 sm:inline">
                 {t(ui.clickMail)}

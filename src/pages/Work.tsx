@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, Tag, MetaNum } from '../components/cards';
 import { work } from '../data';
-import { useI18n, institutionName } from '../i18n';
+import { useI18n, institutionName, trPeriod } from '../i18n';
 
 const spans = [
   'col-span-12 lg:col-span-7',
@@ -71,7 +71,7 @@ export default function Work() {
                   {/* Technical metadata list matching Projects */}
                   <dl className="mt-5 border-t border-line pt-4">
                     {[
-                      { k: t(ui.period), v: item.period },
+                      { k: t(ui.period), v: trPeriod(item.period, lang) },
                       { k: t(ui.stack), v: item.stack },
                       { k: t(ui.status), v: item.status },
                     ].map((row) => (

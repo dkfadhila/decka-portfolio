@@ -3,7 +3,7 @@ import { ArrowUpLeft } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import { Tag, Crosshair } from '../components/cards';
 import { workDetails } from '../data';
-import { useI18n, institutionName } from '../i18n';
+import { useI18n, institutionName, trPeriod } from '../i18n';
 
 export default function WorkDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -145,7 +145,7 @@ export default function WorkDetail() {
             </span>
             <dl className="mt-4">
               {[
-                { k: t(ui.period), v: item.period },
+                { k: t(ui.period), v: trPeriod(item.period, lang) },
                 { k: t(ui.client), v: institutionName(item.client, lang) },
                 { k: t(ui.status), v: item.status },
               ].map((row, i) => (

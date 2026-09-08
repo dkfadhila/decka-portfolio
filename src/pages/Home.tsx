@@ -93,7 +93,7 @@ export default function Home() {
                 {/* Introduction — two-tier paragraphs */}
                 <div className="mt-10 max-w-xl">
                   <p className="text-lg font-medium leading-8 text-ink sm:text-xl sm:leading-9">
-                    {profile.subtitle}
+                    {tr(profile.subtitle, lang)}
                   </p>
                   <p className="mt-5 text-sm leading-6 text-secondary">
                     {t(ui.heroParagraph2)}
@@ -424,7 +424,9 @@ export default function Home() {
                 {t(ui.focusedOn)}
               </span>
               <div className="flex flex-wrap gap-2">
-                {profile.focusPills.map((p, i) => (
+                {profile.focusPills
+                  .filter((p) => p === 'Agentic & Automated Workflows')
+                  .map((p, i) => (
                   <span
                     key={p}
                     className={`rounded-lg border px-4 py-2 text-[11px] font-bold uppercase tracking-wide transition-colors ${

@@ -2,7 +2,7 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Tag, Crosshair } from '../components/cards';
 import { experience, profile, heroMeta } from '../data';
-import { useI18n, institutionName, tr } from '../i18n';
+import { useI18n, institutionName, tr, trPeriod } from '../i18n';
 
 export default function Experience() {
   const { t, lang } = useI18n();
@@ -52,7 +52,7 @@ export default function Experience() {
                   <div className="card p-6 sm:p-7">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-blue">
-                        {e.period}
+                        {trPeriod(e.period, lang)}
                       </span>
                       <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/40">
                         {t(ui.record)}{i + 1}
