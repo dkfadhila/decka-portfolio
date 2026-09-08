@@ -1,10 +1,10 @@
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Crosshair } from '../components/cards';
-import { useI18n } from '../i18n';
+import { useI18n, tr } from '../i18n';
 
 export default function Credentials() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const ui = {
     academic: { id: '01 / Akademik', en: '01 / Academic' },
     degreeTitle: { id: 'S.Si. Fisika', en: 'B.Sc. Physics' },
@@ -44,10 +44,10 @@ export default function Credentials() {
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-line pt-6 sm:grid-cols-4">
               {[
-                { k: t(ui.degree), v: 'Bachelor of Science' },
-                { k: t(ui.field), v: 'Physics' },
+                { k: t(ui.degree), v: tr('Bachelor of Science', lang) },
+                { k: t(ui.field), v: tr('Physics', lang) },
                 { k: t(ui.graduated), v: '2026' },
-                { k: t(ui.status), v: 'Completed' },
+                { k: t(ui.status), v: tr('Completed', lang) },
               ].map((row) => (
                 <div key={row.k}>
                   <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/45">

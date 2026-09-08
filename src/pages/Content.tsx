@@ -2,14 +2,14 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, MetaNum, Crosshair } from '../components/cards';
 import { content } from '../data';
-import { useI18n } from '../i18n';
+import { useI18n, tr, trPeriod } from '../i18n';
 
 const targetOf = (link?: string) =>
   link && link !== '#' ? { href: link, target: '_blank', rel: 'noreferrer' } : { href: '#' };
 
 export default function Content() {
   const [featured, ...rest] = content;
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const ui = {
     featured: { id: 'Unggulan — ', en: 'Featured — ' },
     index: { id: 'Indeks — ', en: 'Index — ' },
@@ -29,17 +29,17 @@ export default function Content() {
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-md border border-blue bg-blue-soft px-3 py-1 text-[10px] font-black uppercase tracking-wide text-ink">
-                {t(ui.featured)}{featured?.type}
+                {t(ui.featured)}{tr(featured?.type ?? '', lang)}
               </span>
               <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45">
-                {featured?.date}
+                {featured ? trPeriod(featured.date, lang) : ''}
               </span>
             </div>
             <h3 className="heading-display mt-5 max-w-3xl text-3xl uppercase leading-[0.9] tracking-tight sm:text-5xl">
-              {featured?.title}
+              {featured ? tr(featured.title, lang) : ''}
             </h3>
             <p className="mt-4 max-w-xl text-sm font-medium leading-6 text-ink/65">
-              {featured?.description}
+              {featured ? tr(featured.description, lang) : ''}
             </p>
           </div>
           <span className="grid h-14 w-14 shrink-0 place-items-center self-start rounded-full border border-line bg-bg md:self-end">
@@ -66,21 +66,21 @@ export default function Content() {
             >
               <div className="flex items-center gap-3 sm:block">
                 <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/45">
-                  {c.date}
+                  {trPeriod(c.date, lang)}
                 </span>
                 <span className="mt-0 inline-block rounded-md border border-line bg-bg px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-ink/60 sm:mt-2">
-                  {c.type}
+                  {tr(c.type, lang)}
                 </span>
               </div>
               <div>
                 <div className="flex items-baseline gap-3">
                   <MetaNum num={`0${i + 2}`} />
                   <h3 className="heading-display text-xl uppercase leading-[0.95] tracking-tight sm:text-2xl">
-                    {c.title}
+                    {tr(c.title, lang)}
                   </h3>
                 </div>
                 <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-ink/60">
-                  {c.description}
+                  {tr(c.description, lang)}
                 </p>
               </div>
               <ArrowSlot />

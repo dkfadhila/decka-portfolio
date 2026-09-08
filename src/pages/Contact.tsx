@@ -4,7 +4,7 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Crosshair, PlusMark } from '../components/cards';
 import { socials, heroMeta } from '../data';
-import { useI18n } from '../i18n';
+import { useI18n, tr } from '../i18n';
 
 export default function Contact() {
   const others = socials.filter((s) => s.label !== 'Email');
@@ -104,9 +104,9 @@ export default function Contact() {
             <dl className="mt-4">
               {[
                 { k: t(ui.based), v: heroMeta.location },
-                { k: 'Coordinates', v: heroMeta.coords },
-                { k: t(ui.status), v: heroMeta.availability },
-                { k: t(ui.focus), v: heroMeta.role },
+                { k: t(ui.coordinates), v: heroMeta.coords },
+                { k: t(ui.status), v: tr(heroMeta.availability, lang) },
+                { k: t(ui.focus), v: tr(heroMeta.role, lang) },
               ].map((row, i) => (
                 <div
                   key={row.k}

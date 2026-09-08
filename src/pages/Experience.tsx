@@ -59,17 +59,17 @@ export default function Experience() {
                       </span>
                     </div>
                     <h3 className="heading-display mt-3 text-2xl uppercase leading-[0.95] tracking-tight sm:text-3xl">
-                      {e.role}
+                      {tr(e.role, lang)}
                     </h3>
                     <p className="mt-1 text-sm font-bold uppercase tracking-wide text-ink/50">
-                      {institutionName(e.org, lang)}
+                      {tr(institutionName(e.org, lang), lang)}
                     </p>
                     <p className="mt-4 max-w-2xl text-sm font-medium leading-6 text-ink/65">
-                      {e.description}
+                      {tr(e.description, lang)}
                     </p>
                     <div className="mt-5 flex flex-wrap gap-2">
                       {e.tags.map((tag) => (
-                        <Tag key={tag}>{tag}</Tag>
+                        <Tag key={tag}>{tr(tag, lang)}</Tag>
                       ))}
                     </div>
                   </div>
@@ -99,7 +99,7 @@ export default function Experience() {
               </p>
               <div className="mt-5 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink/70">
                 <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-ink" />
-                {heroMeta.availability}
+                {tr(heroMeta.availability, lang)}
               </div>
             </div>
           </Reveal>

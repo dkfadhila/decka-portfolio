@@ -290,7 +290,7 @@ export default function Home() {
                   </div>
                   <Meta k="Index" n={`S/0${i + 1}`} />
                   <p className={`heading-display mt-3 text-4xl leading-none tracking-tight sm:text-5xl ${i === 2 ? 'text-ink' : 'text-blue'}`}>
-                    {s.value}
+                    {tr(s.value, lang)}
                   </p>
                   <p className="mt-2 text-[11px] font-bold uppercase tracking-wide text-secondary">
                     {tr(s.label, lang)}
@@ -325,8 +325,8 @@ export default function Home() {
           <Reveal className="col-span-12 md:col-span-6 lg:col-span-7">
             <CardB
               num={about.num}
-              title={about.title}
-              description={about.description}
+              title={tr(about.title, lang)}
+              description={tr(about.description, lang)}
               image={about.image}
               to={about.path}
               className="min-h-[280px]"
@@ -338,8 +338,8 @@ export default function Home() {
             <CardC
               num={experience.num}
               big="8+"
-              title={experience.title}
-              description={experience.description}
+              title={tr(experience.title, lang)}
+              description={tr(experience.description, lang)}
               to={experience.path}
               className="min-h-[280px]"
             />
@@ -349,8 +349,8 @@ export default function Home() {
           <Reveal className="col-span-12 sm:col-span-6 lg:col-span-4">
             <CardB
               num={work.num}
-              title={work.title}
-              description={work.description}
+              title={tr(work.title, lang)}
+              description={tr(work.description, lang)}
               image={work.image}
               to={work.path}
               className="min-h-[250px]"
@@ -361,8 +361,8 @@ export default function Home() {
           <Reveal className="col-span-12 sm:col-span-6 lg:col-span-4">
             <CardB
               num={projects.num}
-              title={projects.title}
-              description={projects.description}
+              title={tr(projects.title, lang)}
+              description={tr(projects.description, lang)}
               image={projects.image}
               to={projects.path}
               className="min-h-[250px]"
@@ -373,8 +373,8 @@ export default function Home() {
           <Reveal className="col-span-12 sm:col-span-6 lg:col-span-4">
             <CardB
               num={content.num}
-              title={content.title}
-              description={content.description}
+              title={tr(content.title, lang)}
+              description={tr(content.description, lang)}
               image={content.image}
               to={content.path}
               className="min-h-[250px]"
@@ -385,8 +385,8 @@ export default function Home() {
           <Reveal className="col-span-12">
             <CardB
               num={creative.num}
-              title={creative.title}
-              description={creative.description}
+              title={tr(creative.title, lang)}
+              description={tr(creative.description, lang)}
               image={creative.image}
               to={creative.path}
               className="min-h-[260px]"
@@ -397,8 +397,8 @@ export default function Home() {
           <Reveal className="col-span-12">
             <CardA
               num={credentials.num}
-              title={credentials.title}
-              description={credentials.description}
+              title={tr(credentials.title, lang)}
+              description={tr(credentials.description, lang)}
               to={credentials.path}
             />
           </Reveal>
@@ -407,8 +407,8 @@ export default function Home() {
           <Reveal className="col-span-12">
             <CardD
               num={contact.num}
-              title={contact.title}
-              description={contact.description}
+              title={tr(contact.title, lang)}
+              description={tr(contact.description, lang)}
               to={contact.path}
             />
           </Reveal>

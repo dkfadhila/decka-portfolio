@@ -5,7 +5,7 @@ import { useI18n, ui } from '../i18n';
 const pageTitle: Record<string, { id: string; en: string }> = {
   about: { id: 'Tentang & Prinsip.', en: 'About & Principles.' },
   experience: { id: 'Pengalaman & Operasi.', en: 'Experience & Operations.' },
-  work: { id: 'Karya Pilihan.', en: 'Selected Work.' },
+  work: { id: 'Pekerjaan Terpilih.', en: 'Selected Work.' },
   projects: { id: 'Proyek & Riset.', en: 'Projects & Research.' },
   content: { id: 'Konten & Riset.', en: 'Content & Research.' },
   credentials: { id: 'Kredensial & Penghargaan.', en: 'Credentials & Honors.' },
@@ -46,7 +46,7 @@ const pageLead: Record<string, { id: string; en: string }> = {
 const kicker: Record<string, { id: string; en: string }> = {
   about: { id: 'Tentang', en: 'About' },
   experience: { id: 'Pengalaman', en: 'Experience' },
-  work: { id: 'Karya', en: 'Work' },
+  work: { id: 'Pekerjaan', en: 'Work' },
   projects: { id: 'Proyek', en: 'Projects' },
   content: { id: 'Konten', en: 'Content' },
   credentials: { id: 'Kredensial', en: 'Credentials' },

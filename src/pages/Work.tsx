@@ -3,7 +3,7 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, Tag, MetaNum } from '../components/cards';
 import { work } from '../data';
-import { useI18n, institutionName, trPeriod } from '../i18n';
+import { useI18n, institutionName, trPeriod, tr } from '../i18n';
 
 const spans = [
   'col-span-12 lg:col-span-7',
@@ -58,22 +58,22 @@ export default function Work() {
                     <div>
                       <MetaNum num={institutionName(item.client, lang)} />
                       <h3 className="heading-display mt-2 text-2xl uppercase leading-[0.95] tracking-tight sm:text-3xl">
-                        {item.title}
+                        {tr(item.title, lang)}
                       </h3>
                     </div>
                     <CardArrow size={20} />
                   </div>
 
                   <p className="mt-3 text-sm font-medium leading-6 text-ink/65">
-                    {item.description}
+                    {tr(item.description, lang)}
                   </p>
 
                   {/* Technical metadata list matching Projects */}
                   <dl className="mt-5 border-t border-line pt-4">
                     {[
                       { k: t(ui.period), v: trPeriod(item.period, lang) },
-                      { k: t(ui.stack), v: item.stack },
-                      { k: t(ui.status), v: item.status },
+                      { k: t(ui.stack), v: tr(item.stack, lang) },
+                      { k: t(ui.status), v: tr(item.status, lang) },
                     ].map((row) => (
                       <div
                         key={row.k}
@@ -91,7 +91,7 @@ export default function Work() {
 
                   <div className="mt-5 flex flex-wrap gap-2 border-t border-line pt-5">
                     {item.tags.map((tag) => (
-                      <Tag key={tag}>{tag}</Tag>
+                      <Tag key={tag}>{tr(tag, lang)}</Tag>
                     ))}
                   </div>
                 </div>

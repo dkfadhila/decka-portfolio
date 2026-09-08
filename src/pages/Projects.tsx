@@ -3,12 +3,12 @@ import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, Tag, MetaNum } from '../components/cards';
 import { projects } from '../data';
-import { useI18n } from '../i18n';
+import { useI18n, tr } from '../i18n';
 
 const spans = ['col-span-12 lg:col-span-5', 'col-span-12 lg:col-span-4', 'col-span-12 lg:col-span-3'];
 
 export default function Projects() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const ui = {
     exp: { id: 'Eksp. 0', en: 'Exp. 0' },
     year: { id: 'Tahun', en: 'Year' },
@@ -54,23 +54,23 @@ export default function Projects() {
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <MetaNum num={p.category} className={i === 1 ? 'text-ink/55' : ''} />
+                      <MetaNum num={tr(p.category, lang)} className={i === 1 ? 'text-ink/55' : ''} />
                       <h3 className="heading-display mt-2 text-xl uppercase leading-[0.95] tracking-tight sm:text-2xl">
-                        {p.title}
+                        {tr(p.title, lang)}
                       </h3>
                     </div>
                     <CardArrow size={18} />
                   </div>
                   <p className="mt-3 text-sm font-medium leading-6 text-ink/65">
-                    {p.description}
+                    {tr(p.description, lang)}
                   </p>
 
                   {/* Technical metadata */}
                   <dl className="mt-5 border-t border-line pt-4">
                     {[
-                      { k: t(ui.year), v: p.year },
-                      { k: t(ui.stack), v: p.stack },
-                      { k: t(ui.status), v: p.status },
+                      { k: t(ui.year), v: trPeriod(p.year, lang) },
+                      { k: t(ui.stack), v: tr(p.stack, lang) },
+                      { k: t(ui.status), v: tr(p.status, lang) },
                     ].map((row) => (
                       <div
                         key={row.k}
@@ -88,7 +88,7 @@ export default function Projects() {
 
                   <div className="mt-5 flex flex-wrap gap-2 pt-1">
                     {p.tags.map((tag) => (
-                      <Tag key={tag}>{tag}</Tag>
+                      <Tag key={tag}>{tr(tag, lang)}</Tag>
                     ))}
                   </div>
                 </div>

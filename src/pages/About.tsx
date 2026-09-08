@@ -91,10 +91,10 @@ export default function About() {
                     }`}
                   >
                     <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink/45">
-                      {f.label}
+                      {tr(f.label, lang)}
                     </dt>
                     <dd className="font-mono text-[11px] uppercase tracking-wide text-ink/80">
-                      {f.value}
+                      {tr(f.value, lang)}
                     </dd>
                   </div>
                 ))}

@@ -3,12 +3,12 @@ import { ArrowUpLeft } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import { Tag, Crosshair } from '../components/cards';
 import { projectDetails } from '../data';
-import { useI18n } from '../i18n';
+import { useI18n, tr, trPeriod } from '../i18n';
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? projectDetails[slug] : undefined;
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const ui = {
     back: { id: 'Kembali ke Proyek', en: 'Back to Projects' },
     notFound: { id: 'Proyek tidak ditemukan', en: 'Project not found' },
@@ -68,13 +68,13 @@ stack: { id: 'Tumpukan:', en: 'Stack:' },
           <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent sm:from-ink/60 sm:via-ink/10" />
           <div className="absolute bottom-0 left-0 p-5 sm:p-8 md:p-10">
             <span className="rounded-md border border-line bg-bg/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-ink/70">
-              {project.category}
+              {tr(project.category, lang)}
             </span>
             <h1 className="heading-display mt-3 text-3xl uppercase leading-[0.9] tracking-tight text-white sm:mt-4 sm:text-5xl md:text-6xl">
-              {project.title}
+              {tr(project.title, lang)}
             </h1>
             <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-white/80 sm:mt-3 sm:text-base">
-              {project.subtitle}
+              {tr(project.subtitle, lang)}
             </p>
           </div>
         </div>
@@ -86,10 +86,10 @@ stack: { id: 'Tumpukan:', en: 'Stack:' },
           {project.highlights.map((h) => (
             <div key={h.label} className="card p-5">
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/45">
-                {h.label}
+                {tr(h.label, lang)}
               </span>
               <p className="heading-display mt-2 text-2xl uppercase tracking-tight text-blue">
-                {h.value}
+                {trPeriod(tr(h.value, lang), lang)}
               </p>
             </div>
           ))}
@@ -104,7 +104,7 @@ stack: { id: 'Tumpukan:', en: 'Stack:' },
           </span>
           <div className="flex flex-wrap gap-2">
             {project.stack.map((s) => (
-              <Tag key={s}>{s}</Tag>
+              <Tag key={s}>{tr(s, lang)}</Tag>
             ))}
           </div>
         </div>
@@ -119,7 +119,7 @@ stack: { id: 'Tumpukan:', en: 'Stack:' },
                 <div className="flex items-center gap-3 border-b border-line pb-3">
                   <Crosshair />
                   <h2 className="heading-display text-xl uppercase tracking-tight sm:text-2xl">
-                    {section.heading}
+                    {tr(section.heading, lang)}
                   </h2>
                 </div>
                 <div className="mt-4 space-y-4">
@@ -128,7 +128,7 @@ stack: { id: 'Tumpukan:', en: 'Stack:' },
                       key={i}
                       className="max-w-2xl text-base font-medium leading-7 text-ink/70"
                     >
-                      {p}
+                      {tr(p, lang)}
                     </p>
                   ))}
                 </div>
@@ -145,9 +145,9 @@ stack: { id: 'Tumpukan:', en: 'Stack:' },
             </span>
             <dl className="mt-4">
               {[
-                { k: t(ui.year), v: project.year },
-                { k: t(ui.category), v: project.category },
-                { k: t(ui.status), v: 'Completed' },
+                { k: t(ui.year), v: trPeriod(project.year, lang) },
+                { k: t(ui.category), v: tr(project.category, lang) },
+                { k: t(ui.status), v: tr(project.status, lang) },
               ].map((row, i) => (
                 <div
                   key={row.k}
@@ -166,7 +166,7 @@ stack: { id: 'Tumpukan:', en: 'Stack:' },
             </dl>
             <div className="mt-5 flex flex-wrap gap-2">
               {project.tags.map((t) => (
-                <Tag key={t}>{t}</Tag>
+                <Tag key={t}>{tr(t, lang)}</Tag>
               ))}
             </div>
           </div>

@@ -159,7 +159,7 @@ export default function Header() {
               </span>
               <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
                 <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-blue" />
-                {heroMeta.availability}
+                {t({ id: 'Terbuka untuk bekerja', en: 'Open to work' })}
               </span>
             </div>
           </div>

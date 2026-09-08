@@ -3,14 +3,14 @@ import { ArrowUpLeft } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import { Tag, Crosshair } from '../components/cards';
 import { workDetails } from '../data';
-import { useI18n, institutionName, trPeriod } from '../i18n';
+import { useI18n, institutionName, trPeriod, tr } from '../i18n';
 
 export default function WorkDetail() {
   const { slug } = useParams<{ slug: string }>();
   const item = slug ? workDetails[slug] : undefined;
   const { t, lang } = useI18n();
   const ui = {
-    back: { id: 'Kembali ke Karya', en: 'Back to Work' },
+    back: { id: 'Kembali ke Pekerjaan', en: 'Back to Work' },
     notFound: { id: 'Studi kasus tidak ditemukan', en: 'Case study not found' },
     stack: { id: 'Tumpukan & Keahlian:', en: 'Stack & Skills:' },
     workInfo: { id: 'Info Keterlibatan', en: 'Engagement Info' },
@@ -71,10 +71,10 @@ export default function WorkDetail() {
               {institutionName(item.client, lang)}
             </span>
             <h1 className="heading-display mt-3 text-3xl uppercase leading-[0.9] tracking-tight text-white sm:mt-4 sm:text-5xl md:text-6xl">
-              {item.title}
+              {tr(item.title, lang)}
             </h1>
             <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-white/85 sm:mt-3 sm:text-base">
-              {item.subtitle}
+              {tr(item.subtitle, lang)}
             </p>
           </div>
         </div>
@@ -86,10 +86,10 @@ export default function WorkDetail() {
           {item.highlights.map((h) => (
             <div key={h.label} className="card p-5">
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/45">
-                {h.label}
+                {tr(h.label, lang)}
               </span>
               <p className="heading-display mt-2 text-2xl uppercase tracking-tight text-blue">
-                {h.value}
+                {tr(h.value, lang)}
               </p>
             </div>
           ))}
@@ -104,7 +104,7 @@ export default function WorkDetail() {
           </span>
           <div className="flex flex-wrap gap-2">
             {item.stack.map((s) => (
-              <Tag key={s}>{s}</Tag>
+              <Tag key={s}>{tr(s, lang)}</Tag>
             ))}
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function WorkDetail() {
                 <div className="flex items-center gap-3 border-b border-line pb-3">
                   <Crosshair />
                   <h2 className="heading-display text-xl uppercase tracking-tight sm:text-2xl">
-                    {section.heading}
+                    {tr(section.heading, lang)}
                   </h2>
                 </div>
                 <div className="mt-4 space-y-4">
@@ -128,7 +128,7 @@ export default function WorkDetail() {
                       key={i}
                       className="max-w-2xl text-base font-medium leading-7 text-ink/70"
                     >
-                      {p}
+                      {tr(p, lang)}
                     </p>
                   ))}
                 </div>
@@ -147,7 +147,7 @@ export default function WorkDetail() {
               {[
                 { k: t(ui.period), v: trPeriod(item.period, lang) },
                 { k: t(ui.client), v: institutionName(item.client, lang) },
-                { k: t(ui.status), v: item.status },
+                { k: t(ui.status), v: tr(item.status, lang) },
               ].map((row, i) => (
                 <div
                   key={row.k}
@@ -166,7 +166,7 @@ export default function WorkDetail() {
             </dl>
             <div className="mt-5 flex flex-wrap gap-2">
               {item.tags.map((tag) => (
-                <Tag key={tag}>{tag}</Tag>
+                <Tag key={tag}>{tr(tag, lang)}</Tag>
               ))}
             </div>
           </div>
