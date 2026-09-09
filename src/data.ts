@@ -253,6 +253,13 @@ export const experience: ExperienceItem[] = [
 ];
 
 // ============================================================
+//  EXPERIENCE DETAILS — keyed by id for CMS editing
+// ============================================================
+export const experienceDetails: Record<string, ExperienceItem> = Object.fromEntries(
+  experience.map((e) => [e.id, e])
+);
+
+// ============================================================
 //  WORK — Professional engagements from CV
 // ============================================================
 export const work: WorkItem[] = [

@@ -1,11 +1,13 @@
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { Tag, Crosshair } from '../components/cards';
-import { experience, profile, heroMeta } from '../data';
+import { profile, heroMeta } from '../data';
+import { useContent } from '../contentStore';
 import { useI18n, institutionName, tr, trPeriod } from '../i18n';
 
 export default function Experience() {
   const { t, lang } = useI18n();
+  const { experience } = useContent();
   const ui = {
     record: { id: 'Catatan / 0', en: 'Record / 0' },
     status: { id: 'Status', en: 'Status' },

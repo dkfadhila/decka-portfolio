@@ -10,6 +10,8 @@ import {
   projectDetails as staticProjectDetails,
   work as staticWork,
   workDetails as staticWorkDetails,
+  experience as staticExperience,
+  experienceDetails as staticExperienceDetails,
   content as staticContent,
   creativeItems as staticCreatives,
 } from './data';
@@ -28,20 +30,24 @@ import {
 export interface LiveContent {
   projects: any[];          // detail-shaped (id, title, subtitle, overview, sections, ...)
   work: any[];              // detail-shaped
+  experience: any[];        // detail-shaped (id, role, org, period, description, tags)
   content: any[];
   creative: any[];
   projectDetails: Record<string, any>;
   workDetails: Record<string, any>;
+  experienceDetails: Record<string, any>;
   updatedAt?: string;
 }
 
 const EMPTY: LiveContent = {
   projects: [],
   work: [],
+  experience: [],
   content: [],
   creative: [],
   projectDetails: {},
   workDetails: {},
+  experienceDetails: {},
 };
 
 interface ContentValue {
@@ -51,6 +57,8 @@ interface ContentValue {
   projects: any[];
   /** Listing for /work (falls back to static, hides Draft) */
   work: any[];
+  /** Listing for /experience (falls back to static, hides Draft) */
+  experience: any[];
   /** Listing for /content */
   content: any[];
   /** Listing for /creative (Draft hidden) */
@@ -59,6 +67,8 @@ interface ContentValue {
   projectDetail: (slug: string) => any | undefined;
   /** Detail lookup /work/:slug */
   workDetail: (slug: string) => any | undefined;
+  /** Detail lookup experience by id */
+  experienceDetail: (slug: string) => any | undefined;
 }
 
 const ContentContext = createContext<ContentValue>({
@@ -66,10 +76,12 @@ const ContentContext = createContext<ContentValue>({
   live: EMPTY,
   projects: staticProjects as any,
   work: staticWork as any,
+  experience: staticExperience as any,
   content: staticContent,
   creative: staticCreatives,
   projectDetail: (slug) => staticProjectDetails[slug],
   workDetail: (slug) => staticWorkDetails[slug],
+  experienceDetail: (slug) => staticExperienceDetails[slug],
 });
 
 export function ContentProvider({ children }: { children: ReactNode }) {
@@ -123,15 +135,28 @@ export function ContentProvider({ children }: { children: ReactNode }) {
       status: w.status || 'Completed',
     }));
 
+  const liveExperience = live.experience
+    .filter((e) => e.status !== 'Draft')
+    .map((e) => ({
+      id: e.id,
+      role: e.role,
+      org: e.org || '',
+      period: e.period || '',
+      description: e.description || '',
+      tags: e.tags || [],
+    }));
+
   const value: ContentValue = {
     ready,
     live,
     projects: hasLive ? liveProjects : (staticProjects as any),
     work: hasLive ? liveWork : (staticWork as any),
+    experience: hasLive ? liveExperience : (staticExperience as any),
     content: live.content.length > 0 ? live.content : staticContent,
     creative: live.creative.filter((c) => c.status !== 'Draft'),
     projectDetail: (slug) => (hasLive ? live.projects.find((p) => p.id === slug) : staticProjectDetails[slug]),
     workDetail: (slug) => (hasLive ? live.work.find((w) => w.id === slug) : staticWorkDetails[slug]),
+    experienceDetail: (slug) => (hasLive ? live.experience.find((e) => e.id === slug) : staticExperienceDetails[slug]),
   };
 
   return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>;

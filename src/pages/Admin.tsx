@@ -27,6 +27,7 @@ import {
   projectDetails as initialProjectDetails,
   work as initialWork,
   workDetails as initialWorkDetails,
+  experience as initialExperience,
   content as initialContent,
   creativeItems as initialCreatives,
 } from '../data';
@@ -40,7 +41,7 @@ export default function AdminPage() {
   const [authError, setAuthError] = useState(false);
 
   // Active Tab: Projects, Work, Content, Creative
-  const [activeTab, setActiveTab] = useState<'projects' | 'work' | 'content' | 'creative'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'work' | 'experience' | 'content' | 'creative'>('projects');
   const [notification, setNotification] = useState('');
   const [currentTimeWIB, setCurrentTimeWIB] = useState('');
 
@@ -65,6 +66,11 @@ export default function AdminPage() {
   const [creativeList, setCreativeList] = useState(() => {
     const saved = localStorage.getItem('dktirta_creative');
     return saved ? JSON.parse(saved) : initialCreatives;
+  });
+
+  const [experienceList, setExperienceList] = useState(() => {
+    const saved = localStorage.getItem('dktirta_experience');
+    return saved ? JSON.parse(saved) : initialExperience;
   });
 
   // Clock
@@ -95,6 +101,43 @@ export default function AdminPage() {
   // Sync to local storage
   const persistChanges = (key: string, data: any) => {
     localStorage.setItem(key, JSON.stringify(data));
+  };
+
+  // Auto-sync to GitHub
+  const [syncing, setSyncing] = useState(false);
+  const syncToGitHub = async () => {
+    if (syncing) return;
+    setSyncing(true);
+    try {
+      const payload = {
+        projects: projectsList,
+        work: workList,
+        experience: experienceList,
+        content: contentList,
+        creative: creativeList,
+      };
+      const res = await fetch('/api/content', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-password': 'tanjungkarang',
+          'x-vercel-protection-bypass': 'dktirta-cms-bypass-2026',
+        },
+        body: JSON.stringify(payload),
+      });
+      const result = await res.json();
+      if (result.ok) {
+        triggerNotify(`Auto-synced to GitHub! Deploy ~1-2 min. Commit: ${result.commit || 'pending'}`);
+      } else {
+        console.error('Sync failed:', result.error);
+        triggerNotify(`Sync error: ${result.error}`);
+      }
+    } catch (err: any) {
+      console.error('Sync error:', err);
+      triggerNotify(`Sync error: ${err.message}`);
+    } finally {
+      setSyncing(false);
+    }
   };
 
   // ══════════════════════════════════════════════════════════
@@ -172,6 +215,19 @@ export default function AdminPage() {
     mediaType: 'image' as 'image' | 'video',
     tags: 'Graphic Design, Poster',
     aspectRatio: 'poster' as 'poster' | 'video-vertical' | 'video-horizontal' | 'photo',
+  });
+
+  // 4. Experience Modal (Pengalaman Kerja / Organisasi)
+  const [experienceModalOpen, setExperienceModalOpen] = useState(false);
+  const [isEditingExperience, setIsEditingExperience] = useState(false);
+  const [experienceStatus, setExperienceStatus] = useState<'Published' | 'Draft'>('Published');
+  const [experienceForm, setExperienceForm] = useState({
+    id: '',
+    role: '',
+    org: '',
+    period: '',
+    description: '',
+    tags: '',
   });
 
   // ══════════════════════════════════════════════════════════
@@ -463,6 +519,58 @@ export default function AdminPage() {
     setCreativeModalOpen(false);
   };
 
+  const openNewExperience = () => {
+    setIsEditingExperience(false);
+    setExperienceStatus('Published');
+    setExperienceForm({
+      id: '',
+      role: '',
+      org: 'Universitas Negeri Yogyakarta',
+      period: '2025',
+      description: '',
+      tags: '',
+    });
+    setExperienceModalOpen(true);
+  };
+
+  const openEditExperience = (item: any) => {
+    setIsEditingExperience(true);
+    setExperienceStatus(item.status || 'Published');
+    setExperienceForm({
+      id: item.id,
+      role: item.role || '',
+      org: item.org || '',
+      period: item.period || '',
+      description: item.description || '',
+      tags: Array.isArray(item.tags) ? item.tags.join(', ') : item.tags || '',
+    });
+    setExperienceModalOpen(true);
+  };
+
+  const saveExperience = (e: React.FormEvent) => {
+    e.preventDefault();
+    const slug = experienceForm.id || experienceForm.role.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const tags = experienceForm.tags.split(',').map((s) => s.trim()).filter(Boolean);
+
+    const newObj = {
+      id: slug,
+      role: experienceForm.role,
+      org: experienceForm.org,
+      period: experienceForm.period,
+      description: experienceForm.description,
+      tags,
+      status: experienceStatus,
+    };
+
+    const updated = isEditingExperience
+      ? experienceList.map((ex: any) => (ex.id === slug ? newObj : ex))
+      : [newObj, ...experienceList];
+    setExperienceList(updated);
+    persistChanges('dktirta_experience', updated);
+    triggerNotify(`Pengalaman "${experienceForm.role}" berhasil disimpan [${experienceStatus}]!`);
+    setExperienceModalOpen(false);
+  };
+
   // ══════════════════════════════════════════════════════════
   // AUTH GUARD CHECK
   // ══════════════════════════════════════════════════════════
@@ -487,7 +595,7 @@ export default function AdminPage() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (password === 'tanjungkarang' || password === 'tirta') {
+              if (password === 'tanjungkarang') {
                 setIsAuthenticated(true);
                 setAuthError(false);
               } else {
@@ -567,14 +675,17 @@ export default function AdminPage() {
             onClick={() => {
               persistChanges('dktirta_projects', projectsList);
               persistChanges('dktirta_work', workList);
+              persistChanges('dktirta_experience', experienceList);
               persistChanges('dktirta_content', contentList);
               persistChanges('dktirta_creative', creativeList);
               triggerNotify(t({ id: 'Seluruh perubahan data karya & konten telah tersimpan ke sistem!', en: 'All portfolio & content changes have been saved to the system!' }));
+              syncToGitHub();
             }}
-            className="flex items-center gap-2 rounded-xl bg-ink px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-blue hover:text-ink transition-colors shadow-sm"
+            disabled={syncing}
+            className="flex items-center gap-2 rounded-xl bg-ink px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-blue hover:text-ink transition-colors shadow-sm disabled:opacity-50"
           >
             <Save className="h-3.5 w-3.5" />
-            {t({ id: 'Simpan Perubahan', en: 'Save All Changes' })}
+            {syncing ? 'Syncing...' : t({ id: 'Simpan Perubahan', en: 'Save All Changes' })}
           </button>
         </div>
       </div>
@@ -592,6 +703,7 @@ export default function AdminPage() {
         {[
           { id: 'projects', label: `${t({ id: 'Proyek Artikel', en: 'Project Case Studies' })} (${projectsList.length})`, icon: FolderGit2 },
           { id: 'work', label: `${t({ id: 'Work Engagements', en: 'Work Engagements' })} (${workList.length})`, icon: Briefcase },
+          { id: 'experience', label: `${t({ id: 'Pengalaman', en: 'Experience' })} (${experienceList.length})`, icon: Clock },
           { id: 'content', label: `${t({ id: 'Content & Riset', en: 'Content & Research' })} (${contentList.length})`, icon: FileText },
           { id: 'creative', label: `${t({ id: 'Karya Visual', en: 'Visual Works' })} (${creativeList.length})`, icon: ImageIcon },
         ].map((tab) => {
@@ -787,7 +899,89 @@ export default function AdminPage() {
       )}
 
       {/* ═════════════════════════════════════════════════════════ */}
-      {/* TAB 3: CONTENT & RESEARCH (LINK ATAU ARTIKEL)            */}
+      {/* TAB 3: EXPERIENCE                                        */}
+      {/* ═════════════════════════════════════════════════════════ */}
+      {activeTab === 'experience' && (
+        <div className="mt-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <span className="font-mono text-xs uppercase tracking-widest text-blue font-bold">
+                03 / Experience & Engagements
+              </span>
+              <h2 className="heading-display text-2xl uppercase tracking-tight text-ink">
+                Pengalaman Kerja, Organisasi, & Keahlian
+              </h2>
+            </div>
+            <button
+              onClick={openNewExperience}
+              className="flex items-center gap-1.5 rounded-xl bg-ink px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-blue hover:text-ink transition-colors"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              Tambah Pengalaman
+            </button>
+          </div>
+
+          <div className="mt-6 space-y-4">
+            {experienceList.map((ex: any) => (
+              <div
+                key={ex.id}
+                className="card flex flex-col justify-between gap-6 p-6 md:flex-row md:items-center hover:border-blue transition-colors"
+              >
+                <div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="heading-display text-lg uppercase text-ink">{ex.role}</span>
+                    <span className="rounded-md border border-line bg-bg px-2 py-0.5 font-mono text-[10px] uppercase text-secondary">
+                      {ex.org}
+                    </span>
+                    <span className="font-mono text-[11px] text-secondary">{ex.period}</span>
+                    <span
+                      className={`rounded-md px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${
+                        ex.status === 'Draft'
+                          ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                          : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                      }`}
+                    >
+                      {ex.status || 'Published'}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm text-ink/75 max-w-3xl leading-relaxed">{ex.description}</p>
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {(ex.tags || []).map((tag: string) => (
+                      <span key={tag} className="font-mono text-[9px] text-ink/60 bg-ink/5 px-1.5 py-0.5 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
+                  <button
+                    onClick={() => openEditExperience(ex)}
+                    className="flex items-center gap-1.5 rounded-xl border border-line bg-bg px-3.5 py-2 font-mono text-xs font-bold uppercase text-ink hover:border-blue hover:bg-blue-soft transition-colors"
+                  >
+                    <Edit3 className="h-3.5 w-3.5 text-blue" />
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => {
+                      const updated = experienceList.filter((x: any) => x.id !== ex.id);
+                      setExperienceList(updated);
+                      persistChanges('dktirta_experience', updated);
+                      triggerNotify(`Pengalaman "${ex.role}" telah dihapus.`);
+                    }}
+                    className="rounded-xl border border-red-200 bg-red-50 p-2 text-red-600 hover:bg-red-100 transition-colors"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ═════════════════════════════════════════════════════════ */}
+      {/* TAB 4: CONTENT & RESEARCH (LINK ATAU ARTIKEL)            */}
       {/* ═════════════════════════════════════════════════════════ */}
       {activeTab === 'content' && (
         <div className="mt-8">
@@ -1473,6 +1667,134 @@ export default function AdminPage() {
                   className="rounded-xl bg-ink px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-blue hover:text-ink transition-colors"
                 >
                   {isEditingContent ? 'Simpan Perubahan' : 'Publikasikan Konten'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ═════════════════════════════════════════════════════════════ */}
+      {/* MODAL: EXPERIENCE CMS EDITOR                                */}
+      {/* ═════════════════════════════════════════════════════════════ */}
+      {experienceModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/75 p-4 backdrop-blur-sm overflow-y-auto">
+          <div className="my-8 w-full max-w-2xl rounded-2xl border border-line bg-card p-6 sm:p-8 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-line pb-4">
+              <div className="flex items-center gap-3">
+                <Clock className="h-6 w-6 text-blue" />
+                <div>
+                  <h3 className="heading-display text-xl uppercase tracking-tight text-ink">
+                    {isEditingExperience ? 'Edit Pengalaman' : 'Tambah Pengalaman Baru'}
+                  </h3>
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-secondary">
+                    Pengalaman Kerja, Organisasi, atau Keahlian
+                  </p>
+                </div>
+              </div>
+              <X
+                className="h-5 w-5 cursor-pointer text-secondary hover:text-ink"
+                onClick={() => setExperienceModalOpen(false)}
+              />
+            </div>
+
+            <form onSubmit={saveExperience} className="mt-6 space-y-4 text-xs">
+              {/* STATUS PUBLIKASI */}
+              <div className="flex items-center gap-4 bg-bg p-3 rounded-xl border border-line">
+                <span className="font-mono uppercase font-bold text-ink">Status Publikasi:</span>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="expStatus"
+                    checked={experienceStatus === 'Published'}
+                    onChange={() => setExperienceStatus('Published')}
+                  />
+                  <span className="font-bold text-emerald-700">Published (Tampil Live)</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="expStatus"
+                    checked={experienceStatus === 'Draft'}
+                    onChange={() => setExperienceStatus('Draft')}
+                  />
+                  <span className="font-bold text-amber-700">Draft (Disimpan Sementara)</span>
+                </label>
+              </div>
+
+              <div>
+                <label className="block font-mono uppercase text-secondary">Jabatan / Posisi</label>
+                <input
+                  type="text"
+                  required
+                  value={experienceForm.role}
+                  onChange={(e) => setExperienceForm({ ...experienceForm, role: e.target.value })}
+                  placeholder="misal: Physics Computing Teaching Assistant"
+                  className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-mono uppercase text-secondary">Organisasi / Institusi</label>
+                  <input
+                    type="text"
+                    required
+                    value={experienceForm.org}
+                    onChange={(e) => setExperienceForm({ ...experienceForm, org: e.target.value })}
+                    placeholder="Universitas Negeri Yogyakarta"
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue"
+                  />
+                </div>
+                <div>
+                  <label className="block font-mono uppercase text-secondary">Periode</label>
+                  <input
+                    type="text"
+                    required
+                    value={experienceForm.period}
+                    onChange={(e) => setExperienceForm({ ...experienceForm, period: e.target.value })}
+                    placeholder="Feb 2025 — Jun 2025"
+                    className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block font-mono uppercase text-secondary">Deskripsi / Tanggung Jawab</label>
+                <textarea
+                  rows={3}
+                  required
+                  value={experienceForm.description}
+                  onChange={(e) => setExperienceForm({ ...experienceForm, description: e.target.value })}
+                  placeholder="Uraian tanggung jawab dan pencapaian..."
+                  className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue leading-relaxed"
+                />
+              </div>
+
+              <div>
+                <label className="block font-mono uppercase text-secondary">Tags (Pisahkan dengan koma)</label>
+                <input
+                  type="text"
+                  value={experienceForm.tags}
+                  onChange={(e) => setExperienceForm({ ...experienceForm, tags: e.target.value })}
+                  placeholder="Python, Data Processing, Teaching"
+                  className="mt-1 w-full font-mono rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue"
+                />
+              </div>
+
+              <div className="mt-6 flex justify-end gap-3 border-t border-line pt-4">
+                <button
+                  type="button"
+                  onClick={() => setExperienceModalOpen(false)}
+                  className="rounded-xl border border-line px-4 py-2 font-mono text-xs font-bold uppercase text-secondary hover:border-ink hover:text-ink"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  className="rounded-xl bg-ink px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-white hover:bg-blue hover:text-ink transition-colors"
+                >
+                  {isEditingExperience ? 'Simpan Perubahan' : 'Publikasikan Sekarang'}
                 </button>
               </div>
             </form>

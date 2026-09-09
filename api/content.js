@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       return res.end(JSON.stringify({ error: 'Invalid JSON body.' }));
     }
 
-    for (const k of ['projects', 'work', 'content', 'creative']) {
+    for (const k of ['projects', 'work', 'experience', 'content', 'creative']) {
       if (!Array.isArray(data[k])) {
         res.statusCode = 400;
         return res.end(JSON.stringify({ error: `Missing field: ${k}` }));
@@ -55,6 +55,7 @@ export default async function handler(req, res) {
       updatedAt: new Date().toISOString(),
       projects: data.projects,
       work: data.work,
+      experience: data.experience,
       content: data.content,
       creative: data.creative,
     };
