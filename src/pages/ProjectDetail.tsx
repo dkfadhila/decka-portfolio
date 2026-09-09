@@ -2,12 +2,13 @@
 import { ArrowUpLeft } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import { Tag, Crosshair } from '../components/cards';
-import { projectDetails } from '../data';
+import { useContent } from '../contentStore';
 import { useI18n, tr, trPeriod } from '../i18n';
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const project = slug ? projectDetails[slug] : undefined;
+  const { projectDetail } = useContent();
+  const project = slug ? projectDetail(slug) : undefined;
   const { t, lang } = useI18n();
   const ui = {
     back: { id: 'Kembali ke Proyek', en: 'Back to Projects' },

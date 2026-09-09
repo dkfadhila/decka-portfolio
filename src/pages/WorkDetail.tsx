@@ -2,12 +2,13 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowUpLeft } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import { Tag, Crosshair } from '../components/cards';
-import { workDetails } from '../data';
+import { useContent } from '../contentStore';
 import { useI18n, institutionName, trPeriod, tr } from '../i18n';
 
 export default function WorkDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const item = slug ? workDetails[slug] : undefined;
+  const { workDetail } = useContent();
+  const item = slug ? workDetail(slug) : undefined;
   const { t, lang } = useI18n();
   const ui = {
     back: { id: 'Kembali ke Pekerjaan', en: 'Back to Work' },

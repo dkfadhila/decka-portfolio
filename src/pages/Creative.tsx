@@ -3,7 +3,7 @@ import { X, Play } from 'lucide-react';
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, Tag, MetaNum } from '../components/cards';
-import { creativeItems } from '../data';
+import { useContent } from '../contentStore';
 import { useI18n, type LStr } from '../i18n';
 import type { CreativeItem } from '../types';
 
@@ -18,17 +18,11 @@ type FilterTab = 'all' | 'graphic' | 'photography' | 'motion';
 
 export default function Creative() {
   const { t } = useI18n();
+  const { creative } = useContent();
   const [activeTab, setActiveTab] = useState<FilterTab>('all');
   const [selectedMedia, setSelectedMedia] = useState<CreativeItem | null>(null);
 
-  const [creativeList] = useState(() => {
-    // Publication source is data.ts — while it is empty, the page stays
-    // empty for everyone (ignores any CMS preview saved in localStorage).
-    if (creativeItems.length === 0) return creativeItems;
-    if (typeof window === 'undefined') return creativeItems;
-    const saved = localStorage.getItem('dktirta_creative');
-    return saved ? JSON.parse(saved) : creativeItems;
-  });
+  const creativeList = creative;
 
   const tabs: { id: FilterTab; label: LStr }[] = [
     { id: 'all', label: { id: 'Semua', en: 'All' } },

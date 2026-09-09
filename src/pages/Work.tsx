@@ -2,7 +2,7 @@
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, Tag, MetaNum } from '../components/cards';
-import { work } from '../data';
+import { useContent } from '../contentStore';
 import { useI18n, institutionName, trPeriod, tr } from '../i18n';
 
 const spans = [
@@ -13,6 +13,7 @@ const spans = [
 
 export default function Work() {
   const { t, lang } = useI18n();
+  const { work } = useContent();
   const ui = {
     case: { id: 'Kasus 0', en: 'Case 0' },
     period: { id: 'Periode', en: 'Period' },

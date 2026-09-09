@@ -1,13 +1,14 @@
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, MetaNum, Crosshair } from '../components/cards';
-import { content } from '../data';
+import { useContent } from '../contentStore';
 import { useI18n, tr, trPeriod } from '../i18n';
 
 const targetOf = (link?: string) =>
   link && link !== '#' ? { href: link, target: '_blank', rel: 'noreferrer' } : { href: '#' };
 
 export default function Content() {
+  const { content } = useContent();
   const [featured, ...rest] = content;
   const { t, lang } = useI18n();
   const ui = {

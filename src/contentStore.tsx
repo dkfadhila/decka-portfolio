@@ -1,0 +1,142 @@
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from 'react';
+import {
+  projects as staticProjects,
+  projectDetails as staticProjectDetails,
+  work as staticWork,
+  workDetails as staticWorkDetails,
+  content as staticContent,
+  creativeItems as staticCreatives,
+} from './data';
+
+/* ============================================================
+   contentStore — live content layer for dktirta.tech
+
+   /admin saves → /api/content commits public/content.json to
+   GitHub → Vercel auto-deploys → visitors get the fresh JSON.
+
+   The store fetches /content.json at load. Until it arrives
+   (or if it never exists) every page renders the static data
+   from data.ts, so the site is never empty.
+   ============================================================ */
+
+export interface LiveContent {
+  projects: any[];          // detail-shaped (id, title, subtitle, overview, sections, ...)
+  work: any[];              // detail-shaped
+  content: any[];
+  creative: any[];
+  projectDetails: Record<string, any>;
+  workDetails: Record<string, any>;
+  updatedAt?: string;
+}
+
+const EMPTY: LiveContent = {
+  projects: [],
+  work: [],
+  content: [],
+  creative: [],
+  projectDetails: {},
+  workDetails: {},
+};
+
+interface ContentValue {
+  ready: boolean;
+  live: LiveContent;
+  /** Listing for /projects (falls back to static, hides Draft) */
+  projects: any[];
+  /** Listing for /work (falls back to static, hides Draft) */
+  work: any[];
+  /** Listing for /content */
+  content: any[];
+  /** Listing for /creative (Draft hidden) */
+  creative: any[];
+  /** Detail lookup /projects/:slug */
+  projectDetail: (slug: string) => any | undefined;
+  /** Detail lookup /work/:slug */
+  workDetail: (slug: string) => any | undefined;
+}
+
+const ContentContext = createContext<ContentValue>({
+  ready: true,
+  live: EMPTY,
+  projects: staticProjects as any,
+  work: staticWork as any,
+  content: staticContent,
+  creative: staticCreatives,
+  projectDetail: (slug) => staticProjectDetails[slug],
+  workDetail: (slug) => staticWorkDetails[slug],
+});
+
+export function ContentProvider({ children }: { children: ReactNode }) {
+  const [ready, setReady] = useState(false);
+  const [live, setLive] = useState<LiveContent>(EMPTY);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/content.json', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((data: LiveContent) => {
+        if (cancelled) return;
+        if (data && Array.isArray(data.projects)) setLive(data);
+        setReady(true);
+      })
+      .catch(() => { if (!cancelled) setReady(true); });
+    return () => { cancelled = true; };
+  }, []);
+
+  const hasLive = live.projects.length > 0;
+
+  // ── Listings: admin stores detail-shaped objects; derive the
+  //    card-shaped listing from them and hide drafts.
+  const liveProjects = live.projects
+    .filter((p) => p.status !== 'Draft')
+    .map((p) => ({
+      id: p.id,
+      title: p.title,
+      category: p.category || '',
+      description: p.description || p.overview || '',
+      imageUrl: p.imageUrl || '',
+      detailPath: `/projects/${p.id}`,
+      tags: p.tags || p.stack || [],
+      year: p.year || '',
+      stack: Array.isArray(p.stack) ? p.stack.join(' / ') : p.stack || '',
+      status: p.status || 'Completed',
+    }));
+
+  const liveWork = live.work
+    .filter((w) => w.status !== 'Draft')
+    .map((w) => ({
+      id: w.id,
+      title: w.title,
+      client: w.client || '',
+      description: w.description || w.overview || '',
+      imageUrl: w.imageUrl || '',
+      detailPath: `/work/${w.id}`,
+      tags: w.tags || [],
+      period: w.period || '',
+      stack: Array.isArray(w.stack) ? w.stack.join(' / ') : w.stack || '',
+      status: w.status || 'Completed',
+    }));
+
+  const value: ContentValue = {
+    ready,
+    live,
+    projects: hasLive ? liveProjects : (staticProjects as any),
+    work: hasLive ? liveWork : (staticWork as any),
+    content: live.content.length > 0 ? live.content : staticContent,
+    creative: live.creative.filter((c) => c.status !== 'Draft'),
+    projectDetail: (slug) => (hasLive ? live.projects.find((p) => p.id === slug) : staticProjectDetails[slug]),
+    workDetail: (slug) => (hasLive ? live.work.find((w) => w.id === slug) : staticWorkDetails[slug]),
+  };
+
+  return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>;
+}
+
+export function useContent() {
+  return useContext(ContentContext);
+}

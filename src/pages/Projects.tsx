@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
 import { CardArrow, Tag, MetaNum } from '../components/cards';
-import { projects } from '../data';
+import { useContent } from '../contentStore';
 import { useI18n, tr, trPeriod } from '../i18n';
 
 const spans = ['col-span-12 lg:col-span-5', 'col-span-12 lg:col-span-4', 'col-span-12 lg:col-span-3'];
 
 export default function Projects() {
   const { t, lang } = useI18n();
+  const { projects } = useContent();
   const ui = {
     exp: { id: 'Eksp. 0', en: 'Exp. 0' },
     year: { id: 'Tahun', en: 'Year' },
