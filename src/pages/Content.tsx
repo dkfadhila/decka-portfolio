@@ -1,6 +1,6 @@
 import Reveal from '../components/Reveal';
 import PageHeader from '../components/PageHeader';
-import { CardArrow, MetaNum, Crosshair } from '../components/cards';
+import { CardArrow } from '../components/cards';
 import { useContent } from '../contentStore';
 import { useI18n, tr, trPeriod } from '../i18n';
 
@@ -9,94 +9,60 @@ const targetOf = (link?: string) =>
 
 export default function Content() {
   const { content } = useContent();
-  const [featured, ...rest] = content;
   const { t, lang } = useI18n();
-  const ui = {
-    featured: { id: 'Unggulan — ', en: 'Featured — ' },
-    index: { id: 'Indeks — ', en: 'Index — ' },
-    entries: { id: 'entri', en: 'entries' },
-  };
 
   return (
     <section className="container-shell py-16 md:py-20">
       <PageHeader page="content" />
 
-      {/* Featured entry — large editorial card */}
-      <Reveal>
-        <a
-          {...targetOf(featured?.link)}
-          className="card group flex flex-col justify-between gap-8 p-6 sm:p-8 md:flex-row md:items-end"
-        >
-          <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-md border border-blue bg-blue-soft px-3 py-1 text-[10px] font-black uppercase tracking-wide text-ink">
-                {t(ui.featured)}{tr(featured?.type ?? '', lang)}
-              </span>
-              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45">
-                {featured ? trPeriod(featured.date, lang) : ''}
-              </span>
-            </div>
-            <h3 className="heading-display mt-5 max-w-3xl text-3xl uppercase leading-[0.9] tracking-tight sm:text-5xl">
-              {featured ? tr(featured.title, lang) : ''}
-            </h3>
-            <p className="mt-4 max-w-xl text-sm font-medium leading-6 text-ink/65">
-              {featured ? tr(featured.description, lang) : ''}
-            </p>
-          </div>
-          <span className="grid h-14 w-14 shrink-0 place-items-center self-start rounded-full border border-line bg-bg md:self-end">
-            <CardArrow size={22} />
-          </span>
-        </a>
-      </Reveal>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {content.map((c) => {
+          const hasImage = !!(c.imageUrl || c.images?.[0]);
+          return (
+            <Reveal key={c.id}>
+              <a
+                {...targetOf(c.link)}
+                className="card group flex h-full flex-col overflow-hidden transition-colors hover:border-blue sm:flex-row"
+              >
+                {hasImage && (
+                  <div className="relative w-full shrink-0 overflow-hidden border-b border-line sm:w-[200px] sm:border-b-0 sm:border-r sm:border-line">
+                    <div className="aspect-[16/10] w-full sm:aspect-auto sm:h-full">
+                      <img
+                        src={c.imageUrl || c.images?.[0]}
+                        alt={c.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <span className="absolute left-3 top-3 rounded-md border border-line bg-bg/90 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-ink/70">
+                      {tr(c.type, lang)}
+                    </span>
+                  </div>
+                )}
 
-      {/* Publication index */}
-      <div className="mt-12">
-        <Reveal>
-          <div className="mb-4 flex items-center justify-between border-b border-line pb-3">
-            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-blue">
-              {t(ui.index)}{rest.length} {t(ui.entries)}
-            </span>
-            <Crosshair />
-          </div>
-        </Reveal>
-        {rest.map((c, i) => (
-          <Reveal key={c.id}>
-            <a
-              {...targetOf(c.link)}
-              className="group grid grid-cols-1 gap-3 border-b border-line py-6 transition-colors hover:bg-card sm:grid-cols-[8rem_1fr_auto] sm:items-center sm:gap-6 sm:px-4"
-            >
-              <div className="flex items-center gap-3 sm:block">
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/45">
-                  {trPeriod(c.date, lang)}
-                </span>
-                <span className="mt-0 inline-block rounded-md border border-line bg-bg px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-ink/60 sm:mt-2">
-                  {tr(c.type, lang)}
-                </span>
-              </div>
-              <div>
-                <div className="flex items-baseline gap-3">
-                  <MetaNum num={`0${i + 2}`} />
-                  <h3 className="heading-display text-xl uppercase leading-[0.95] tracking-tight sm:text-2xl">
-                    {tr(c.title, lang)}
-                  </h3>
+                <div className="flex flex-1 flex-col justify-between p-4">
+                  <div>
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="line-clamp-2 text-sm font-bold uppercase leading-tight tracking-tight sm:text-base">
+                        {tr(c.title, lang)}
+                      </h3>
+                      <CardArrow size={14} />
+                    </div>
+                    <p className="mt-2 line-clamp-2 text-xs font-medium leading-5 text-ink/55">
+                      {tr(c.description, lang)}
+                    </p>
+                  </div>
+
+                  <div className="mt-3 flex items-center gap-3 border-t border-line pt-2">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-ink/40">
+                      {trPeriod(c.date, lang)}
+                    </span>
+                  </div>
                 </div>
-                <p className="mt-2 max-w-2xl text-sm font-medium leading-6 text-ink/60">
-                  {tr(c.description, lang)}
-                </p>
-              </div>
-              <ArrowSlot />
-            </a>
-          </Reveal>
-        ))}
+              </a>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
-  );
-}
-
-function ArrowSlot() {
-  return (
-    <span className="hidden sm:block">
-      <CardArrow size={20} />
-    </span>
   );
 }
