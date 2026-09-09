@@ -151,7 +151,7 @@ export function ContentProvider({ children }: { children: ReactNode }) {
     live,
     projects: hasLive ? liveProjects : (staticProjects as any),
     work: hasLive ? liveWork : (staticWork as any),
-    experience: hasLive ? liveExperience : (staticExperience as any),
+    experience: liveExperience.length > 0 ? liveExperience : (staticExperience as any),
     content: (live.content || []).length > 0 ? live.content : staticContent,
     creative: (live.creative || []).filter((c: any) => c.status !== 'Draft'),
     projectDetail: (slug) => (hasLive ? live.projects.find((p: any) => p.id === slug) : staticProjectDetails[slug]),
