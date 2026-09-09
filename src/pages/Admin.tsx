@@ -191,6 +191,7 @@ export default function AdminPage() {
     // Extra if article mode selected:
     subtitle: '',
     imageUrl: '',
+    images: [''] as string[],
     sub1Title: 'Overview',
     sub1Content: '',
     sub2Title: 'Analysis & Methodology',
@@ -365,6 +366,7 @@ export default function AdminPage() {
       link: 'https://x.com/tirtavex',
       subtitle: '',
       imageUrl: '',
+      images: [''],
       sub1Title: 'Overview',
       sub1Content: '',
       sub2Title: 'Methodology & Findings',
@@ -388,6 +390,7 @@ export default function AdminPage() {
       link: c.link || '',
       subtitle: c.subtitle || '',
       imageUrl: c.imageUrl || '',
+      images: Array.isArray(c.images) && c.images.length > 0 ? c.images : (c.imageUrl ? [c.imageUrl] : ['']),
       sub1Title: c.sections?.[0]?.heading || 'Overview',
       sub1Content: Array.isArray(c.sections?.[0]?.content) ? c.sections[0].content.join('\n\n') : c.sections?.[0]?.content || '',
       sub2Title: c.sections?.[1]?.heading || 'Analysis',
@@ -400,6 +403,7 @@ export default function AdminPage() {
 
   const saveContent = (e: React.FormEvent) => {
     e.preventDefault();
+    const cleanedImages = contentForm.images.filter((img) => img.trim() !== '');
     let newObj: any = {
       id: contentForm.id,
       title: contentForm.title,
@@ -407,6 +411,8 @@ export default function AdminPage() {
       date: contentForm.date,
       description: contentForm.description,
       status: contentStatus,
+      imageUrl: cleanedImages[0] || '',
+      images: cleanedImages,
     };
 
     if (contentMode === 'link') {
@@ -414,7 +420,6 @@ export default function AdminPage() {
     } else {
       newObj.link = `/content/${contentForm.id}`;
       newObj.subtitle = contentForm.subtitle;
-      newObj.imageUrl = contentForm.imageUrl;
       newObj.sections = [
         { heading: contentForm.sub1Title, content: contentForm.sub1Content.split('\n\n').filter(Boolean) },
         { heading: contentForm.sub2Title, content: contentForm.sub2Content.split('\n\n').filter(Boolean) },
@@ -1459,7 +1464,7 @@ export default function AdminPage() {
       {/* ═════════════════════════════════════════════════════════════ */}
       {contentModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/75 p-4 backdrop-blur-sm overflow-y-auto">
-          <div className="my-8 w-full max-w-2xl rounded-2xl border border-line bg-card p-6 sm:p-8 shadow-2xl">
+          <div className={`my-8 rounded-2xl border border-line bg-card p-6 sm:p-8 shadow-2xl ${contentMode === 'article' ? 'w-full max-w-5xl' : 'w-full max-w-2xl'}`}>
             <div className="flex items-center justify-between border-b border-line pb-4">
               <div className="flex items-center gap-3">
                 <FileText className="h-6 w-6 text-blue" />
@@ -1567,19 +1572,38 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* JIKA FORMAT LINK: Cukup URL Saja */}
+              {/* JIKA FORMAT LINK: Cukup URL Saja + Gambar */}
               {contentMode === 'link' && (
-                <div>
-                  <label className="block font-mono uppercase text-blue font-bold">Target Link URL</label>
-                  <input
-                    type="url"
-                    required
-                    value={contentForm.link}
-                    onChange={(e) => setContentForm({ ...contentForm, link: e.target.value })}
-                    placeholder="https://x.com/tirtavex"
-                    className="mt-1 w-full font-mono rounded-xl border border-blue bg-bg p-2.5 text-sm text-ink outline-none"
-                  />
-                </div>
+                <>
+                  <div>
+                    <label className="block font-mono uppercase text-blue font-bold">Target Link URL</label>
+                    <input
+                      type="url"
+                      required
+                      value={contentForm.link}
+                      onChange={(e) => setContentForm({ ...contentForm, link: e.target.value })}
+                      placeholder="https://x.com/tirtavex"
+                      className="mt-1 w-full font-mono rounded-xl border border-blue bg-bg p-2.5 text-sm text-ink outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-mono uppercase text-secondary">Gambar / Thumbnail URL</label>
+                    <input
+                      type="url"
+                      value={contentForm.images[0] || ''}
+                      onChange={(e) => {
+                        const imgs = [...contentForm.images];
+                        imgs[0] = e.target.value;
+                        setContentForm({ ...contentForm, images: imgs });
+                      }}
+                      placeholder="https://images.unsplash.com/photo-..."
+                      className="mt-1 w-full rounded-xl border border-line bg-bg p-2.5 text-sm text-ink outline-none focus:border-blue"
+                    />
+                    {contentForm.images[0] && (
+                      <img src={contentForm.images[0]} alt="Preview" className="mt-2 h-32 w-full object-cover rounded-xl border border-line" />
+                    )}
+                  </div>
+                </>
               )}
 
               <div>
@@ -1594,62 +1618,131 @@ export default function AdminPage() {
                 />
               </div>
 
-              {/* JIKA FORMAT ARTIKEL: Menyediakan 3 Sub-Bab */}
+              {/* JIKA FORMAT ARTIKEL: 2 Kolom — Kiri: Editor, Kanan: Galeri Gambar */}
               {contentMode === 'article' && (
-                <div className="border-t border-line pt-3 space-y-3">
-                  <span className="font-mono text-xs font-bold uppercase text-blue block">
-                    3 Sub-Bab Pembahasan Artikel Web
-                  </span>
+                <div className="border-t border-line pt-3">
+                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4">
+                    {/* KOLOM KIRI: Sub-Bab Editor */}
+                    <div className="space-y-3">
+                      <span className="font-mono text-xs font-bold uppercase text-blue block">
+                        3 Sub-Bab Pembahasan Artikel Web
+                      </span>
 
-                  <div>
-                    <input
-                      type="text"
-                      value={contentForm.sub1Title}
-                      onChange={(e) => setContentForm({ ...contentForm, sub1Title: e.target.value })}
-                      placeholder="Bab 1: Overview"
-                      className="w-full rounded-lg border border-line bg-bg p-2 font-bold text-ink"
-                    />
-                    <textarea
-                      rows={2}
-                      value={contentForm.sub1Content}
-                      onChange={(e) => setContentForm({ ...contentForm, sub1Content: e.target.value })}
-                      placeholder="Isi uraian bab 1..."
-                      className="mt-1.5 w-full rounded-lg border border-line bg-bg p-2 text-ink"
-                    />
-                  </div>
+                      <div>
+                        <input
+                          type="text"
+                          value={contentForm.sub1Title}
+                          onChange={(e) => setContentForm({ ...contentForm, sub1Title: e.target.value })}
+                          placeholder="Bab 1: Overview"
+                          className="w-full rounded-lg border border-line bg-bg p-2 font-bold text-ink"
+                        />
+                        <textarea
+                          rows={2}
+                          value={contentForm.sub1Content}
+                          onChange={(e) => setContentForm({ ...contentForm, sub1Content: e.target.value })}
+                          placeholder="Isi uraian bab 1..."
+                          className="mt-1.5 w-full rounded-lg border border-line bg-bg p-2 text-ink"
+                        />
+                      </div>
 
-                  <div>
-                    <input
-                      type="text"
-                      value={contentForm.sub2Title}
-                      onChange={(e) => setContentForm({ ...contentForm, sub2Title: e.target.value })}
-                      placeholder="Bab 2: Analysis & Discussion"
-                      className="w-full rounded-lg border border-line bg-bg p-2 font-bold text-ink"
-                    />
-                    <textarea
-                      rows={2}
-                      value={contentForm.sub2Content}
-                      onChange={(e) => setContentForm({ ...contentForm, sub2Content: e.target.value })}
-                      placeholder="Isi uraian bab 2..."
-                      className="mt-1.5 w-full rounded-lg border border-line bg-bg p-2 text-ink"
-                    />
-                  </div>
+                      <div>
+                        <input
+                          type="text"
+                          value={contentForm.sub2Title}
+                          onChange={(e) => setContentForm({ ...contentForm, sub2Title: e.target.value })}
+                          placeholder="Bab 2: Analysis & Discussion"
+                          className="w-full rounded-lg border border-line bg-bg p-2 font-bold text-ink"
+                        />
+                        <textarea
+                          rows={2}
+                          value={contentForm.sub2Content}
+                          onChange={(e) => setContentForm({ ...contentForm, sub2Content: e.target.value })}
+                          placeholder="Isi uraian bab 2..."
+                          className="mt-1.5 w-full rounded-lg border border-line bg-bg p-2 text-ink"
+                        />
+                      </div>
 
-                  <div>
-                    <input
-                      type="text"
-                      value={contentForm.sub3Title}
-                      onChange={(e) => setContentForm({ ...contentForm, sub3Title: e.target.value })}
-                      placeholder="Bab 3: Key Insights"
-                      className="w-full rounded-lg border border-line bg-bg p-2 font-bold text-ink"
-                    />
-                    <textarea
-                      rows={2}
-                      value={contentForm.sub3Content}
-                      onChange={(e) => setContentForm({ ...contentForm, sub3Content: e.target.value })}
-                      placeholder="Isi uraian bab 3..."
-                      className="mt-1.5 w-full rounded-lg border border-line bg-bg p-2 text-ink"
-                    />
+                      <div>
+                        <input
+                          type="text"
+                          value={contentForm.sub3Title}
+                          onChange={(e) => setContentForm({ ...contentForm, sub3Title: e.target.value })}
+                          placeholder="Bab 3: Key Insights"
+                          className="w-full rounded-lg border border-line bg-bg p-2 font-bold text-ink"
+                        />
+                        <textarea
+                          rows={2}
+                          value={contentForm.sub3Content}
+                          onChange={(e) => setContentForm({ ...contentForm, sub3Content: e.target.value })}
+                          placeholder="Isi uraian bab 3..."
+                          className="mt-1.5 w-full rounded-lg border border-line bg-bg p-2 text-ink"
+                        />
+                      </div>
+                    </div>
+
+                    {/* KOLOM KANAN: Galeri Visual */}
+                    <div className="rounded-xl border border-line bg-bg p-4 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs font-bold uppercase text-blue">
+                          Galeri Visual
+                        </span>
+                        <span className="font-mono text-[10px] text-secondary">
+                          {contentForm.images.filter((i) => i.trim()).length} gambar
+                        </span>
+                      </div>
+                      <p className="font-mono text-[10px] text-secondary leading-relaxed">
+                        Tambahkan gambar untuk galeri visual artikel. Gambar pertama jadi cover.
+                      </p>
+
+                      <div className="space-y-2.5">
+                        {contentForm.images.map((img, idx) => (
+                          <div key={idx} className="space-y-1">
+                            <div className="flex items-center gap-1.5">
+                              <span className="font-mono text-[9px] text-ink/40 w-4">{idx + 1}.</span>
+                              <input
+                                type="url"
+                                value={img}
+                                onChange={(e) => {
+                                  const imgs = [...contentForm.images];
+                                  imgs[idx] = e.target.value;
+                                  setContentForm({ ...contentForm, images: imgs });
+                                }}
+                                placeholder={idx === 0 ? 'URL gambar cover...' : 'URL gambar tambahan...'}
+                                className="flex-1 rounded-lg border border-line bg-card p-1.5 text-[11px] font-mono text-ink outline-none focus:border-blue"
+                              />
+                              {contentForm.images.length > 1 && (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const imgs = contentForm.images.filter((_, i) => i !== idx);
+                                    setContentForm({ ...contentForm, images: imgs });
+                                  }}
+                                  className="shrink-0 rounded-md border border-red-200 bg-red-50 p-1 text-red-500 hover:bg-red-100"
+                                >
+                                  <X className="h-3 w-3" />
+                                </button>
+                              )}
+                            </div>
+                            {img.trim() && (
+                              <img
+                                src={img}
+                                alt={`Preview ${idx + 1}`}
+                                className="h-20 w-full object-cover rounded-lg border border-line"
+                              />
+                            )}
+                          </div>
+                        ))}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setContentForm({ ...contentForm, images: [...contentForm.images, ''] })}
+                        className="w-full rounded-lg border border-dashed border-line bg-card py-2 font-mono text-[10px] uppercase tracking-wider text-secondary hover:border-blue hover:text-ink transition-colors flex items-center justify-center gap-1.5"
+                      >
+                        <Plus className="h-3 w-3" />
+                        Tambah Gambar
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
