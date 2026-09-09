@@ -1,8 +1,505 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T04:31:56.474Z",
-  "projects": [],
-  "work": [],
-  "content": [],
+  "updatedAt": "2026-09-09T05:05:11.653Z",
+  "projects": [
+    {
+      "id": "project-veyra",
+      "title": "Project Veyra — Multiplayer Browser RPG (Realm of the Soulbond)",
+      "subtitle": "Full-Stack Web Game — Real-Time Multiplayer & On-Chain Player State",
+      "category": "Full-Stack Web Game",
+      "year": "2026",
+      "client": "",
+      "period": "",
+      "imageUrl": "https://pbs.twimg.com/media/HLKHq75bIAAtvD7?format=jpg&name=large",
+      "overview": "Realm of the Soulbond is a full-stack 2D browser RPG with a vanilla JavaScript + Canvas2D frontend and an Express.js + Socket.IO backend providing real-time multiplayer position sync. Repository: github.com/dkfadhila/ProjectVeyra.",
+      "highlights": [
+        {
+          "label": "Genre",
+          "value": "2D Multiplayer RPG"
+        },
+        {
+          "label": "Playable Classes",
+          "value": "7"
+        },
+        {
+          "label": "AI NPC",
+          "value": "Lyra Oracle"
+        },
+        {
+          "label": "Real-Time Sync",
+          "value": "Socket.IO"
+        }
+      ],
+      "stack": [
+        "JavaScript",
+        "Canvas2D",
+        "Express.js",
+        "Socket.IO",
+        "JWT + bcrypt",
+        "0G Storage"
+      ],
+      "tags": [
+        "JavaScript",
+        "Canvas2D",
+        "Express.js",
+        "Socket.IO",
+        "JWT + bcrypt",
+        "0G Storage"
+      ],
+      "sections": [
+        {
+          "heading": "Overview",
+          "content": [
+            "Project Veyra is a full-stack 2D browser RPG: the frontend is built with vanilla JavaScript and Canvas2D, while the backend uses Express.js and Socket.IO to sync player positions across clients in real time.",
+            "Player accounts use JWT + bcrypt authentication, with auto-save persistence on both the server and localStorage, and on-chain verified player state stored via 0G Storage."
+          ]
+        },
+        {
+          "heading": "Game Systems",
+          "content": [
+            "Developed a player-driven marketplace with a token-based economy, turn-based combat with skills and item drops, and a chained quest system across 7 playable classes.",
+            "Integrated an AI-powered NPC (Lyra Oracle, MIMO) that responds to player dialogue and gifts."
+          ]
+        },
+        {
+          "heading": "Development Workflow",
+          "content": [
+            "Built the game end-to-end with an AI-leveraged workflow using Claude Code — from backend architecture and game systems to frontend rendering.",
+            "Repository and source code are available at github.com/dkfadhila/ProjectVeyra."
+          ]
+        }
+      ],
+      "status": "Published"
+    },
+    {
+      "id": "saturnian-moons",
+      "title": "Simulating the Orbits of 83 Saturnian Moons Using Python & Pygame",
+      "subtitle": "Computational Physics Simulation — Orbital Dynamics & Numerical Methods",
+      "category": "Scientific Computing",
+      "year": "2023",
+      "client": "",
+      "period": "",
+      "imageUrl": "https://i.ibb.co.com/cXTCnnjW/1745575013767.jpg",
+      "overview": "A computational physics project that simulates the orbital behavior of 83 known Saturnian moons. The simulation models gravitational interactions using Newton's Law of Gravitation and applies the 4th-order Runge-Kutta numerical method to predict satellite positions and velocities over time.",
+      "highlights": [
+        {
+          "label": "Data Points",
+          "value": "30,000+"
+        },
+        {
+          "label": "Moons Simulated",
+          "value": "83"
+        },
+        {
+          "label": "Method",
+          "value": "4th-order Runge-Kutta"
+        },
+        {
+          "label": "Physics Model",
+          "value": "Newtonian Gravity + Keplerian Mechanics"
+        }
+      ],
+      "stack": [
+        "Python",
+        "Pygame",
+        "Runge-Kutta",
+        "Newtonian Gravity",
+        "Keplerian Mechanics"
+      ],
+      "tags": [
+        "Python",
+        "Pygame",
+        "Runge-Kutta",
+        "Newtonian Gravity",
+        "Keplerian Mechanics"
+      ],
+      "sections": [
+        {
+          "heading": "Overview",
+          "content": [
+            "This project simulates the orbital dynamics of Saturn's 83 known moons using Python and Pygame for visualization. The goal was to model gravitational interactions and predict satellite trajectories based on real astronomical data.",
+            "The simulation processes orbital parameters including velocity, period, position/trajectory, mass, and other characteristics from the dataset to create an accurate model of moon behavior around Saturn."
+          ]
+        },
+        {
+          "heading": "Methodology",
+          "content": [
+            "Applied the 4th-order Runge-Kutta method — a widely-used numerical technique for solving ordinary differential equations — to predict satellite positions and velocities at each time step.",
+            "Modeled gravitational interactions based on Newton's Law of Gravitation, accounting for Saturn's mass and the orbital parameters of each moon.",
+            "Incorporated Kepler's Laws of planetary motion to validate orbital behavior and ensure the simulation produced physically accurate trajectories."
+          ]
+        },
+        {
+          "heading": "Analysis & Findings",
+          "content": [
+            "Analyzed orbital patterns and parameter relationships among the 83 Saturnian moons, identifying distinct clustering tendencies among satellites with similar orbital characteristics.",
+            "Identified differences in orbital distribution between inner and outer moons, revealing patterns in how Saturn's satellite system is organized.",
+            "The simulation provided insights into orbital resonance and gravitational perturbation effects within the Saturnian system."
+          ]
+        }
+      ],
+      "status": "Published"
+    },
+    {
+      "id": "flood-analysis",
+      "title": "Analysis of the March 25, 2025 Flood Event in Kabupaten Kudus",
+      "subtitle": "Atmospheric Dynamics Analysis — Python & Data Visualization",
+      "category": "Thesis",
+      "year": "2026",
+      "client": "",
+      "period": "",
+      "imageUrl": "https://i.ibb.co.com/hF92JHDq/sdaddcvc.png",
+      "overview": "An atmospheric dynamics analysis using Python to investigate factors associated with the March 25, 2025 flood event in Kabupaten Kudus. The study processed and analyzed 10,000+ data points covering rainfall, temperature, pressure, and atmospheric stability from 2016–2025.",
+      "highlights": [
+        {
+          "label": "Data Points",
+          "value": "10,000+"
+        },
+        {
+          "label": "Time Span",
+          "value": "2016 — 2025"
+        },
+        {
+          "label": "Event",
+          "value": "March 25, 2025 Flood"
+        },
+        {
+          "label": "Location",
+          "value": "Kabupaten Kudus"
+        }
+      ],
+      "stack": [
+        "Python",
+        "Data Analysis",
+        "Atmospheric Science",
+        "Data Visualization"
+      ],
+      "tags": [
+        "Python",
+        "Data Analysis",
+        "Atmospheric Science",
+        "Data Visualization"
+      ],
+      "sections": [
+        {
+          "heading": "Overview",
+          "content": [
+            "This project investigates the atmospheric conditions and climate-related factors that contributed to the severe flooding in Kabupaten Kudus on March 25, 2025. The analysis uses Python-based data processing and visualization to identify patterns in meteorological data.",
+            "The study processed over 10,000 data points spanning a 10-year period (2016–2025) to establish baseline conditions and identify anomalies associated with the flood event."
+          ]
+        },
+        {
+          "heading": "Data & Methods",
+          "content": [
+            "Analyzed multiple atmospheric variables including rainfall intensity, surface temperature, atmospheric pressure, cloud movement patterns, and climate variability indices.",
+            "Applied computational and data-analysis methods to investigate the relationship between atmospheric conditions and flood events, comparing the March 2025 event against historical patterns.",
+            "Used data visualization techniques to present findings and identify temporal patterns in atmospheric stability leading up to the flood event."
+          ]
+        },
+        {
+          "heading": "Key Findings",
+          "content": [
+            "Identified correlations between atmospheric pressure drops, sustained rainfall, and cloud movement patterns that preceded the flood event.",
+            "Compared atmospheric variables across historical periods to establish the severity and uniqueness of the March 2025 conditions.",
+            "The analysis provided a data-driven understanding of the flood's meteorological context, supporting disaster preparedness and response planning."
+          ]
+        }
+      ],
+      "status": "Published"
+    },
+    {
+      "id": "arduino-garage",
+      "title": "Ultrasonic Sensor-Based Automatic Garage System",
+      "subtitle": "Embedded Systems Prototype — Arduino UNO & Control Logic",
+      "category": "Embedded Systems",
+      "year": "2025",
+      "stack": [
+        "Arduino UNO",
+        "Ultrasonic Sensor",
+        "C++",
+        "Embedded Systems",
+        "Control Logic"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=80",
+      "overview": "An automatic garage prototype that uses an Arduino UNO and ultrasonic sensor to detect vehicle proximity and automatically open/close the garage door. The system integrates sensor input, mathematical distance calculations, and control logic into a working embedded automation system.",
+      "highlights": [
+        {
+          "label": "Platform",
+          "value": "Arduino UNO"
+        },
+        {
+          "label": "Sensor",
+          "value": "Ultrasonic"
+        },
+        {
+          "label": "Type",
+          "value": "Prototype"
+        },
+        {
+          "label": "Domain",
+          "value": "Embedded Systems"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "Overview",
+          "content": [
+            "This project develops an automatic garage system prototype using Arduino UNO as the main controller and an ultrasonic sensor for distance detection. The system automatically opens and closes the garage door based on the proximity of a vehicle.",
+            "The project integrates hardware (sensor + Arduino) with software (control logic) to create a functional embedded automation system."
+          ]
+        },
+        {
+          "heading": "Methodology",
+          "content": [
+            "Analyzed the mathematical equations used to calculate distance from ultrasonic sensor readings, converting time-of-flight measurements into accurate distance values.",
+            "Designed control logic that translates calculated distance parameters into actuator commands for the garage mechanism (open/close).",
+            "Integrated sensor input processing, mathematical calculations, and output control into a cohesive Arduino-based system."
+          ]
+        },
+        {
+          "heading": "Implementation",
+          "content": [
+            "Connected the ultrasonic sensor to Arduino UNO and programmed the microcontroller to continuously read distance measurements.",
+            "Implemented threshold-based logic: when a vehicle is detected within a predefined distance, the system triggers the garage door to open; when the vehicle moves away, the door closes.",
+            "Tested and calibrated the system for reliable detection and response across different conditions."
+          ]
+        }
+      ],
+      "tags": [
+        "Arduino",
+        "Ultrasonic Sensor",
+        "Embedded Systems",
+        "Control Logic",
+        "Basic Electronics"
+      ]
+    }
+  ],
+  "work": [
+    {
+      "id": "physics-computing",
+      "title": "Physics Computing Teaching Assistant",
+      "subtitle": "Academic Data Management & Computational Physics Laboratory Assistance",
+      "client": "Universitas Negeri Yogyakarta",
+      "period": "Feb 2025 — Jun 2025",
+      "stack": [
+        "Python",
+        "Data Processing",
+        "Scientific Computing",
+        "Academic Support",
+        "Troubleshooting"
+      ],
+      "status": "Completed",
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80",
+      "overview": "A comprehensive laboratory teaching and academic support engagement at Universitas Negeri Yogyakarta. Responsible for managing assessment data for 60+ undergraduate physics students, providing direct instructional support during computational sessions, and troubleshooting Python code.",
+      "highlights": [
+        {
+          "label": "Students Supported",
+          "value": "60+"
+        },
+        {
+          "label": "Timeframe",
+          "value": "Feb — Jun 2025"
+        },
+        {
+          "label": "Core Focus",
+          "value": "Python & Numerics"
+        },
+        {
+          "label": "Role",
+          "value": "Teaching Assistant"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "Operational Scope & Responsibilities",
+          "content": [
+            "Led weekly laboratory sessions focusing on computational physics problem solving using Python.",
+            "Processed, structured, and archived comprehensive assessment records across both weekly lab work and midterm practical evaluations.",
+            "Conducted real-time debugging and code reviews for students learning scientific numerical libraries."
+          ]
+        },
+        {
+          "heading": "Data Workflow & Methodology",
+          "content": [
+            "Built clean data processing sheets and automated tracking to minimize human grading discrepancies.",
+            "Coordinated closely with primary course lecturers to calibrate grading standards and ensure consistency.",
+            "Created reference scripts and problem-solving guidelines to accelerate student onboarding on complex physics algorithms."
+          ]
+        },
+        {
+          "heading": "Impact & Outcomes",
+          "content": [
+            "Successfully supervised and graded over 60 students with zero record losses and on-time grade submissions.",
+            "Enhanced student code quality and numerical literacy through structured practical mentorship."
+          ]
+        }
+      ],
+      "tags": [
+        "Teaching Assistant",
+        "Data Processing",
+        "Python",
+        "Scientific Computing",
+        "UNY"
+      ]
+    },
+    {
+      "id": "kudus-disaster-mapping",
+      "title": "Intern — Emergency & Logistics Division",
+      "subtitle": "GIS Vulnerability Mapping, Field Surveys & Administrative Support",
+      "client": "Badan Penanggulangan Bencana Daerah Kabupaten Kudus",
+      "period": "Dec 2024 — Feb 2025",
+      "stack": [
+        "QGIS",
+        "GIS Mapping",
+        "Field Assessment",
+        "Data Analysis",
+        "Visual Design"
+      ],
+      "status": "Completed",
+      "imageUrl": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1400&q=80",
+      "overview": "Professional internship engagement within the Emergency and Logistics Division of BPBD Kabupaten Kudus. Involved in disaster vulnerability mapping, GIS data processing, field hazard surveys, and operational administrative support.",
+      "highlights": [
+        {
+          "label": "Agency",
+          "value": "BPBD Kudus"
+        },
+        {
+          "label": "Timeframe",
+          "value": "Dec 2024 — Feb 2025"
+        },
+        {
+          "label": "Domain",
+          "value": "GIS & Disaster Mgmt"
+        },
+        {
+          "label": "Focus",
+          "value": "Floods & Landslides"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "Field Reconnaissance & Hazard Assessment",
+          "content": [
+            "Participated directly in on-site field surveys following landslide and localized flooding events across vulnerable sub-districts in Kudus.",
+            "Collected ground-truth geographic and hazard impact data to support rapid response and logistics allocation."
+          ]
+        },
+        {
+          "heading": "Spatial Mapping & Data Synthesis",
+          "content": [
+            "Conducted rainfall distribution analysis and correlated precipitation anomalies with historical vulnerability maps.",
+            "Compiled geographic layers into accessible disaster risk maps for internal agency review and stakeholder briefs.",
+            "Organized official travel and operational documentation, ensuring accurate administrative tracking for emergency dispatch."
+          ]
+        },
+        {
+          "heading": "Communication & Visual Materials",
+          "content": [
+            "Designed informative graphic infographics and visual notices for regional public awareness and agency bulletins.",
+            "Bridged technical data and public comprehension through concise visual communication design."
+          ]
+        }
+      ],
+      "tags": [
+        "BPBD",
+        "GIS",
+        "Disaster Mitigation",
+        "Data Mapping",
+        "Field Survey"
+      ]
+    },
+    {
+      "id": "digital-systems",
+      "title": "Digital Systems Laboratory Teaching Assistant",
+      "subtitle": "Hardware Logic Testing & Academic Assessment Management",
+      "client": "Universitas Negeri Yogyakarta",
+      "period": "Aug 2024 — Dec 2024",
+      "stack": [
+        "Digital Logic",
+        "Data Management",
+        "Documentation",
+        "Teaching",
+        "Circuit Testing"
+      ],
+      "status": "Completed",
+      "imageUrl": "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1400&q=80",
+      "overview": "Academic teaching assistance for the Digital Systems laboratory course at UNY. Managed evaluation data, guided undergraduate students through circuit implementations, and supported laboratory documentation standards.",
+      "highlights": [
+        {
+          "label": "Students",
+          "value": "20+"
+        },
+        {
+          "label": "Timeframe",
+          "value": "Aug — Dec 2024"
+        },
+        {
+          "label": "Course",
+          "value": "Digital Systems"
+        },
+        {
+          "label": "Role",
+          "value": "Teaching Assistant"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "Instruction & Lab Supervision",
+          "content": [
+            "Assisted in monitoring students during Digital Systems laboratory sessions.",
+            "Provided guidance to students in completing Digital Systems laboratory assignments.",
+            "Mentored students through logic gates, combinational circuits, and sequential systems work."
+          ]
+        },
+        {
+          "heading": "Assessment Management",
+          "content": [
+            "Processed and managed assessment data for 20+ students during Digital Systems laboratory sessions.",
+            "Supported student assessment and documentation processes throughout the semester.",
+            "Maintained organized academic performance records to support accurate grading and reporting."
+          ]
+        },
+        {
+          "heading": "Coordination & Communication",
+          "content": [
+            "Supported coordination between students and teaching staff during laboratory activities.",
+            "Relayed laboratory requirements and schedule information to keep sessions running smoothly."
+          ]
+        }
+      ],
+      "tags": [
+        "Digital Systems",
+        "Teaching Assistant",
+        "Academic Support",
+        "UNY"
+      ]
+    }
+  ],
+  "content": [
+    {
+      "id": "c1",
+      "title": "Independent Web3 Research",
+      "type": "Research",
+      "date": "2024 — Present",
+      "description": "Researched and evaluated 300+ Web3 projects based on project activity, ecosystem development, incentive mechanisms, product concepts, and community participation. Monitored project updates, ecosystem narratives, and campaigns.",
+      "link": "https://x.com/tirtavex"
+    },
+    {
+      "id": "c2",
+      "title": "Web3 Content Writing — X (@tirtavex)",
+      "type": "Content",
+      "date": "2024 — Present",
+      "description": "Researched and wrote content on Web3 projects, blockchain protocols, DeFi concepts, and ecosystem developments. Translated technical information into accessible written content and social media copywriting.",
+      "link": "https://x.com/tirtavex"
+    },
+    {
+      "id": "c3",
+      "title": "AI & Automation Workflows",
+      "type": "Experiment",
+      "date": "2025",
+      "description": "Developed research workflows, knowledge bases, content operations, agent workflows, and workflow automation. Experienced with n8n, Cursor, GitHub, Claude Code, Codex, Vercel, and Hermes.",
+      "link": "#"
+    }
+  ],
   "creative": []
 }
