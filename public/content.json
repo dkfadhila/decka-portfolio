@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T07:07:38.671Z",
+  "updatedAt": "2026-09-09T07:33:35.739Z",
   "projects": [
     {
       "id": "project-veyra",
@@ -612,6 +612,11 @@
       "type": "Research",
       "date": "2024 — Present",
       "description": "Researched and evaluated 300+ Web3 projects based on project activity, ecosystem development, incentive mechanisms, product concepts, and community participation. Monitored project updates, ecosystem narratives, and campaigns.",
+      "status": "Published",
+      "imageUrl": "https://pbs.twimg.com/profile_images/2097516813005606912/YoygabvI_400x400.jpg",
+      "images": [
+        "https://pbs.twimg.com/profile_images/2097516813005606912/YoygabvI_400x400.jpg"
+      ],
       "link": "https://x.com/tirtavex"
     },
     {
@@ -620,6 +625,11 @@
       "type": "Content",
       "date": "2024 — Present",
       "description": "Researched and wrote content on Web3 projects, blockchain protocols, DeFi concepts, and ecosystem developments. Translated technical information into accessible written content and social media copywriting.",
+      "status": "Published",
+      "imageUrl": "https://pbs.twimg.com/profile_banners/1856725885682085888/1788921954/1500x500",
+      "images": [
+        "https://pbs.twimg.com/profile_banners/1856725885682085888/1788921954/1500x500"
+      ],
       "link": "https://x.com/tirtavex"
     }
   ],
