@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T05:05:11.653Z",
+  "updatedAt": "2026-09-09T06:12:41.688Z",
   "projects": [
     {
       "id": "project-veyra",
@@ -475,7 +475,124 @@
       ]
     }
   ],
+  "experience": [
+    {
+      "id": "exp-1",
+      "role": "Physics Computing Teaching Assistant",
+      "org": "Universitas Negeri Yogyakarta",
+      "period": "Feb 2025 — Jun 2025",
+      "description": "Processed and managed assessment data for 60+ students across laboratory and theoretical assessments. Assisted lecturers and students during laboratory sessions, guided students in completing computational physics assignments, and provided technical troubleshooting support.",
+      "tags": [
+        "Python",
+        "Data Processing",
+        "Scientific Computing",
+        "Teaching"
+      ]
+    },
+    {
+      "id": "exp-2",
+      "role": "Intern — Emergency & Logistics Division",
+      "org": "Badan Penanggulangan Bencana Daerah Kabupaten Kudus",
+      "period": "Dec 2024 — Feb 2025",
+      "description": "Sorted and organized travel documents and financial records. Created visual materials for the agency's communication. Conducted rainfall and disaster-vulnerability mapping for Kabupaten Kudus. Participated in field surveys and assessments related to landslides and flood events.",
+      "tags": [
+        "Data Mapping",
+        "GIS",
+        "Administrative Support",
+        "Field Research"
+      ]
+    },
+    {
+      "id": "exp-3",
+      "role": "Digital Systems Laboratory Teaching Assistant",
+      "org": "Universitas Negeri Yogyakarta",
+      "period": "Aug 2024 — Dec 2024",
+      "description": "Processed and managed assessment data for 20+ students during Digital Systems laboratory sessions. Supported student assessment and documentation processes, monitored laboratory activities, and provided guidance on laboratory assignments.",
+      "tags": [
+        "Data Management",
+        "Documentation",
+        "Teaching",
+        "Digital Systems"
+      ]
+    },
+    {
+      "id": "exp-4",
+      "role": "Vice Head — Media & Information Division",
+      "org": "Badan Eksekutif Mahasiswa Fakultas Matematika & Ilmu Pengetahuan Alam Universitas Negeri Yogyakarta",
+      "period": "Feb 2025 — Dec 2025",
+      "description": "Coordinated communication between organizational leadership, Media & Information staff, and other divisions. Monitored division workflow, managed design requests from multiple divisions, and supported social media publication and content distribution.",
+      "tags": [
+        "Coordination",
+        "Visual Design",
+        "Social Media",
+        "Leadership"
+      ]
+    },
+    {
+      "id": "exp-5",
+      "role": "Organizational Advisory Board",
+      "org": "Unit Kegiatan Mahasiswa Catur Universitas Negeri Yogyakarta",
+      "period": "Jan 2025 — Dec 2025",
+      "description": "Monitored internal coordination and organizational relationships among management members. Provided organizational monitoring and oversight to support internal coordination.",
+      "tags": [
+        "Oversight",
+        "Coordination",
+        "Organization"
+      ]
+    },
+    {
+      "id": "exp-6",
+      "role": "Media & Information Staff",
+      "org": "Unit Kegiatan Mahasiswa Catur Universitas Negeri Yogyakarta",
+      "period": "Jan 2023 — Jan 2024",
+      "description": "Supported internal communication and coordination within the Media & Information division. Managed and published organizational social media content, created visual materials, and supported content planning and publication activities.",
+      "tags": [
+        "Social Media",
+        "Visual Design",
+        "Content Planning"
+      ]
+    },
+    {
+      "id": "exp-7",
+      "role": "Independent Web3 Researcher & Ecosystem Participant",
+      "org": "Independent — X: @tirtavex",
+      "period": "2024 — Present",
+      "description": "Researched and evaluated 300+ Web3 projects based on activity, ecosystem development, incentive mechanisms, and community participation. Developed practical understanding of blockchain, DeFi, DEX, liquidity pools, DLMM, and Web3 protocols through testnets and social tasks.",
+      "tags": [
+        "Web3",
+        "Blockchain",
+        "DeFi",
+        "Research"
+      ]
+    },
+    {
+      "id": "exp-8",
+      "role": "Web3 Content Writer & Researcher",
+      "org": "X: @tirtavex",
+      "period": "2024 — Present",
+      "description": "Researched and wrote content on Web3 projects, blockchain protocols, DeFi concepts, and ecosystem developments. Translated technical information into accessible written content and created copywriting for social media.",
+      "tags": [
+        "Content Writing",
+        "Copywriting",
+        "Web3",
+        "Research"
+      ]
+    }
+  ],
   "content": [
+    {
+      "id": "c-mttpa5ex",
+      "title": "Strategi Kejar Impression di 2026: Memanfaatkan Data 2025 dan Fenomena FOMO Cenblu di Indonesia",
+      "type": "Content",
+      "date": "FEB 2026",
+      "description": "Belakangan ini, meta Centang Biru atau Cenblu makin marak di Indonesia. Banyak pengguna yang mulai berlangganan X Premium seharga kurang lebih 80 ribu rupiah per bulan. Tujuannya jelas: mereka saling bekerja sama atau \"collab\" interaksi demi mengejar syarat monetisasi dari Elon Musk (Ad Revenue Sharing).",
+      "status": "Published",
+      "imageUrl": "https://pbs.twimg.com/media/HAJDqR8bMAEpEry?format=jpg&name=900x900",
+      "images": [
+        "https://pbs.twimg.com/media/HAJDqR8bMAEpEry?format=jpg&name=900x900"
+      ],
+      "link": "https://x.com/tirtaVEX/status/2018250120589136205"
+    },
     {
       "id": "c1",
       "title": "Independent Web3 Research",
@@ -491,15 +608,25 @@
       "date": "2024 — Present",
       "description": "Researched and wrote content on Web3 projects, blockchain protocols, DeFi concepts, and ecosystem developments. Translated technical information into accessible written content and social media copywriting.",
       "link": "https://x.com/tirtavex"
-    },
-    {
-      "id": "c3",
-      "title": "AI & Automation Workflows",
-      "type": "Experiment",
-      "date": "2025",
-      "description": "Developed research workflows, knowledge bases, content operations, agent workflows, and workflow automation. Experienced with n8n, Cursor, GitHub, Claude Code, Codex, Vercel, and Hermes.",
-      "link": "#"
     }
   ],
-  "creative": []
+  "creative": [
+    {
+      "id": "cr-2",
+      "title": "Urban Architecture & Geometry",
+      "category": "photography",
+      "type": "Photography",
+      "date": "2024",
+      "description": "Monochrome and high-contrast architectural series exploring structural lines and shadow patterns.",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1000&q=80",
+      "mediaUrl": "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1600&q=90",
+      "mediaType": "image",
+      "tags": [
+        "Photography",
+        "Architecture",
+        "Monochrome"
+      ],
+      "aspectRatio": "photo"
+    }
+  ]
 }
