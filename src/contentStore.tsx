@@ -135,8 +135,8 @@ export function ContentProvider({ children }: { children: ReactNode }) {
       status: w.status || 'Completed',
     }));
 
-  const liveExperience = live.experience
-    .filter((e) => e.status !== 'Draft')
+  const liveExperience = (live.experience || [])
+    .filter((e: any) => e.status !== 'Draft')
     .map((e) => ({
       id: e.id,
       role: e.role,
@@ -152,11 +152,11 @@ export function ContentProvider({ children }: { children: ReactNode }) {
     projects: hasLive ? liveProjects : (staticProjects as any),
     work: hasLive ? liveWork : (staticWork as any),
     experience: hasLive ? liveExperience : (staticExperience as any),
-    content: live.content.length > 0 ? live.content : staticContent,
-    creative: live.creative.filter((c) => c.status !== 'Draft'),
-    projectDetail: (slug) => (hasLive ? live.projects.find((p) => p.id === slug) : staticProjectDetails[slug]),
-    workDetail: (slug) => (hasLive ? live.work.find((w) => w.id === slug) : staticWorkDetails[slug]),
-    experienceDetail: (slug) => (hasLive ? live.experience.find((e) => e.id === slug) : staticExperienceDetails[slug]),
+    content: (live.content || []).length > 0 ? live.content : staticContent,
+    creative: (live.creative || []).filter((c: any) => c.status !== 'Draft'),
+    projectDetail: (slug) => (hasLive ? live.projects.find((p: any) => p.id === slug) : staticProjectDetails[slug]),
+    workDetail: (slug) => (hasLive ? live.work.find((w: any) => w.id === slug) : staticWorkDetails[slug]),
+    experienceDetail: (slug) => (hasLive ? (live.experience || []).find((e: any) => e.id === slug) : staticExperienceDetails[slug]),
   };
 
   return <ContentContext.Provider value={value}>{children}</ContentContext.Provider>;
