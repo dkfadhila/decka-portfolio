@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-09T06:12:41.688Z",
+  "updatedAt": "2026-09-09T07:07:38.671Z",
   "projects": [
     {
       "id": "project-veyra",
@@ -580,6 +580,19 @@
     }
   ],
   "content": [
+    {
+      "id": "c-mttr6yua",
+      "title": "Private Beta Voyage | Tutorial ",
+      "type": "CONTENT",
+      "date": "2026",
+      "description": "Semalam saya mendapat email untuk mencoba beta On Voyage, jadi saya buatkan tutorial lengkap khusus untuk orang awam. Buka app.onvoyage.ai, login menggunakan akun sosial media, lalu masukkan kode invite v_6562681. ",
+      "status": "Published",
+      "imageUrl": "https://pbs.twimg.com/media/HAWufxOacAUOhce?format=jpg&name=small",
+      "images": [
+        "https://pbs.twimg.com/media/HAWufxOacAUOhce?format=jpg&name=small"
+      ],
+      "link": "https://x.com/tirtaVEX/status/2019217997207069141"
+    },
     {
       "id": "c-mttpa5ex",
       "title": "Strategi Kejar Impression di 2026: Memanfaatkan Data 2025 dan Fenomena FOMO Cenblu di Indonesia",
