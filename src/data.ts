@@ -33,8 +33,8 @@ export const profile: Profile = {
     'I also build small, useful things for myself and others when existing workflows feel repetitive.',
   ],
   aboutHeading: ['Data explorer.', 'Scientific thinker.', 'Tech builder.'],
-  avatar: '/tirta-profile.jpg',
-  profileImage: '/tirta-profile.jpg',
+  avatar: '/tirta-profile.jpg?v=blur',
+  profileImage: '/tirta-profile.jpg?v=blur',
   facts: [
     { label: 'Focus', value: 'Data, Research, Technology' },
     { label: 'Languages', value: 'Indonesian / English' },
@@ -747,7 +747,7 @@ export const mapCards: MapCard[] = [
     description: 'Operating principles, capabilities, and collaboration style.',
     path: '/about',
     type: 'B',
-    image: '/tirta-profile.jpg',
+    image: '/tirta-profile.jpg?v=blur',
   },
   {
     id: 'experience',
