@@ -18,3 +18,4 @@ metadata.json
 .vercel
 
 .vercel
+*.orig.*
